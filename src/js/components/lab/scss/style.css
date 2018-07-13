@@ -1,0 +1,112 @@
+.lab {
+  display: flex;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  text-align: center;
+  border-top: 1px #A6A6A6 solid;
+  font-family: "Open Sans",sans-serif;
+  color: #454545;
+  margin: auto;
+  max-width: 1200px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center; }
+  @media (max-width: 1080px) {
+    .lab {
+      flex-direction: row;
+      align-items: start; } }
+
+.labLogo__image {
+  height: 70px;
+  width: 160px; }
+
+.labLogo_isNotCurrentLab {
+  filter: grayscale(1) opacity(0.75); }
+
+.labContent {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center; }
+  @media (max-width: 1080px) {
+    .labContent {
+      flex-direction: column;
+      align-items: start; } }
+
+.labContent__admissionDate {
+  padding-right: 5px; }
+
+.labContent__city {
+  padding-right: 30px; }
+  @media (min-width: 1080px) {
+    .labContent__city {
+      text-align: right;
+      width: 250px;
+      color: #A6A6A6; } }
+  @media (max-width: 1080px) {
+    .labContent__city {
+      font-size: 10px;
+      color: #A6A6A6; } }
+
+.labContent__trainingDates {
+  padding-left: 90px; }
+  @media (max-width: 1080px) {
+    .labContent__trainingDates {
+      font-size: 10px;
+      position: relative;
+      left: -90px; } }
+  .labContent__trainingDates .labContent__dates {
+    font-weight: 700; }
+    @media (max-width: 1080px) {
+      .labContent__trainingDates .labContent__dates {
+        display: inline-block;
+        color: #A6A6A6;
+        font-weight: 500; } }
+
+.labContent__dates {
+  font-size: 16px;
+  text-align: left; }
+  @media (max-width: 1080px) {
+    .labContent__dates {
+      font-size: 10px; } }
+
+.labContent__labType {
+  text-align: left;
+  width: 400px; }
+  .labContent__labType .labContent__dates {
+    color: #A6A6A6; }
+
+@keyframes blink {
+  0% {
+    background-color: #eb1d24; }
+  50% {
+    background-color: rgba(235, 29, 36, 0); }
+  100% {
+    background-color: #eb1d24; } }
+.labContent__labStatus {
+  display: inline-block;
+  margin-right: 10px;
+  float: left;
+  animation: blink 1.5s linear infinite;
+  background-color: #eb1d24;
+  border-radius: 6px;
+  height: 12px;
+  width: 12px; }
+  @media (max-width: 1080px) {
+    .labContent__labStatus {
+      height: 6px;
+      width: 6px;
+      margin-right: 5px; } }
+
+.labContent__headerTrainingDate {
+  color: #A6A6A6; }
+  @media (max-width: 1080px) {
+    .labContent__headerTrainingDate {
+      display: inline-block;
+      padding-right: 10px; } }
+
+.lab__arrow {
+  background: url("/img/media/list-arrow-right.svg") no-repeat center center;
+  min-width: 20px; }
+
+/*# sourceMappingURL=style.css.map */

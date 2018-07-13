@@ -1,0 +1,31 @@
+header {
+  transform: translateZ(0);
+  transition: transform .2s linear,background 1s ease,height .5s ease; }
+
+.container {
+  background-attachment: scroll;
+  display: block;
+  height: 85px;
+  margin-bottom: 30px; }
+  .container .logo {
+    background: url("/img/logo.svg") no-repeat;
+    margin-top: 40px;
+    width: 170px;
+    display: inline-block;
+    height: 70px; }
+  .container .authorization {
+    background-color: #eb1d24;
+    color: white;
+    cursor: pointer;
+    float: right;
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 34px;
+    margin-top: 35px;
+    text-align: center;
+    text-transform: uppercase;
+    width: 239px;
+    display: block; }
+
+/*# sourceMappingURL=style.css.map */

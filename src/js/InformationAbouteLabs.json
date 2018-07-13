@@ -1,0 +1,97 @@
+{
+  "startedLabs": [
+    {
+      "id": 34,
+      "trainingDate": "07.2018 - 08.2018",
+      "trainingName": "Full-Stack js Students lab",
+      "admissionDate": "03.2018 - 06.2018",
+      "image": "/img/media/microsoft_net_logo.svg"
+    },
+    {
+      "id": 3478,
+      "trainingDate": "07.2018 - 08.2018",
+      "trainingName": "Full-Stack js Students lab",
+      "admissionDate": "03.2018 - 06.2018",
+      "image": "/img/media/microsoft_net_logo.svg"
+    },
+    {
+      "id": 1348,
+      "trainingDate": "07.2018 - 08.2018",
+      "trainingName": "Full-Stack js Students lab",
+      "admissionDate": "03.2018 - 06.2018",
+      "image": "/img/media/microsoft_net_logo.svg"
+    },
+    {
+      "id": 12323234,
+      "trainingDate": "07.2018 - 08.2018",
+      "trainingName": "Full-Stack js Students lab",
+      "admissionDate": "03.2018 - 06.2018",
+      "image": "/img/media/microsoft_net_logo.svg"
+    },
+    {
+      "id": 1231212,
+      "trainingDate": "07.2018 - 08.2018",
+      "trainingName": "Full-Stack js Students lab",
+      "admissionDate": "03.2018 - 06.2018",
+      "image": "/img/media/microsoft_net_logo.svg"
+    },
+    {
+      "id": 123183744,
+      "trainingDate": "07.2018 - 08.2018",
+      "trainingName": "Full-Stack js Students lab",
+      "admissionDate": "03.2018 - 06.2018",
+      "image": "/img/media/microsoft_net_logo.svg"
+    },
+    {
+      "id": 12347455,
+      "trainingDate": "07.2018 - 08.2018",
+      "trainingName": "Full-Stack js Students",
+      "admissionDate": "03.2018 - 06.2018",
+      "image": "/img/media/FullStack-JS.svg"
+    },
+    {
+      "id": 12349858,
+      "trainingDate": "07.2018 - 08.2018",
+      "trainingName": "Full-Stack js lab",
+      "admissionDate": "03.2018 - 06.2018",
+      "image": "/img/media/java.svg"
+    },
+    {
+      "id": 12342653623,
+      "trainingDate": "07.2018 - 08.2018",
+      "trainingName": "Full-Stack js Students lab",
+      "admissionDate": "03.2018 - 06.2018",
+      "image": "/img/media/microsoft_net_logo.svg"
+    },
+    {
+      "id": 1234843738,
+      "trainingDate": "07.2018 - 08.2018",
+      "trainingName": "Full-Stack js Students lab",
+      "admissionDate": "03.2018 - 06.2018",
+      "image": "/img/media/microsoft_net_logo.svg"
+    },
+    {
+      "id": 123111,
+      "trainingDate": "07.2018 - 08.2018",
+      "trainingName": "Full-Stack js Students lab",
+      "admissionDate": "03.2018 - 06.2018",
+      "image": "/img/media/microsoft_net_logo.svg"
+    }
+  ],
+  "currentLabs":[
+    {
+      "id": "1234",
+      "trainingDate": "07.2018 - 08.2018",
+      "trainingName": "Full-Stack js Students lab",
+      "admissionDate": "03.2018 - 09.2018",
+      "image": "/img/media/microsoft_net_logo.svg"
+    },
+    {
+      "id": "113423",
+      "trainingDate": "07.2018 - 08.2018",
+      "trainingName": "Full-Stack js Students lab",
+      "admissionDate": "03.2018 - 09.2018",
+      "image": "/img/media/microsoft_net_logo.svg"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+footer {
+  background-color: #454545;
+  text-align: center;
+  height: max-content; }
+  footer .footer__logo {
+    background: url("/img/footer-logo.svg") no-repeat;
+    margin-top: 40px;
+    width: 170px;
+    display: inline-block;
+    height: 70px; }
+  footer .footer__operatorImage {
+    width: 20px;
+    height: 20px; }
+  footer .footer__phonesTitle {
+    color: #f6f6f5; }
+  footer .footer__languages {
+    color: #f6f6f5;
+    cursor: pointer; }
+
+/*# sourceMappingURL=styleFooter.css.map */
