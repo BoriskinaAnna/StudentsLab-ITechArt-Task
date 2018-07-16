@@ -11,7 +11,7 @@ class Lab extends Component {
 
     componentWillMount(){
         const {lab} = this.props;
-        const date = new Date(lab.admission_end_date.replace(/(\d+).(\d+)/, '$1 1 $2'));
+        const date = new Date(lab.admissionEndDate.replace(/(\d+).(\d+)/, '$1 1 $2'));
         date.setMonth(date.getMonth() + 1);
         if (new Date() - date < 0 ){
             this.setState({isCurrent: false});
@@ -48,19 +48,19 @@ class Lab extends Component {
                 </div>
                 <div className="labContent">
                     <div className="labContent__labType">
-                        <h3 className="labContent__title">{lab.training_name}</h3>
+                        <h3 className="labContent__title">{lab.trainingName}</h3>
                         <div className="labContent__dates">
                             {labStatus}
                             <div>
                                <span className="labContent__admissionDate">{t('admissionDate')}</span>
-                                {lab.admission_start_date} - {lab.admission_end_date}
+                                {lab.admissionStartDate} - {lab.admissionEndDate}
                             </div>
                             </div>
                     </div>
                     <div className="labContent__trainingDates">
                         <span className="labContent__headerTrainingDate">{t('headerTrainingDate')}</span>
                         <div className="labContent__dates">
-                            {lab.training_date}
+                            {lab.trainingDate}
                             </div>
                     </div>
                     <span className="labContent__city">{t('city')}</span>
