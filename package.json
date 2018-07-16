@@ -6,7 +6,7 @@
     "bootstrap": "^4.1.1",
     "i18next": "^11.3.6",
     "i18next-browser-languagedetector": "^2.2.0",
-
+    "js": "^0.1.0",
     "react": "^16.4.1",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.4.1",
@@ -16,7 +16,6 @@
     "redux": "^4.0.0",
     "redux-form": "^7.4.2"
   },
-
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -26,19 +25,18 @@
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
   "main": "index.js",
   "devDependencies": {
-
     "node-sass": "^4.9.1",
     "sass-loader": "^7.0.3"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BoriskinaAnna/react-js.git"
+    "url": "git+https://github.com/BoriskinaAnna/StudentsLab-ITechArt-Task.git"
   },
   "keywords": [],
   "author": "Hanna Baryskina",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/BoriskinaAnna/react-js/issues"
+    "url": "https://github.com/BoriskinaAnna/StudentsLab-ITechArt-Task/issues"
   },
-  "homepage": "https://github.com/BoriskinaAnna/react-js#readme"
+  "homepage": "https://github.com/BoriskinaAnna/StudentsLab-ITechArt-Task#readme"
 }

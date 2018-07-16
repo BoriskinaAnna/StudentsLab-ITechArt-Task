@@ -1,25 +1,25 @@
 import React from 'react';
-import {Component} from "react";
-import "js/components/footer/scss/styleFooter.css";
+import {Component} from 'react';
+import 'js/components/footer/scss/styleFooter.css';
 import { translate } from 'react-i18next';
+
 
 class Footer extends Component {
 
-    render(){
+    render() {
         const {t, i18n} = this.props;
-
         const changeLanguage = (lng) => {
             i18n.changeLanguage(lng);
         };
 
         return (
             <footer>
-                <div className ="container">
-                    <div className = "row">
-                        <div className = "col-4">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-4">
                             <a className="footer__logo"  href = ""/>
                         </div>
-                        <div className = "col-4 footer__phones">
+                        <div className="col-4 footer__phones">
                                 <div className="footer__phonesTitle">
                                     {t('numbers')}
                                     </div>
@@ -39,7 +39,7 @@ class Footer extends Component {
                                     <span>+375 29 359 63 31</span>
                                 </div>
                         </div>
-                        <div className = "col-4 footer__languages">
+                        <div className="col-4 footer__languages">
                             <div><btn onClick={() => changeLanguage('ru')}>Русский</btn></div>
                             <div><btn onClick={() => changeLanguage('en')}>English</btn></div>
                         </div>
@@ -49,5 +49,4 @@ class Footer extends Component {
         )
     }
 }
-
 export default translate('translations')(Footer)
