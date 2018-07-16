@@ -1,6 +1,6 @@
 import React from 'react';
 import {Component} from 'react';
-import 'js/components/footer/scss/styleFooter.css';
+import 'js/components/footer/footerStyle.scss';
 import { translate } from 'react-i18next';
 
 
@@ -14,12 +14,11 @@ class Footer extends Component {
 
         return (
             <footer>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-4">
+
+                        <div>
                             <a className="footer__logo"  href = ""/>
                         </div>
-                        <div className="col-4 footer__phones">
+                        <div className="footer__phones">
                                 <div className="footer__phonesTitle">
                                     {t('numbers')}
                                     </div>
@@ -39,12 +38,11 @@ class Footer extends Component {
                                     <span>+375 29 359 63 31</span>
                                 </div>
                         </div>
-                        <div className="col-4 footer__languages">
+                        <div className="footer__languages">
                             <div><btn onClick={() => changeLanguage('ru')}>Русский</btn></div>
                             <div><btn onClick={() => changeLanguage('en')}>English</btn></div>
                         </div>
-                    </div>
-                </div>
+
             </footer>
         )
     }

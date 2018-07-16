@@ -13,8 +13,7 @@ export class App extends Component {
         return(
             <div>
                 <Header/>
-                <LabsList labs={labs.startedLabs} current={true}/>
-                <LabsList labs={labs.currentLabs} current={false}/>
+                <LabsList labs={labs} />
                 <Footer/>
             </div>
         )

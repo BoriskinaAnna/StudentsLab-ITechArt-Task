@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
 import Lab from 'js/components/lab/lab';
-import 'js/components/labsList/scss/style.css';
+import 'js/components/labsList/labsListStyle.scss';
 
 
 class LabsList extends Component {
 
     render() {
-        const {labs, current} = this.props;
+        const {labs} = this.props;
         const labElements = labs.map(lab =>
 
             <div key = {lab.id} className="lab-list__li">
-                <Lab lab={lab} curren ={current}/>
+                <Lab lab={lab}/>
             </div>
         );
 
