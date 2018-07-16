@@ -18,26 +18,20 @@ class Lab extends Component {
         }
     }
 
-    getImageURL(type){
+    static getImageURL(type){
         switch (type){
             case 'js':
                 return '/img/media/FullStack-JS.svg';
-                break;
             case '.net':
                 return '/img/media/microsoft_net_logo.svg';
-                break;
             case 'java':
                 return '/img/media/java.svg';
-                break;
             case 'qa':
                 return '/img/media/qa.svg';
-                break;
             case 'ruby':
                 return '/img/media/ruby.svg';
-                break;
             case 'salesforce':
                 return '/img/media/salesforce.svg';
-                break;
         }
     }
 
@@ -45,7 +39,7 @@ class Lab extends Component {
         const {lab, t} = this.props;
         const labStatus = !this.state.isCurrent &&
                 <div className="labContent__labStatus"/>;
-        const imageURL = this.getImageURL(lab.type);
+        const imageURL = Lab.getImageURL(lab.type);
         return (
             <div className="lab">
                 <div className="labLogo">
@@ -71,7 +65,9 @@ class Lab extends Component {
                     </div>
                     <span className="labContent__city">{t('city')}</span>
                 </div>
-                <span className="lab__arrow"/>
+
+                    <img className="lab__arrow" src="/img/media/list-arrow-right.svg"/>
+
             </div>
         )
     }
