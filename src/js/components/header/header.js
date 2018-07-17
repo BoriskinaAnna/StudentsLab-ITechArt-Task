@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import 'js/components/header/headerStyle.scss';
-import { translate } from 'react-i18next';
+import {translate} from 'react-i18next';
+import {Link} from 'react-router-dom';
 
 
 class Header extends Component {
@@ -10,14 +11,13 @@ class Header extends Component {
         return (
             <header>
                 <div>
-                    <a className="logo" href=""/>
+                    <Link to="/" className="logo"/>
                 </div>
                 <div>
-                    <a className="authorization" href="">
+                    <Link to="/authorization" className="authorizationBtn">
                         {t('btnAuthorization')}
-                        </a>
+                        </Link>
                 </div>
-
             </header>
         )
     }

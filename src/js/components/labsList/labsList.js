@@ -8,7 +8,6 @@ class LabsList extends Component {
     render() {
         const {labs} = this.props;
         const labElements = labs.map((lab, index) =>
-
             <div key = {index} className="lab-list__li">
                 <Lab lab={lab}/>
             </div>

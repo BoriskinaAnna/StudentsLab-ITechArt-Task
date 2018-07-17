@@ -23,7 +23,10 @@ options.resources = {
             "city": "Minsk",
             "admissionDate": "Admission to courses",
             "headerTrainingDate": "Training dates",
-            "numbers": "Numbers:",
+            "numbers": "Numbers",
+            "e-mail": "E-mail",
+            "password": "Password",
+
         }
     },
     ru: {
@@ -33,6 +36,8 @@ options.resources = {
             "admissionDate": "Набор на курсы",
             "headerTrainingDate": "Даты обучения",
             "numbers": "Телефоны:",
+            "e-mail": "Электронная почта",
+            "password": "Пароль",
         }
     }
 };
