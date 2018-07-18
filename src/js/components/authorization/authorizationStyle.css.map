@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,wBAAwB;EACtB,UAAU,EAAE,2EAA4E;EAExF,eAAe,EAAE,SAAS;EAC1B,OAAO,EAAE,IAAI;EACb,IAAI,EAAE,CAAC;EAEP,uCAAc;IACZ,OAAO,EAAE,IAAI;IACb,WAAW,EAAE,QAAQ;IACrB,eAAe,EAAE,MAAM;IACvB,cAAc,EAAE,MAAM;IACtB,KAAK,EAAE,KAAK;IACZ,MAAM,EAAE,IAAI",
+"sources": ["authorizationStyle.scss"],
+"names": [],
+"file": "authorizationStyle.css"
+}

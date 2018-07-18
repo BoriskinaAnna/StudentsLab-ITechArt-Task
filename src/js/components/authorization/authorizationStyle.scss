@@ -1,10 +1,17 @@
-.authorization{
-  border: 1px gainsboro solid;
+.authorizationBackground{
+  background: rgba(255, 255, 255, 0.4) url("/img/authorization-background.png")  no-repeat;
+
+  background-size: 100% 100%;
   display: flex;
   flex: 1;
-  align-items: flex-end;
-  justify-content: center;
-  flex-direction: column;
-  width: 350px;
-  margin: auto;
+
+  .authorization{
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    flex-direction: column;
+    width: 350px;
+    margin: auto;
+
+  }
 }

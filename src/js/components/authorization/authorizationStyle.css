@@ -1,0 +1,14 @@
+.authorizationBackground {
+  background: rgba(255, 255, 255, 0.4) url("/img/authorization-background.png") no-repeat;
+  background-size: 100% 100%;
+  display: flex;
+  flex: 1; }
+  .authorizationBackground .authorization {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    flex-direction: column;
+    width: 350px;
+    margin: auto; }
+
+/*# sourceMappingURL=authorizationStyle.css.map */
