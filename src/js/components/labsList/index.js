@@ -1,14 +1,22 @@
 import React, {Component} from 'react';
-import Lab from 'js/components/lab/lab';
+import Lab from 'js/components/lab/';
 import 'js/components/labsList/labsListStyle.scss';
 
 
-class LabsList extends Component {
+class Index extends Component {
+
+    constructor() {
+        super();
+
+        this.state = {
+            isAddLabShowed: false
+        };
+    }
 
     render() {
-        const {labs} = this.props;
+        const {labs, showAddLab} = this.props;
         const labElements = labs.map((lab, index) =>
-            <div key = {index} className="lab-list__li">
+            <div key = {index} className="lab-list__lab">
                 <Lab lab={lab}/>
             </div>
         );
@@ -16,13 +24,13 @@ class LabsList extends Component {
         return (
             <div className="labsContainer">
                 <div className="labsContainer__buttonAdd">
-                    <a className="labsContainer__buttonContent">
+                    <button onClick={showAddLab} className="labsContainer__buttonContent">
                         +
-                    </a>
+                    </button>
                 </div>
                 {labElements}
             </div>
         )
     }
 }
-export default LabsList
+export default Index

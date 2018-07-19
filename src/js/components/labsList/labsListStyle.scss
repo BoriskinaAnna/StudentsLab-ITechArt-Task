@@ -1,14 +1,15 @@
 .labsContainer{
   background-color: #F6F6F5;
   cursor: pointer;
+  flex: 1;
 
-  .labsContainer__buttonAdd {
+  &__buttonAdd {
     display: flex;
     flex-direction: row-reverse;
     margin: auto;
     max-width: 1200px;
 
-    .labsContainer__buttonContent {
+    &__buttonContent {
       border-top: 1px #A6A6A6 solid;
       border-left: 1px #A6A6A6 solid;
       border-right: 1px #A6A6A6 solid;
