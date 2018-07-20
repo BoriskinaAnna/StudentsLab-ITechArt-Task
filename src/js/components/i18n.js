@@ -20,19 +20,33 @@ options.resources = {
     en: {
         translations: {
             "btnAuthorization": "Log in",
-            "city": "Minsk",
+            "city": "City",
             "admissionDate": "Admission to courses",
-            "headerTrainingDate": "Training dates",
-            "numbers": "Numbers:",
+            "trainingDate": "Training dates",
+            "numbers": "Numbers",
+            "e-mail": "E-mail",
+            "password": "Password",
+            "courseName": "Сourse name",
+            "start": "Start",
+            "end": "End",
+            "courseType": "Course type",
+            "add": "Add"
         }
     },
     ru: {
         translations: {
             "btnAuthorization": "Войти",
-            "city": "Минск",
+            "city": "Город",
             "admissionDate": "Набор на курсы",
-            "headerTrainingDate": "Даты обучения",
+            "trainingDate": "Даты обучения",
             "numbers": "Телефоны:",
+            "e-mail": "Электронная почта",
+            "password": "Пароль",
+            "courseName": "Название курсов",
+            "start": "Начало",
+            "end": "Конец",
+            "courseType": "Тип курсов",
+            "add": "Добавить"
         }
     }
 };

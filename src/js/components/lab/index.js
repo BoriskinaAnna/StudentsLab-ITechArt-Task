@@ -5,9 +5,13 @@ import { translate } from 'react-i18next';
 
 class Lab extends Component {
 
-    state = {
-        isCurrent: true
-    };
+    constructor(){
+        super();
+
+        this.state = {
+            isCurrent: true
+        };
+    }
 
     componentWillMount(){
         const {lab} = this.props;
@@ -32,6 +36,8 @@ class Lab extends Component {
                 return '/img/media/ruby.svg';
             case 'salesforce':
                 return '/img/media/salesforce.svg';
+            default:
+                throw new Error(`Image for ${type} type of lab not found`);
         }
     }
 
@@ -40,34 +46,33 @@ class Lab extends Component {
         const labStatus = !this.state.isCurrent &&
                 <div className="labContent__labStatus"/>;
         const imageURL = Lab.getImageURL(lab.type);
+
         return (
             <div className="lab">
                 <div className="labLogo">
                     <img className={this.state.isCurrent ? "labLogo__image labLogo_isNotCurrentLab": "labLogo__image"}
-                         src={imageURL}/>
+                         src={imageURL} alt={lab.type}/>
                 </div>
                 <div className="labContent">
                     <div className="labContent__labType">
+                        {labStatus}
                         <h3 className="labContent__title">{lab.trainingName}</h3>
                         <div className="labContent__dates">
-                            {labStatus}
                             <div>
                                <span className="labContent__admissionDate">{t('admissionDate')}</span>
                                 {lab.admissionStartDate} - {lab.admissionEndDate}
                             </div>
-                            </div>
+                        </div>
                     </div>
                     <div className="labContent__trainingDates">
-                        <span className="labContent__headerTrainingDate">{t('headerTrainingDate')}</span>
+                        <span className="labContent__headerTrainingDate">{t('trainingDate')}</span>
                         <div className="labContent__dates">
-                            {lab.trainingDate}
+                            {lab.trainingStartDate} - {lab.trainingEndDate}
                             </div>
                     </div>
-                    <span className="labContent__city">{t('city')}</span>
+                    <span className="labContent__city">{lab.city}</span>
                 </div>
-
-                    <img className="lab__arrow" src="/img/media/list-arrow-right.svg"/>
-
+                <img className="lab__arrow" src="/img/media/list-arrow-right.svg" alt="arrow"/>
             </div>
         )
     }

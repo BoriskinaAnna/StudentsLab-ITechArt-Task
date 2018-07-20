@@ -1,79 +1,101 @@
  [
     {
-      "trainingDate": "07.2018 - 08.2018",
+      "trainingStartDate": "07.2018",
+      "trainingEndDate": "08.2018",
       "trainingName": "Full-Stack js Students lab",
       "admissionStartDate": "03.2018",
       "admissionEndDate": "09.2018",
-      "type": ".net"
+      "type": ".net",
+      "city": "Минск"
     },
     {
-      "trainingDate": "07.2018 - 08.2018",
+      "trainingStartDate": "07.2018",
+      "trainingEndDate": "08.2018",
       "trainingName": "Full-Stack js Students lab",
       "admissionStartDate": "03.2018",
       "admissionEndDate": "09.2018",
-      "type": ".net"
+      "type": ".net",
+      "city": "Минск"
     },
     {
-      "trainingDate": "07.2018 - 08.2018",
+      "trainingStartDate": "07.2018",
+      "trainingEndDate": "08.2018",
       "trainingName": "Full-Stack js Students lab",
       "admissionStartDate": "03.2018",
       "admissionEndDate": "09.2018",
-      "type": "js"
+      "type": "js",
+      "city": "Минск"
     },
     {
-      "trainingDate": "07.2018 - 08.2018",
+      "trainingStartDate": "07.2018",
+      "trainingEndDate": "08.2018",
       "trainingName": "Full-Stack js Students lab",
       "admissionStartDate": "03.2018",
       "admissionEndDate": "09.2018",
-      "type": "qa"
+      "type": "qa",
+      "city": "Минск"
     },
     {
-      "trainingDate": "07.2018 - 08.2018",
+      "trainingStartDate": "07.2018",
+      "trainingEndDate": "08.2018",
       "trainingName": "Full-Stack js Students lab",
       "admissionStartDate": "03.2018",
       "admissionEndDate": "09.2018",
-      "type": "java"
+      "type": "java",
+      "city": "Минск"
     },
     {
-      "trainingDate": "07.2018 - 08.2018",
+      "trainingStartDate": "07.2018",
+      "trainingEndDate": "08.2018",
       "trainingName": "Full-Stack js Students lab",
       "admissionStartDate": "03.2018",
       "admissionEndDate": "09.2018",
-      "type": ".net"
+      "type": ".net",
+      "city": "Минск"
     },
     {
-      "trainingDate": "07.2018 - 08.2018",
+      "trainingStartDate": "07.2018",
+      "trainingEndDate": "08.2018",
       "trainingName": "Full-Stack js Students lab",
       "admissionStartDate": "03.2018",
       "admissionEndDate": "09.2018",
-      "type": ".net"
+      "type": ".net",
+      "city": "Минск"
     },
     {
-      "trainingDate": "07.2018 - 08.2018",
+      "trainingStartDate": "07.2018",
+      "trainingEndDate": "08.2018",
       "trainingName": "Full-Stack js Students lab",
       "admissionStartDate": "03.2018",
       "admissionEndDate": "02.2018",
-      "type": ".net"
+      "type": ".net",
+      "city": "Минск"
     },
     {
-      "trainingDate": "07.2018 - 08.2018",
+      "trainingStartDate": "07.2018",
+      "trainingEndDate": "08.2018",
       "trainingName": "Full-Stack js Students lab",
       "admissionStartDate": "03.2018",
       "admissionEndDate": "09.2018",
-      "type": ".net"
+      "type": ".net",
+      "city": "Минск"
     },
     {
-      "trainingDate": "07.2018 - 08.2018",
+      "trainingStartDate": "07.2018",
+      "trainingEndDate": "08.2018",
       "trainingName": "Full-Stack js Students lab",
       "admissionStartDate": "03.2018",
       "admissionEndDate": "09.2018",
-      "type": ".net"
+      "type": ".net",
+      "city": "Минск"
     },
     {
-      "trainingDate": "07.2018 - 08.2018",
+      "trainingStartDate": "07.2018",
+      "trainingEndDate": "08.2018",
       "trainingName": "Full-Stack js Students lab",
       "admissionStartDate": "03.2018",
       "admissionEndDate": "09.2018",
-      "type": ".net"
+      "type": ".net",
+      "city": "Минск"
     }
   ]
