@@ -36,8 +36,8 @@ class Footer extends Component {
                     </div>
                 </div>
                 <div className="footer__languages">
-                    <div><span onClick={() => changeLanguage('ru')}>Русский</span></div>
-                    <div><span onClick={() => changeLanguage('en')}>English</span></div>
+                    <button className="footer__changeLanguageBtn" onClick={() => changeLanguage('ru')}>Русский</button>
+                    <button className="footer__changeLanguageBtn" onClick={() => changeLanguage('en')}>English</button>
                 </div>
             </footer>
         )

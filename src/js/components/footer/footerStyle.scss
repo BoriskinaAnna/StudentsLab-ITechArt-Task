@@ -25,7 +25,20 @@ footer{
 
   .footer__languages{
     align-self: center;
-    color: rgb(246, 246, 245);
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+
+    .footer__changeLanguageBtn{
+      display: inline-block;
+      cursor: pointer;
+      color: #a6a6a6;
+      background-color: rgb(69,69,69);
+      border: none;
+
+      &:focus{
+        outline: none;
+      }
+    }
   }
 }
