@@ -8,6 +8,8 @@ import { BrowserRouter as Router, Route} from 'react-router-dom';
 import Authorization from 'js/components/authorization';
 import AddLabForm from 'js/components/addLabForm';
 import 'js/components/appStyle.scss';
+import Schedule from 'js/components/schedule/';
+import schedule from 'js/schedule.json';
 
 
 export class App extends Component {
@@ -53,6 +55,7 @@ export class App extends Component {
                     <Authorization isLoginShowed={this.state.isLoginShowed} closeLogin={this.closeLogin}/>
                     <AddLabForm isAddLabShowed={this.state.isAddLabShowed} closeAddLab={this.closeAddLab}/>
                     <Route exact path="/" component={() => (<LabsList labs={labs} showAddLab={this.showAddLab}/>)}/>
+                    <Route exact path="/schedule" component={() => (<Schedule schedule={schedule}/>)}/>
                     <Footer/>
                 </div>
             </Router>

@@ -30,7 +30,11 @@ options.resources = {
             "start": "Start",
             "end": "End",
             "courseType": "Course type",
-            "add": "Add"
+            "add": "Add",
+            "time": "Time",
+            "lecturer": "Lecturer",
+            "place": "Place",
+            "duration": "Duration"
         }
     },
     ru: {
@@ -46,7 +50,11 @@ options.resources = {
             "start": "Начало",
             "end": "Конец",
             "courseType": "Тип курсов",
-            "add": "Добавить"
+            "add": "Добавить",
+            "time": "Время",
+            "lecturer": "Лектор",
+            "place": "Место",
+            "duration": "Продолжительность"
         }
     }
 };

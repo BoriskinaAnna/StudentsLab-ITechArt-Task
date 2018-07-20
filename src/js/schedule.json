@@ -1,0 +1,82 @@
+[
+  {
+    "lectureNumber": "L1",
+    "lectureTheme": "Introductory",
+    "lectureMonth": "июня",
+    "lectureDay": "4",
+    "lectureTime": "10:30",
+    "lectureLecturer": "Никита Дубко",
+    "lecturePlace": "БГТУ",
+    "lectureDuration": "3 часа"
+  },
+  {
+    "lectureNumber": "L1",
+    "lectureTheme": "Web-программирование. Архитектуры, форматы. Протоколы.",
+    "lectureMonth": "февраля",
+    "lectureDay": "10",
+    "lectureTime": "10:30",
+    "lectureLecturer": "Никита Дубко",
+    "lecturePlace": "БГТУ",
+    "lectureDuration": "3 академ. часа"
+  },
+  {
+    "lectureNumber": "L1",
+    "lectureTheme": "HTML/CSS, Верстка",
+    "lectureMonth": "августа",
+    "lectureDay": "25",
+    "lectureTime": "10:30",
+    "lectureLecturer": "Антон Александрёнок",
+    "lecturePlace": "БГТУ",
+    "lectureDuration": "3 часа"
+  },
+  {
+    "lectureNumber": "L1",
+    "lectureTheme": "ES2015+. Babel",
+    "lectureMonth": "июня",
+    "lectureDay": "4",
+    "lectureTime": "10:30",
+    "lectureLecturer": "Никита Дубко",
+    "lecturePlace": "БГТУ",
+    "lectureDuration": "3 часа"
+  },
+  {
+    "lectureNumber": "L1",
+    "lectureTheme": "ReactJS. Redux",
+    "lectureMonth": "июня",
+    "lectureDay": "4",
+    "lectureTime": "10:30",
+    "lectureLecturer": "Никита Дубко",
+    "lecturePlace": "БГТУ",
+    "lectureDuration": "3 часа"
+  },
+  {
+    "lectureNumber": "L1",
+    "lectureTheme": "ASP.NET CORE",
+    "lectureMonth": "июня",
+    "lectureDay": "4",
+    "lectureTime": "10:30",
+    "lectureLecturer": "Никита Дубко",
+    "lecturePlace": "БГТУ",
+    "lectureDuration": "3 часа"
+  },
+  {
+    "lectureNumber": "L1",
+    "lectureTheme": "Javascript testing (protractor, jasmine, mocha, chai, karma, sinon, proxyquire,  jest, enzyme)",
+    "lectureMonth": "июня",
+    "lectureDay": "4",
+    "lectureTime": "10:30",
+    "lectureLecturer": "Никита Дубко",
+    "lecturePlace": "БГТУ",
+    "lectureDuration": "3 часа"
+  },
+  {
+    "lectureNumber": "L1",
+    "lectureTheme": "NoSQL",
+    "lectureMonth": "июня",
+    "lectureDay": "4",
+    "lectureTime": "10:30",
+    "lectureLecturer": "Никита Дубко",
+    "lecturePlace": "БГТУ",
+    "lectureDuration": "3 часа"
+  }
+]
