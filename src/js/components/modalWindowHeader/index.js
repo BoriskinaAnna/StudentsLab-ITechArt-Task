@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import 'js/components/modalWindowHeader/modalWindowHeaderStyle.scss';
 
 
-class Index extends Component {
+class ModalWindowHeader extends Component {
 
     render() {
         const {close} = this.props;
@@ -15,4 +15,4 @@ class Index extends Component {
         )
     }
 }
-export default Index
+export default ModalWindowHeader

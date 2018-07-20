@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 import 'js/components/authorization/authorizationStyle.scss';
 import { translate } from 'react-i18next';
 import Modal from 'react-modal';
-import ModalWindowHeader from 'js/components/modalWindowHeader/';
+import ModalWindowHeader from 'js/components/modalWindowHeader';
 
 Modal.setAppElement('#content');
 
-class Index extends Component {
+class Authorization extends Component {
 
     render() {
         const {t, isLoginShowed, closeLogin} = this.props;
@@ -32,4 +32,4 @@ class Index extends Component {
         )
     }
 }
-export default translate('translations')(Index)
+export default translate('translations')(Authorization)

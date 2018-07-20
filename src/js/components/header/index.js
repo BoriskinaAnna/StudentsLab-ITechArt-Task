@@ -4,7 +4,7 @@ import {translate} from 'react-i18next';
 import {Link} from 'react-router-dom';
 
 
-class Index extends Component {
+class Header extends Component {
 
     constructor() {
         super();
@@ -27,4 +27,4 @@ class Index extends Component {
         )
     }
 }
-export default translate('translations')(Index)
+export default translate('translations')(Header)

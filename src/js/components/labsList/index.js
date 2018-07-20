@@ -1,17 +1,9 @@
 import React, {Component} from 'react';
-import Lab from 'js/components/lab/';
+import Lab from 'js/components/lab';
 import 'js/components/labsList/labsListStyle.scss';
 
 
-class Index extends Component {
-
-    constructor() {
-        super();
-
-        this.state = {
-            isAddLabShowed: false
-        };
-    }
+class LabList extends Component {
 
     render() {
         const {labs, showAddLab} = this.props;
@@ -33,4 +25,4 @@ class Index extends Component {
         )
     }
 }
-export default Index
+export default LabList

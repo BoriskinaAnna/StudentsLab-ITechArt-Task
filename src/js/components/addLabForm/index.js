@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import 'js/components/addLabForm/addLabFormStyle.scss';
 import {translate} from 'react-i18next';
 import Modal from 'react-modal';
-import ModalWindowHeader from 'js/components/modalWindowHeader/';
+import ModalWindowHeader from 'js/components/modalWindowHeader';
 
 Modal.setAppElement('#content');
 

@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import LabsList from 'js/components/labsList/';
+import LabsList from 'js/components/labsList';
 import labs from 'js/information-aboute-labs.json';
 import 'bootstrap/dist/css/bootstrap.css';
-import Header from 'js/components/header/';
-import Footer from 'js/components/footer/';
+import Header from 'js/components/header';
+import Footer from 'js/components/footer';
 import { BrowserRouter as Router, Route} from 'react-router-dom';
-import Authorization from 'js/components/authorization/';
-import AddLabForm from 'js/components/addLabForm/';
+import Authorization from 'js/components/authorization';
+import AddLabForm from 'js/components/addLabForm';
 import 'js/components/appStyle.scss';
 
 

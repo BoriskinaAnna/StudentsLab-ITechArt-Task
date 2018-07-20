@@ -5,7 +5,7 @@ import { translate } from 'react-i18next';
 import {Link} from 'react-router-dom';
 
 
-class Index extends Component {
+class Footer extends Component {
 
     render() {
         const {t, i18n} = this.props;
@@ -43,4 +43,4 @@ class Index extends Component {
         )
     }
 }
-export default translate('translations')(Index)
+export default translate('translations')(Footer)

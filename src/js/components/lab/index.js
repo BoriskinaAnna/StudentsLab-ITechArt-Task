@@ -3,7 +3,7 @@ import 'js/components/lab/labStyle.scss';
 import { translate } from 'react-i18next';
 
 
-class Index extends Component {
+class Lab extends Component {
 
     constructor(){
         super();
@@ -37,7 +37,7 @@ class Index extends Component {
             case 'salesforce':
                 return '/img/media/salesforce.svg';
             default:
-                return '/img/media/helloWorld.jpeg';
+                throw new Error(`Image for ${type} type of lab not found`);
         }
     }
 
@@ -45,7 +45,7 @@ class Index extends Component {
         const {lab, t} = this.props;
         const labStatus = !this.state.isCurrent &&
                 <div className="labContent__labStatus"/>;
-        const imageURL = Index.getImageURL(lab.type);
+        const imageURL = Lab.getImageURL(lab.type);
 
         return (
             <div className="lab">
@@ -77,4 +77,4 @@ class Index extends Component {
         )
     }
 }
-export default translate('translations')(Index)
+export default translate('translations')(Lab)
