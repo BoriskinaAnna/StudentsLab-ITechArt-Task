@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Lab from 'js/components/lab';
 import 'js/components/labsList/labsListStyle.scss';
+import {Link} from 'react-router-dom';
 
 
 class LabList extends Component {
@@ -8,9 +9,9 @@ class LabList extends Component {
     render() {
         const {labs, showAddLab} = this.props;
         const labElements = labs.map((lab, index) =>
-            <div key = {index} className="lab-list__lab">
+            <Link to="/schedule" key = {index} className="lab-list__lab">
                 <Lab lab={lab}/>
-            </div>
+            </Link>
         );
 
         return (

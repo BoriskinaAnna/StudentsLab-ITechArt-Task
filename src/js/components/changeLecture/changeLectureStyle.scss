@@ -1,4 +1,4 @@
-.addLabModal{
+.changeLectureModal{
   position: fixed;
   top: 50%;
   left: 50%;
@@ -10,30 +10,39 @@
   font-family: "Open Sans", sans-serif;
   font-size: 16px;
   font-weight: 400;
-  height: 600px;
+  height: 620px;
   width: 400px;
 
-  .addLab{
+  .changeLecture{
     display: flex;
     flex-direction: column;
     height: 100%;
     width: 90%;
     margin: auto;
 
-    &__dates{
+    &__times{
       display: flex;
       flex-direction: row;
-      &__input {
-        width: 45%;
-      }
     }
 
-    &__blockTitle{
+    &__title{
       font-weight: 600;
-      margin-bottom: 10px;
     }
 
-    &__addBtn{
+    &__input{
+      background-color: rgb(255, 255, 255);
+      border: 1px solid rgb(220, 220, 220);
+      cursor: text;
+      height: 48px;
+      line-height: 49px;
+      text-align: start;
+      width: 100%;
+      display: flex;
+      margin-bottom: 5px;
+      padding-left: 10px;
+    }
+
+    &__btnSave{
       align-items: flex-start;
       background-color: rgb(27, 183, 134);
       border: 0px rgb(255, 255, 255);
@@ -46,17 +55,13 @@
       margin-top: 10px;
     }
 
-    &__input {
-      background-color: rgb(255, 255, 255);
-      border: 1px solid rgb(220, 220, 220);
-      cursor: text;
-      height: 48px;
-      line-height: 49px;
-      text-align: start;
-      width: 100%;
-      display: flex;
-      margin-bottom: 5px;
-      padding-left: 10px;
+    &__comments{
+
+      .changeLecture__input{
+        height: 120px;
+        line-height: 22px;
+        resize: none;
+      }
     }
   }
 }

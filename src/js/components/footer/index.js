@@ -21,18 +21,18 @@ class Footer extends Component {
                 <div className="footer__phones">
                     <div className="footer__phonesTitle">
                         {t('numbers')}
-                     </div>
+                    </div>
                     <div className="footer__phone">
                         <img className="footer__operatorImage" src = "/img/operators/mts.svg" alt="mts"/>
-                        <span>+375 33 662 31 40</span>
+                        <a href="tel:+375 33 662 31 40" className="footer__phoneNumber">+375 33 662 31 40</a>
                     </div>
                     <div className="footer__phone">
                         <img className="footer__operatorImage" src="/img/operators/life.svg" alt="life"/>
-                        <span>+375 25 799 67 43</span>
+                        <a href="tel:+375 25 799 67 43" className="footer__phoneNumber">+375 25 799 67 43</a>
                     </div>
                     <div className="footer__phone">
                         <img className="footer__operatorImage" src="/img/operators/velcom.svg" alt="velcom"/>
-                        <span>+375 29 359 63 31</span>
+                        <a href="tel:+375 29 359 63 31" className="footer__phoneNumber">+375 29 359 63 31</a>
                     </div>
                 </div>
                 <div className="footer__languages">

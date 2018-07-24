@@ -4,9 +4,10 @@ import {translate} from 'react-i18next';
 import Modal from 'react-modal';
 import ModalWindowHeader from 'js/components/modalWindowHeader';
 
+
 Modal.setAppElement('#content');
 
-class LabForm extends Component {
+class AddLabForm extends Component {
 
     render() {
         const {t, isAddLabShowed, closeAddLab} = this.props;
@@ -15,46 +16,55 @@ class LabForm extends Component {
             <Modal
                 isOpen={isAddLabShowed}
                 onRequestClose={closeAddLab}
-                className="Modal"
+                className="addLabModal"
                 overlayClassName="Overlay"
             >
-                <div className="addLab form-control">
+                <div className="addLab">
                     <ModalWindowHeader close={closeAddLab}/>
                     <div>
                         <span className="addLab__blockTitle">{t('courseName')}</span>
-                        <input className="form-control"/>
+                        <input className="addLab__input"/>
                     </div>
                     <div>
                         <span className="addLab__blockTitle">{t('trainingDate')}</span>
                         <div className="addLab__dates">
-                            {t('start')}
-                            <input className="form-control"/>
-                            {t('end')}
-                            <input className="form-control"/>
+                            <div>
+                                <span className="title">{t('start')}</span>
+                                <input className="addLab__input"/>
+                            </div>
+                            <div>
+                                <span className="title">{t('end')}</span>
+                                <input className="addLab__input"/>
+                            </div>
                         </div>
                     </div>
                     <div>
                         <span className="addLab__blockTitle">{t('admissionDate')}</span>
                         <div className="addLab__dates">
-                            {t('start')}
-                            <input className="form-control"/>
-                            {t('end')}
-                            <input className="form-control"/>
+                            <div>
+                                <span className="title">{t('start')}</span>
+                                <input className="addLab__input"/>
+                            </div>
+                            <div>
+                                <span className="title">{t('end')}</span>
+                                <input className="addLab__input"/>
+                            </div>
                         </div>
                     </div>
                     <div>
                         <span className="addLab__blockTitle">{t('city')}</span>
-                        <input className="form-control"/>
+                        <input className="addLab__input"/>
                     </div>
                     <div>
                         <span className="addLab__blockTitle">{t('courseType')}</span>
-                        <input className="form-control"/>
+                        <input className="addLab__input"/>
                     </div>
                     <button type="submit" className="addLab__addBtn btn-default">
-                        {t('add')}</button>
+                        {t('add')}
+                    </button>
                 </div>
             </Modal>
         )
     }
 }
-export default translate('translations')(LabForm)
+export default translate('translations')(AddLabForm)

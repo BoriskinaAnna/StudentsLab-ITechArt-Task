@@ -8,9 +8,9 @@ class ModalWindowHeader extends Component {
         const {close} = this.props;
 
         return (
-            <div className="modalWindowHeader">
-                <div className="modalWindowHeader__logo"/>
-                <button className="modalWindowHeader__closeBtn" onClick={close}/>
+            <div className="modalWindow">
+                <div className="modalWindow__logo"/>
+                <button className="modalWindow__close" onClick={close}/>
             </div>
         )
     }

@@ -6,14 +6,6 @@ import {Link} from 'react-router-dom';
 
 class Header extends Component {
 
-    constructor() {
-        super();
-
-        this.state = {
-            isLoginShowed: false
-        };
-    }
-
     render() {
         const {t, showLogin} = this.props;
 

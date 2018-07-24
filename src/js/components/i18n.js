@@ -30,7 +30,15 @@ options.resources = {
             "start": "Start",
             "end": "End",
             "courseType": "Course type",
-            "add": "Add"
+            "add": "Add",
+            "time": "Time",
+            "lecturer": "Lecturer",
+            "place": "Place",
+            "duration": "Duration",
+            "logIn": "Log in",
+            "rememberMe": "Remember me",
+            "forgotPassword": "Forgot password ?",
+            "comments": "Comments"
         }
     },
     ru: {
@@ -40,13 +48,21 @@ options.resources = {
             "admissionDate": "Набор на курсы",
             "trainingDate": "Даты обучения",
             "numbers": "Телефоны:",
-            "e-mail": "Электронная почта",
+            "e-mail": "Адрес электронной почты",
             "password": "Пароль",
             "courseName": "Название курсов",
             "start": "Начало",
             "end": "Конец",
             "courseType": "Тип курсов",
-            "add": "Добавить"
+            "add": "Добавить",
+            "time": "Время",
+            "lecturer": "Лектор",
+            "place": "Место",
+            "duration": "Продолжительность",
+            "logIn": "Вход",
+            "rememberMe": "Запомнить меня",
+            "forgotPassword": "Забыли пароль ?",
+            "comments": "Комментарии"
         }
     }
 };
