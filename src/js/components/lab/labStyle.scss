@@ -64,6 +64,7 @@
 
    &__trainingDates{
      padding-left: 90px;
+
      @media (max-width: 1080px) {
        font-size: 17px;
        position: relative;
@@ -72,6 +73,7 @@
 
      .labContent__dates {
        font-weight: 700;
+
        @media (max-width: 1080px){
          display: inline-block;
          color: #A6A6A6;

@@ -4,6 +4,7 @@ import { translate } from 'react-i18next';
 import Modal from 'react-modal';
 import ModalWindowHeader from 'js/components/modalWindowHeader';
 
+
 Modal.setAppElement('#content');
 
 class Authorization extends Component {
@@ -15,20 +16,22 @@ class Authorization extends Component {
             <Modal
                 isOpen={isLoginShowed}
                 onRequestClose={closeLogin}
-                className="Modal"
+                className="authorizationModal"
                 overlayClassName="Overlay"
             >
-                <div className="authorizationContainer form-control">
-                    <div className="authorizationContainer__content">
-                        <ModalWindowHeader close={closeLogin}/>
-                        <input className="form-control" placeholder={t('e-mail')}/>
-                        <input type="password" className="form-control" placeholder={t('password')}/>
-                        <button type="submit" className="btn btn-default">
-                            {t('btnAuthorization')}
-                        </button>
+                <div className="authorization">
+                    <ModalWindowHeader close={closeLogin}/>
+                    <h2 className="authorization__title">{t('logIn')}</h2>
+                    <input type="text" className="authorization__input"
+                           placeholder={t('e-mail')}/>
+                    <input type="password" className="authorization__input"
+                           placeholder={t('password')}/>
+                    <div className="authorization__forgotPassword">
+                        <a href="">{t('forgotPassword')}</a>
                     </div>
+                    <button className="authorization__btnLogin" type="submit">{t('btnAuthorization')}</button>
                 </div>
-             </Modal>
+            </Modal>
         )
     }
 }

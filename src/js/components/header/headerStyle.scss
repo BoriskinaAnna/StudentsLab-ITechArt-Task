@@ -3,6 +3,7 @@ header {
     justify-content: space-around;
     height: 85px;
     margin-bottom: 30px;
+
     .logo {
       background: url("/img/logo.svg") no-repeat;
       margin-top: 40px;
@@ -10,6 +11,7 @@ header {
       display: inline-block;
       height: 70px;
     }
+
     .authorizationBtn {
       background-color: rgb(235, 29, 36);
       color: rgb(255, 255, 255);
@@ -27,6 +29,3 @@ header {
       border: none;
     }
 }
-
-
-
