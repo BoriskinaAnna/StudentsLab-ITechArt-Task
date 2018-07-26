@@ -512,7 +512,6 @@ ASALocalRun/
 *.db
 *.dbf
 *.mdb
-*.sql
 *.sqlite3
 
 ### VisualStudioCode ###
