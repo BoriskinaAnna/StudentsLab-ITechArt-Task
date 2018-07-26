@@ -7,9 +7,9 @@
     [AdmissionEnd]   DATE          NOT NULL,
     [TrainingStart]  DATE          NOT NULL,
     [TrainingEnd]    DATE          NOT NULL,
-    [IsDeveloped] BIT NOT NULL, 
+    [IsDraft] BIT NOT NULL, 
     CONSTRAINT [PK_Lab] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_Lab_City] FOREIGN KEY ([CityId]) REFERENCES [dbo].[City] ([Id]),
-    CONSTRAINT [FK_Lab_LabType] FOREIGN KEY ([TypeId]) REFERENCES [dbo].[LabType] ([Id]) ON DELETE CASCADE ON UPDATE CASCADE
+    CONSTRAINT [FK_Lab_LabType] FOREIGN KEY ([TypeId]) REFERENCES [dbo].[LabType] ([Id])
 );
 

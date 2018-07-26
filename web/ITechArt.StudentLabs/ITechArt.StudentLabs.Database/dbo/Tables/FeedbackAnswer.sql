@@ -11,10 +11,10 @@
     CONSTRAINT [FK_FeedbackAnswer_Mentor] FOREIGN KEY ([MentorId]) REFERENCES [dbo].[User] ([Id]),
     CONSTRAINT [FK_FeedbackAnswer_Student] FOREIGN KEY ([StudentId]) REFERENCES [dbo].[User] ([Id]),
     CONSTRAINT [UX_FeedbackAnswer_MentorId_FeedbackQuestionId_FeedbackDateId_StudentId] UNIQUE NONCLUSTERED (
-	   [MentorId] ASC, 
-	   [FeedbackDateId] ASC, 
-	   [FeedbackQuestionId] ASC,
-	   [StudentId] ASC
+       [MentorId] ASC, 
+       [FeedbackDateId] ASC, 
+       [FeedbackQuestionId] ASC,
+       [StudentId] ASC
     )
 );
 
