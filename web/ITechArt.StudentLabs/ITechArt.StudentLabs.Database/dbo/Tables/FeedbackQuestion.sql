@@ -5,6 +5,6 @@
     CONSTRAINT [PK_FeedbackQuestion] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_FeedbackQuestion_Lab] FOREIGN KEY ([LabId]) REFERENCES [dbo].[Lab] ([Id]),
     CONSTRAINT [FK_FeedbackQuestion_Question] FOREIGN KEY ([QuestionId]) REFERENCES [dbo].[Question] ([Id]),
-	CONSTRAINT [UX_FeedbackQuestion_QuestionId_LabId] UNIQUE NONCLUSTERED ([QuestionId] ASC, [LabId] ASC)
+    CONSTRAINT [UX_FeedbackQuestion_QuestionId_LabId] UNIQUE NONCLUSTERED ([QuestionId] ASC, [LabId] ASC)
 );
 

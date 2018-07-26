@@ -9,6 +9,12 @@
     CONSTRAINT [FK_FeedbackAnswer_FeedbackDate] FOREIGN KEY ([FeedbackDateId]) REFERENCES [dbo].[FeedbackDate] ([Id]),
     CONSTRAINT [FK_FeedbackAnswer_FeedbackQuestion] FOREIGN KEY ([FeedbackQuestionId]) REFERENCES [dbo].[FeedbackQuestion] ([Id]),
     CONSTRAINT [FK_FeedbackAnswer_Mentor] FOREIGN KEY ([MentorId]) REFERENCES [dbo].[User] ([Id]),
-    CONSTRAINT [FK_FeedbackAnswer_Student] FOREIGN KEY ([StudentId]) REFERENCES [dbo].[User] ([Id])
+    CONSTRAINT [FK_FeedbackAnswer_Student] FOREIGN KEY ([StudentId]) REFERENCES [dbo].[User] ([Id]),
+    CONSTRAINT [UX_FeedbackAnswer_MentorId_FeedbackQuestionId_FeedbackDateId_StudentId] UNIQUE NONCLUSTERED (
+	   [MentorId] ASC, 
+	   [FeedbackDateId] ASC, 
+	   [FeedbackQuestionId] ASC,
+	   [StudentId] ASC
+    )
 );
 
