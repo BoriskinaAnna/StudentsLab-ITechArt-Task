@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import Lab from 'js/components/lab';
-import 'js/components/labsList/labsListStyle.scss';
+import Lab from '../lab';
+import './labsListStyle.scss';
 import {Link} from 'react-router-dom';
 
 

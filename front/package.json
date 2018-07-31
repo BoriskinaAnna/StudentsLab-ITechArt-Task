@@ -80,7 +80,6 @@
   "bugs": {
     "url": "https://github.com/BoriskinaAnna/StudentsLab-ITechArt-Task/issues"
   },
-  "homepage": "https://github.com/BoriskinaAnna/StudentsLab-ITechArt-Task#readme",
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,mjs}"

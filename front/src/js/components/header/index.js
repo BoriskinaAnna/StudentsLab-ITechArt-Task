@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import 'js/components/header/headerStyle.scss';
+import './headerStyle.scss';
 import {translate} from 'react-i18next';
 import {Link} from 'react-router-dom';
 
@@ -11,7 +11,7 @@ class Header extends Component {
 
         return (
             <header>
-                <Link to="/" className="logo"/>
+                <Link to="/" className="logo"><img src="img/logo.svg"/></Link>
                 <button onClick={showLogin} className="authorizationBtn">
                     {t('btnAuthorization')}
                 </button>

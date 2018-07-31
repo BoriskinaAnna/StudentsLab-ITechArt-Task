@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import 'js/components/lab/labStyle.scss';
+import './labStyle.scss';
 import { translate } from 'react-i18next';
 
 
@@ -25,17 +25,17 @@ class Lab extends Component {
     static getImageURL(type){
         switch (type){
             case 'js':
-                return '/img/media/FullStack-JS.svg';
+                return 'img/media/FullStack-JS.svg';
             case '.net':
-                return '/img/media/microsoft_net_logo.svg';
+                return 'img/media/microsoft_net_logo.svg';
             case 'java':
-                return '/img/media/java.svg';
+                return 'img/media/java.svg';
             case 'qa':
-                return '/img/media/qa.svg';
+                return 'img/media/qa.svg';
             case 'ruby':
-                return '/img/media/ruby.svg';
+                return 'img/media/ruby.svg';
             case 'salesforce':
-                return '/img/media/salesforce.svg';
+                return 'img/media/salesforce.svg';
             default:
                 throw new Error(`Image for ${type} type of lab not found`);
         }
@@ -72,7 +72,7 @@ class Lab extends Component {
                     </div>
                     <span className="labContent__city">{lab.city}</span>
                 </div>
-                <img className="lab__arrow" src="/img/media/list-arrow-right.svg" alt="arrow"/>
+                <img className="lab__arrow" src="img/media/list-arrow-right.svg" alt="arrow"/>
             </div>
         )
     }
