@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using React.AspNet;
 
 namespace ITechArt.StudentLab.Server
 {
@@ -46,6 +47,7 @@ namespace ITechArt.StudentLab.Server
             
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddReact();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,17 +66,6 @@ namespace ITechArt.StudentLab.Server
 
             app.UseHttpsRedirection();
             app.UseAuthentication();
-
-           /* app.UseCookieAuthentication(new CookieAuthenticationOptions()
-            {
-                AuthenticationScheme = "MyCookieMiddlewareInstance",
-                CookieName = "MyCookieMiddlewareInstance",
-                LoginPath = new PathString("/Home/Login/"),
-                AccessDeniedPath = new PathString("/Home/AccessDenied/"),
-                AutomaticAuthenticate = true,
-                AutomaticChallenge = true
-            });*/
-
             app.UseMvc();
         }
     }

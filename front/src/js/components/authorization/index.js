@@ -9,6 +9,58 @@ Modal.setAppElement('#content');
 
 class Authorization extends Component {
 
+    constructor(){
+        super();
+        this.state = {
+            emailValue: '',
+            passwordValue: ''
+        }
+    }
+
+    sendToAuthentication = () =>{
+
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json')
+        const options = {
+            method: 'POST',
+            body: JSON.stringify({
+                email:this.state.emailValue,
+                password: this.state.passwordValue
+            }),
+            headers: headers
+        };
+        fetch('https://localhost:44334/api/account/index', options)
+            .then(
+                function(response) {
+                    if (response.status !== 200) {
+                        console.log('Looks like there was a problem. Status Code: ' +
+                            response.status);
+                        return;
+                    }
+
+                    // Examine the text in the response
+                    response.json().then(function(data) {
+                        console.log(data);
+                    });
+                }
+            )
+            .catch(function(err) {
+                console.log('Fetch Error :-S', err);
+            });
+    };
+
+    updateLoginValue = (evt) =>{
+        this.setState({
+            emailValue: evt.target.value
+        });
+    };
+
+    updatePasswordValue = (evt) =>{
+        this.setState({
+            passwordValue: evt.target.value
+        });
+    };
+
     render() {
         const {t, isLoginShowed, closeLogin} = this.props;
 
@@ -22,14 +74,14 @@ class Authorization extends Component {
                 <div className="authorization">
                     <ModalWindowHeader close={closeLogin}/>
                     <h2 className="authorization__title">{t('logIn')}</h2>
-                    <input type="text" className="authorization__input"
-                           placeholder={t('e-mail')}/>
-                    <input type="password" className="authorization__input"
-                           placeholder={t('password')}/>
+                    <input type="text" className="authorization__input" value={this.state.emailValue}
+                           placeholder={t('e-mail')} onChange={this.updateLoginValue}/>
+                    <input type="password" className="authorization__input" value={this.state.passwordValue}
+                           placeholder={t('password')}  onChange={this.updatePasswordValue}/>
                     <div className="authorization__forgotPassword">
                         <a href="">{t('forgotPassword')}</a>
                     </div>
-                    <button className="authorization__btnLogin" type="submit">{t('btnAuthorization')}</button>
+                    <button className="authorization__btnLogin" type="submit" onClick={this.sendToAuthentication}>{t('btnAuthorization')}</button>
                 </div>
             </Modal>
         )
