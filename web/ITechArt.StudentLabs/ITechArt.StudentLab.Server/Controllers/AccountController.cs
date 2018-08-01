@@ -25,7 +25,7 @@ namespace ITechArt.StudentLab.Server.Controllers
             }
             var loggedUser = await _accountService.Authenticate(user.Email, user.Password);
             if (loggedUser == null)
-                return BadRequest();
+                return BadRequest("Invalid login or password");
             
             return Ok(loggedUser);
         }

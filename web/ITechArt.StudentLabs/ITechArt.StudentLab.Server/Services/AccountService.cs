@@ -28,12 +28,9 @@ namespace ITechArt.StudentLab.Server.Services
                         connection.Open();
                         ModelUser user = await connection.QuerySingleOrDefaultAsync<ModelUser>
                             (String.Format("SELECT * FROM dbo.[User] WHERE Email={0};", email));
-                        if (user != null)
-                        {
-                            return user;
-                        }
-
-                        return null;
+                        if (user == null)
+                            return null;
+                       
                     }
                 }
             }
