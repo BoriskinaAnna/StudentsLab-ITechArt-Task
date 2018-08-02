@@ -20,7 +20,7 @@ class Authorization extends Component {
     sendToAuthentication = () =>{
 
         const headers = new Headers();
-        headers.append('Content-Type', 'application/json')
+        headers.append('Content-Type', 'application/json');
         const options = {
             method: 'POST',
             body: JSON.stringify({
@@ -29,7 +29,7 @@ class Authorization extends Component {
             }),
             headers: headers
         };
-        fetch('https://localhost:44334/api/account/index', options)
+        fetch('https://localhost:44353/api/account/login', options)
             .then(
                 function(response) {
                     if (response.status !== 200) {
