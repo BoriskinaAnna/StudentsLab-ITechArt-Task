@@ -29,7 +29,7 @@ class Authorization extends Component {
             }),
             headers: headers
         };
-        fetch('https://localhost:44353/api/account/login', options)
+        fetch('/api/account/login', options)
             .then(
                 function(response) {
                     if (response.status !== 200) {

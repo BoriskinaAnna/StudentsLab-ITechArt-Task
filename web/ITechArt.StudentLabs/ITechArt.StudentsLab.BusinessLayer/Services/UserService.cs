@@ -8,6 +8,7 @@ using System.Data;
 using ITechArt.StudentsLab.DataAccessLayer.Models;
 using ITechArt.StudentsLab.DataAccessLayer.Contracts;
 using JetBrains.Annotations;
+using System.Linq;
 
 namespace ITechArt.StudentsLab.BusinessLayer.Services
 {
@@ -18,6 +19,23 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
         {
             _userRepository = userRepository;
         }
+
+        private static bool ByteArraysCompaire(byte[] a, byte[] b)
+        {
+            if (a.Length != b.Length)
+            {
+                return false;
+            }
+            for (int i = 0; i < a.Length; i++)
+            {
+                if (a[i] != b[i])
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         public async Task<UserModel> Login(string email, string password)
         {
             try
@@ -31,24 +49,19 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
                     UserResponse user = await _userRepository.GetUser(email);
                     if (user == null)
                         return null;
-                    UserModel userModel = new UserModel
-                    (
-                        user.Id,
-                        user.FirstName,
-                        user.LastName,
-                        user.Email
-                     );
-                    return userModel;
-                    /*  string connectionString = @"Data Source=WSC-253-71;Initial Catalog=ITechArtLab;Integrated Security=True";
-                      using (IDbConnection connection = new SqlConnection(connectionString))
-                      {
-                          connection.Open();
-                          UserModel user = await connection.QuerySingleOrDefaultAsync<UserModel>
-                              (String.Format("SELECT * FROM dbo.[User] WHERE Email={0};", email));
-                          if (user == null)
-                              return null;
-                          return null;
-                      }*/
+                    byte[] passwordHash = CryptographyService.GetHash(password, user.Salt);
+                    if (ByteArraysCompaire(user.PasswordHash, passwordHash))
+                    {
+                        UserModel userModel = new UserModel
+                       (
+                           user.Id,
+                           user.FirstName,
+                           user.LastName,
+                           user.Email
+                        );
+                        return userModel;
+                    }
+                    return null;
                 }
             }
             catch (Exception e)

@@ -82,4 +82,7 @@
   <ItemGroup>
     <RefactorLog Include="ITechArt.StudentLabs.Database.refactorlog" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Script.PostDeployment.sql" />
+  </ItemGroup>
 </Project>

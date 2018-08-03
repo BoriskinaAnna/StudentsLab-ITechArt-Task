@@ -6,6 +6,7 @@ using Dapper;
 using System.Data;
 using ITechArt.StudentsLab.BusinessLayer.Contracts;
 using JetBrains.Annotations;
+using System;
 
 namespace ITechArt.StudentsLab.DataAccessLayer.Services
 {
@@ -21,20 +22,17 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Services
 
         public async Task<UserResponse> GetUser(string email)
         {
-            string connectionString = @"Data Source=WSC-253-71;Initial Catalog=ITechArtLab;Integrated Security=True";
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
-                connection.Open();
-                UserResponse user = await connection.QuerySingleOrDefaultAsync<UserResponse>(
-                    "GetUser",
-                    new { Email = email },
-                    commandType: CommandType.StoredProcedure);
-                int x = 5;
-                int s;
-                s = x;
+              
                
-                return user;
-            }
+                UserResponse user = await connection.QuerySingleOrDefaultAsync<UserResponse>(
+                 "GetUser",
+                 new { Email = email },
+                 commandType: CommandType.StoredProcedure);
+
+                 return user;
+            } 
         }
     }
 }

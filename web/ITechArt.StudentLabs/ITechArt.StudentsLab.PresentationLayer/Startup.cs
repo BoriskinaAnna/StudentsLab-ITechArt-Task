@@ -1,5 +1,4 @@
 ﻿using ITechArt.StudentsLab.BusinessLayer.Contracts;
-using ITechArt.StudentsLab.BusinessLayer.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ITechArt.StudentsLab.DataAccessLayer;
+using ITechArt.StudentsLab.BusinessLayer;
 
 namespace ITechArt.StudentsLab.PresentationLayer
 {
@@ -28,6 +28,8 @@ namespace ITechArt.StudentsLab.PresentationLayer
             services.AddSingleton<IDalSettings>(settings);
 
             DalModule.Register(services);
+            BlModule.Register(services);
+            PlModule.Register(services);
             services
                 .Configure<CookiePolicyOptions>(options =>
                 {
@@ -47,7 +49,7 @@ namespace ITechArt.StudentsLab.PresentationLayer
                      options.LogoutPath = "/Account/LogOff";
                  });
 
-            services.AddTransient<IUserService, UserService>(); 
+         
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
