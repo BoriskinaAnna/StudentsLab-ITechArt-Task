@@ -38,37 +38,30 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
 
         public async Task<UserModel> Login(string email, string password)
         {
-            try
-            {
-                if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
-                {
-                    return null;
-                }
-                else
-                {
-                    UserResponse user = await _userRepository.GetUser(email);
-                    if (user == null)
-                        return null;
-                    byte[] passwordHash = CryptographyService.GetHash(password, user.Salt);
-                    if (ByteArraysCompaire(user.PasswordHash, passwordHash))
-                    {
-                        UserModel userModel = new UserModel
-                       (
-                           user.Id,
-                           user.FirstName,
-                           user.LastName,
-                           user.Email
-                        );
-                        return userModel;
-                    }
-                    return null;
-                }
-            }
-            catch (Exception e)
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
                 return null;
             }
+            else
+            {
+                UserResponse user = await _userRepository.GetUser(email);
+                if (user == null)
+                    return null;
+                byte[] passwordHash = CryptographyService.GetHash(password, user.Salt);
 
+                if (passwordHash.Select((b, i) => b == user.PasswordHash[i]).All(item => item))
+                {
+                    UserModel userModel = new UserModel
+                    (
+                        user.Id,
+                        user.FirstName,
+                        user.LastName,
+                        user.Email
+                    );
+                    return userModel;
+                }
+                return null;
+            }
         }
     }
 }
