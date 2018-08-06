@@ -45,8 +45,8 @@ namespace ITechArt.StudentsLab.PresentationLayer
                 })
                  .AddCookie(options =>
                  {
-                     options.LoginPath = "/Account/LogIn";
-                     options.LogoutPath = "/Account/LogOff";
+                     options.LoginPath = "/api/account/LogIn";
+                     options.LogoutPath = "/api/account/LogOff";
                  });
 
          

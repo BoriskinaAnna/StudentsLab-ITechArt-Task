@@ -7,6 +7,7 @@ using ITechArt.StudentsLab.BusinessLayer.Models;
 using System.Security.Claims;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace ITechArt.StudentsLab.PresentationLayer.Controllers
 {
@@ -20,25 +21,28 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login([FromBody] LoginModel model)
+        public async Task<IActionResult> Login([NotNull] [FromBody] LoginModel model)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             UserModel user = await _userService.Login(model.Email, model.Password);
 
-            if (user == null)
+           if (user == null)
                 return BadRequest("Invalid login or password");
-            var claims = new List<Claim>
-                    {
-                    //    new Claim(ClaimTypes.Name, user.Id)
-                    };
-            ClaimsIdentity userIdentity = new ClaimsIdentity(claims, "login");
-            ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
 
-            await HttpContext.SignInAsync(principal);
-          //  return RedirectToAction("UserHome", "User");
-
+           var claims = new List<Claim>
+           {
+               new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+               new Claim(ClaimTypes.Email, user.Email)
+           };
+            var claimsIdentity = new ClaimsIdentity(
+                claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(claimsIdentity)
+            );
+            
             return Ok(new ResponseModel
             (
                 user.Id,
@@ -47,7 +51,5 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
                 user.Email
             ));
         }
-
-
     }
 }
