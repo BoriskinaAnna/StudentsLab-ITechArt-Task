@@ -9,8 +9,8 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
 {
     public class UserService : IUserService
     {
-        private readonly IUserRepository _userRepository;
 
+        private readonly IUserRepository _userRepository;
 
         public UserService(IUserRepository userRepository)
         {
@@ -19,6 +19,10 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
 
         private static bool ByteArraysCompaire(byte[] a, byte[] b)
         {
+            if (a.Length != b.Length)
+            {
+                return false;
+            }
             for (int i = 0; i < a.Length; i++)
             {
                 if (a[i] != b[i])
@@ -26,7 +30,6 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
                     return false;
                 }
             }
-
             return true;
         }
 
@@ -40,13 +43,10 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
             {
                 UserResponse user = await _userRepository.GetUser(email);
                 if (user == null)
-                {
                     return null;
-                }
-
                 byte[] passwordHash = CryptographyService.GetHash(password, user.Salt);
 
-                if (ByteArraysCompaire(passwordHash, user.PasswordHash))
+                if (passwordHash.Select((b, i) => b == user.PasswordHash[i]).All(item => item))
                 {
                     UserModel userModel = new UserModel
                     (
@@ -57,7 +57,6 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
                     );
                     return userModel;
                 }
-
                 return null;
             }
         }

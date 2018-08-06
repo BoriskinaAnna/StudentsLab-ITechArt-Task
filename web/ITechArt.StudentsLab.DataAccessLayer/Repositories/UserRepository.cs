@@ -10,8 +10,8 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Services
 {
     public class UserRepository : IUserRepository
     {
-        private readonly IDalSettings _settings;
 
+        private readonly IDalSettings _settings;
 
         public UserRepository(IDalSettings settings)
         {
@@ -22,14 +22,15 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Services
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
+
                 UserResponse user = await connection.QuerySingleOrDefaultAsync<UserResponse>(
                     "GetUser",
                     new { Email = email },
                     commandType: CommandType.StoredProcedure
                 );
 
-                return user;
-            }
+                 return user;
+            } 
         }
     }
 }

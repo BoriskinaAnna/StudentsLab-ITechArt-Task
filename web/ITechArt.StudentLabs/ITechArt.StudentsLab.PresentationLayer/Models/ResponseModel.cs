@@ -1,22 +1,17 @@
-﻿using JetBrains.Annotations;
-
-namespace ITechArt.StudentsLab.PresentationLayer.Models
+﻿namespace ITechArt.StudentsLab.PresentationLayer.Models
 {
     public class ResponseModel
     {
-        [NotNull]
         public int Id { get; set; }
-        [NotNull]
         public string FirstName { get; set; }
-        [NotNull]
         public string LastName { get; set; }
-        [NotNull]
         public string Email { get; set; }
+
         public ResponseModel(
-            [NotNull] int id,
-            [NotNull] string firstName,
-            [NotNull] string lastName,
-            [NotNull] string email
+            int id,
+            string firstName,
+            string lastName,
+            string email
         )
         {
             Id = id;

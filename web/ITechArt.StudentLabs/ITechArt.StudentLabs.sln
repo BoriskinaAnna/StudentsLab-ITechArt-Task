@@ -5,11 +5,11 @@ VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ITechArt.StudentLabs.Database", "ITechArt.StudentLabs.Database\ITechArt.StudentLabs.Database.sqlproj", "{10A4D4E3-31BD-4663-A9FC-2A8586BD98FD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITechArt.StudentsLab.BusinessLayer", "ITechArt.StudentsLab.BusinessLayer\ITechArt.StudentsLab.BusinessLayer.csproj", "{3E71C110-025C-45DB-9D3F-5908D7D07AD0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITechArt.StudentsLab.PresentationLayer", "ITechArt.StudentsLab.PresentationLayer\ITechArt.StudentsLab.PresentationLayer.csproj", "{53608BF4-6761-4AD6-AA07-01F6B2D8C9DB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITechArt.StudentsLab.DataAccessLayer", "ITechArt.StudentsLab.DataAccessLayer\ITechArt.StudentsLab.DataAccessLayer.csproj", "{E018EE31-9786-41BC-B856-4CC627E1979C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITechArt.StudentsLab.BusinessLayer", "ITechArt.StudentsLab.BusinessLayer\ITechArt.StudentsLab.BusinessLayer.csproj", "{A01563E0-EE3A-40AC-A82F-52FC2B5CD313}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITechArt.StudentsLab.PresentationLayer", "ITechArt.StudentsLab.PresentationLayer\ITechArt.StudentsLab.PresentationLayer.csproj", "{53608BF4-6761-4AD6-AA07-01F6B2D8C9DB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITechArt.StudentsLab.DataAccessLayer", "ITechArt.StudentsLab.DataAccessLayer\ITechArt.StudentsLab.DataAccessLayer.csproj", "{F6DBC35D-2FCD-48E6-B761-0CF81B29B3FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,18 +23,18 @@ Global
 		{10A4D4E3-31BD-4663-A9FC-2A8586BD98FD}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{10A4D4E3-31BD-4663-A9FC-2A8586BD98FD}.Release|Any CPU.Build.0 = Debug|Any CPU
 		{10A4D4E3-31BD-4663-A9FC-2A8586BD98FD}.Release|Any CPU.Deploy.0 = Debug|Any CPU
-		{3E71C110-025C-45DB-9D3F-5908D7D07AD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3E71C110-025C-45DB-9D3F-5908D7D07AD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3E71C110-025C-45DB-9D3F-5908D7D07AD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3E71C110-025C-45DB-9D3F-5908D7D07AD0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E018EE31-9786-41BC-B856-4CC627E1979C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E018EE31-9786-41BC-B856-4CC627E1979C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E018EE31-9786-41BC-B856-4CC627E1979C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E018EE31-9786-41BC-B856-4CC627E1979C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{53608BF4-6761-4AD6-AA07-01F6B2D8C9DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{53608BF4-6761-4AD6-AA07-01F6B2D8C9DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53608BF4-6761-4AD6-AA07-01F6B2D8C9DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53608BF4-6761-4AD6-AA07-01F6B2D8C9DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A01563E0-EE3A-40AC-A82F-52FC2B5CD313}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A01563E0-EE3A-40AC-A82F-52FC2B5CD313}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A01563E0-EE3A-40AC-A82F-52FC2B5CD313}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A01563E0-EE3A-40AC-A82F-52FC2B5CD313}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6DBC35D-2FCD-48E6-B761-0CF81B29B3FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6DBC35D-2FCD-48E6-B761-0CF81B29B3FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6DBC35D-2FCD-48E6-B761-0CF81B29B3FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6DBC35D-2FCD-48E6-B761-0CF81B29B3FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

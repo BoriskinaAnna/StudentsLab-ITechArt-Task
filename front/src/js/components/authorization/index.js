@@ -29,23 +29,25 @@ class Authorization extends Component {
             }),
             headers: headers
         };
-        
+
         fetch('/api/account/login', options)
-            .then(
-                function(response) {
+            .then((response) =>
+                {
                     if (response.status !== 200) {
                         console.log('Looks like there was a problem. Status Code: ' +
                            response.status);
                         return;
                     }
-                    response.json().then(function(data) {
-                        console.log(data);
-                    });
+                    response.json().then((data) =>
+                        {
+                            console.log(data);
+                        });
                 }
             )
-            .catch(function(err) {
-                console.log('Fetch Error :-S', err);
-            });
+            .catch((err) =>
+                {
+                    console.log('Fetch Error :-S', err);
+                });
     };
 
     updateLoginValue = (evt) =>{
