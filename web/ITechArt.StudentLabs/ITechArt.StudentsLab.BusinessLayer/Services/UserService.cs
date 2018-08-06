@@ -3,7 +3,6 @@ using ITechArt.StudentsLab.BusinessLayer.Contracts;
 using ITechArt.StudentsLab.BusinessLayer.Models;
 using ITechArt.StudentsLab.DataAccessLayer.Models;
 using ITechArt.StudentsLab.DataAccessLayer.Contracts;
-using System.Linq;
 
 namespace ITechArt.StudentsLab.BusinessLayer.Services
 {
