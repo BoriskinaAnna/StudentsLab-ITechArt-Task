@@ -42,18 +42,18 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
                 {
                     return null;
                 }
-
+                   
                 byte[] passwordHash = CryptographyService.GetHash(password, user.Salt);
 
                 if (ByteArraysCompaire(passwordHash, user.PasswordHash))
                 {
                     UserModel userModel = new UserModel
-                    (
-                        user.Id,
-                        user.FirstName,
-                        user.LastName,
-                        user.Email
-                    );
+                        (
+                            user.Id,
+                            user.FirstName,
+                            user.LastName,
+                            user.Email
+                        );
                     return userModel;
                 }
 

@@ -20,7 +20,7 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
 
         public static byte[] GetHash(string password, byte[] computedSalt = null)
         {
-            var plainText = Encoding.UTF8.GetBytes(password);
+            byte[] plainText = Encoding.UTF8.GetBytes(password);
 
             if (computedSalt == null)
             {
