@@ -3,29 +3,42 @@ header {
     justify-content: space-around;
     height: 85px;
     margin-bottom: 30px;
+    align-items: center;
 
-    .logo {
-
-      margin-top: 40px;
-      width: 170px;
+    .headerLogo {
+      margin-top: 30px;
+      width: 200px;
       display: inline-block;
-      height: 70px;
+      height: 100px;
+      &__img{
+        width: 200px;
+        height: 100px;
+      }
     }
 
-    .authorizationBtn {
-      background-color: rgb(235, 29, 36);
-      color: rgb(255, 255, 255);
-      cursor: pointer;
-      float: right;
-      font-family: "Open Sans", sans-serif;
-      font-size: 16px;
-      font-weight: 400;
-      line-height: 34px;
-      margin-top: 35px;
-      text-align: center;
-      text-transform: uppercase;
-      width: 239px;
-      display: block;
-      border: none;
+    .login {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      .headerBtn {
+        text-decoration: none;
+        background-color: rgb(235, 29, 36);
+        color: rgb(255, 255, 255);
+        cursor: pointer;
+        font-family: "Open Sans", sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        text-align: center;
+        text-transform: uppercase;
+        width: 240px;
+        border: none;
+        height: 40px;
+        margin-right: 5px;
+        line-height: 40px;
+        &:focus {
+          outline-width: 0;
+        }
+      }
     }
 }

@@ -43,9 +43,9 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
                     return null;
                 }
                    
-                byte[] passwordHash = CryptographyService.GetHash(password, user.Salt);
+                PasswordObject passwordObject = CryptographyService.GetHash(password, user.Salt);
 
-                if (ByteArraysCompaire(passwordHash, user.PasswordHash))
+                if (ByteArraysCompaire(passwordObject.PasswordHash, user.PasswordHash))
                 {
                     UserModel userModel = new UserModel
                         (

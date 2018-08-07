@@ -4,7 +4,13 @@ using System.Text;
 
 namespace ITechArt.StudentsLab.BusinessLayer.Services
 {
-    public class CryptographyService
+    internal struct PasswordObject
+    {
+        public byte[] PasswordHash { get; set; }
+        public byte[] Salt { get; set; }
+    }
+
+    internal class CryptographyService
     {
         private static byte[] GetSalt()
         {
@@ -18,7 +24,7 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
             return salt;
         }
 
-        public static byte[] GetHash(string password, byte[] computedSalt = null)
+        public static PasswordObject GetHash(string password, byte[] computedSalt = null)
         {
             byte[] plainText = Encoding.UTF8.GetBytes(password);
 
@@ -30,7 +36,12 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
             using (SHA512 sha = new SHA512Managed())
             {
                 byte[] passwordWithSalt = plainText.Concat(computedSalt).ToArray();
-                return sha.ComputeHash(passwordWithSalt);
+
+                return new PasswordObject()
+                {
+                    PasswordHash = sha.ComputeHash(passwordWithSalt),
+                    Salt = computedSalt
+                };
             }
         }
     }
