@@ -31,5 +31,26 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Services
                 return user;
             }
         }
+
+        public async Task<int> RegisterUser(UserRequest userRequest)
+        {
+            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+            {
+                int userId = await connection.ExecuteScalarAsync<int>(
+                    "AddUser",
+                    new
+                    {
+                        Firstname = userRequest.FirstName,
+                        LastName = userRequest.SecondName,
+                        Email = userRequest.Email,
+                        PasswordHash = userRequest.PasswordHash,
+                        Salt = userRequest.Salt
+                    },
+                    commandType: CommandType.StoredProcedure
+                );
+
+                return userId;
+            }
+        }
     }
 }

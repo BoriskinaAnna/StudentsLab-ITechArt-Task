@@ -60,5 +60,36 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
                 return null;
             }
         }
+
+        public async Task<UserModel> Register(RegisterUserModel registerModel)
+        {
+            if (await _userRepository.GetUser(registerModel.Email) != null)
+            {
+                return null;
+            }
+
+            PasswordObject passworObjecth = CryptographyService.GetHash(registerModel.Password);
+
+            UserRequest user = new UserRequest()
+            {
+                FirstName = registerModel.FirstName,
+                SecondName = registerModel.SecondName,
+                Email = registerModel.Email,
+                PasswordHash = passworObjecth.PasswordHash,
+                Salt = passworObjecth.Salt
+            };
+
+            int userId = await _userRepository.RegisterUser(user);
+
+            UserModel userModel = new UserModel
+            (
+                userId,
+                user.FirstName,
+                user.SecondName,
+                user.Email
+            );
+
+            return userModel;
+        }
     }
 }

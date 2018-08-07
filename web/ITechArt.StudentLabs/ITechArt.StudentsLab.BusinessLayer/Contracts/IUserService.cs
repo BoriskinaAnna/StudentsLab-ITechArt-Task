@@ -6,5 +6,6 @@ namespace ITechArt.StudentsLab.BusinessLayer.Contracts
     public interface IUserService
     {
         Task<UserModel> Login(string email, string password);
+        Task<UserModel> Register(RegisterUserModel registerModel);
     }
 }

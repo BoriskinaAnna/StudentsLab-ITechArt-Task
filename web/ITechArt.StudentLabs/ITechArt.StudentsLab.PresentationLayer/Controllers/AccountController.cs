@@ -59,5 +59,50 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
                 user.Email
             ));
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Register([FromBody] RegisterModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            RegisterUserModel registerUser = new RegisterUserModel(
+                model.FirstName,
+                model.SecondName,
+                model.Email,
+                model.Password
+            );
+
+            UserModel user = await _userService.Register(registerUser);
+
+            if (user == null)
+            {
+                return BadRequest("User already exists");
+            }
+
+            List<Claim> claims = new List<Claim>
+            {
+               new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+               new Claim(ClaimTypes.Email, user.Email)
+            };
+
+            ClaimsIdentity claimsIdentity = new ClaimsIdentity(
+                claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(claimsIdentity)
+            );
+
+            return Ok(new ResponseModel
+            (
+                user.Id,
+                user.FirstName,
+                user.LastName,
+                user.Email
+            ));
+        }
     }
 }
