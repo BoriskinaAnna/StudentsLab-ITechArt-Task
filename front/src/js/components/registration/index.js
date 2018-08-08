@@ -81,7 +81,7 @@ class Registration extends Component {
 
     sendRegistration = (t) =>{
         this.makeInputsStatusChanged();
-        if (!this.isAllInputsEmpty(t)){
+        if (!this.isAllInputsEmpty(t) && this.state.passwordInput.value.localeCompare(this.state.repeatPasswordInput) === 0){
             const headers = new Headers();
             headers.append('Content-Type', 'application/json');
             const options = {
