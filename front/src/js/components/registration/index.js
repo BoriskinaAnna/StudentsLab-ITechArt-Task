@@ -34,6 +34,7 @@ class Registration extends Component {
             },
             placeholderValue: '',
             isRepeatPasswordIncorrect: false,
+            isRedirect: false
         }
     }
 
@@ -81,7 +82,8 @@ class Registration extends Component {
 
     sendRegistration = (t) =>{
         this.makeInputsStatusChanged();
-        if (!this.isAllInputsEmpty(t) && this.state.passwordInput.value.localeCompare(this.state.repeatPasswordInput) === 0){
+
+        if (!this.isAllInputsEmpty(t) && this.state.passwordInput.value.localeCompare(this.state.repeatPasswordInput.value) === 0){
             const headers = new Headers();
             headers.append('Content-Type', 'application/json');
             const options = {
