@@ -45,7 +45,8 @@ options.resources = {
             "registrationPassword": "Enter your password",
             "registrationRepeatPassword": "Enter your password again",
             "register": "Register",
-            "emptyInput": "This field can't be empty"
+            "inputCanNotBeEmpty": "This field can't be empty",
+            "incorrectRepeatPassword": "Passwords do not match"
         }
     },
     ru: {
@@ -76,7 +77,8 @@ options.resources = {
             "registrationPassword": "Введите пароль:",
             "registrationRepeatPassword": "Повторите пароль:",
             "register": "Зарегистрироваться",
-            "emptyInput": "Это поле не может быть пустым"
+            "inputCanNotBeEmpty": "Это поле не может быть пустым",
+            "incorrectRepeatPassword": "Пароли не совпадают"
         }
     }
 };

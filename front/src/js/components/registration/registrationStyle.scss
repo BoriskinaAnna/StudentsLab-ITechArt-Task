@@ -46,7 +46,7 @@
       text-align: start;
       width: 100%;
       display: flex;
-      margin-bottom: 5px;
+      margin-bottom: 25px;
       padding-left: 10px;
       color: rgb(69, 69, 69);
 
@@ -56,6 +56,10 @@
 
     }
     ::placeholder{
+      color: red;
+    }
+
+    .incorrectRepeatPassword{
       color: red;
     }
   }

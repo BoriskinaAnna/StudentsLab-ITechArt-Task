@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './registrationStyle.scss';
 import {translate} from 'react-i18next';
 import Modal from 'react-modal';
+import RegistrationField from '../registrationField';
 
 
 Modal.setAppElement('#content');
@@ -11,65 +12,91 @@ class Registration extends Component {
     constructor(){
         super();
         this.state = {
-            emailValue: '',
-            passwordValue: '',
-            repeatPasswordValue: '',
-            firstNameValue: '',
-            secondNameValue: '',
-            placeholderValue: ''
+            emailInput: {
+                value:  '',
+                isChanged: false
+            },
+            passwordInput: {
+                value:  '',
+                isChanged: false
+            },
+            repeatPasswordInput: {
+                value:  '',
+                isChanged: false
+            },
+            firstNameInput: {
+                value:  '',
+                isChanged: false
+            },
+            secondNameInput: {
+                value:  '',
+                isChanged: false
+            },
+            placeholderValue: '',
+            isRepeatPasswordIncorrect: false,
         }
     }
-
-    changePlaceholderState = (t) =>{
-        this.setState({
-            placeholderValue: t('emptyInput')
-        });
-    };
 
     isInputEmpty = (inputValue, t) =>{
         if (inputValue.length === 0 ){
-            this.changePlaceholderState(t);
+            this.setState({
+                placeholderValue: t('inputCanNotBeEmpty')
+            });
+
             return true;
         }
-        return false;
+        else{
+            this.setState({
+                placeholderValue: ''
+            });
+
+            return false;
+        }
     };
 
-    isInputsEmpty = (t) =>{
-        let isEmpty = false;
-        isEmpty = isEmpty||this.isInputEmpty(this.state.emailValue, t);
-        isEmpty = isEmpty||this.isInputEmpty(this.state.passwordValue, t);
-        isEmpty = isEmpty||this.isInputEmpty(this.state.repeatPasswordValue, t);
-        isEmpty = isEmpty||this.isInputEmpty(this.state.firstNameValue, t);
-        isEmpty = isEmpty||this.isInputEmpty(this.state.secondNameValue, t);
-        return isEmpty;
+    isAllInputsEmpty = (t) =>{
+       return this.isInputEmpty(this.state.emailInput.value, t)
+                ||this.isInputEmpty(this.state.passwordInput.value, t)
+                ||this.isInputEmpty(this.state.repeatPasswordInput.value, t)
+                ||this.isInputEmpty(this.state.firstNameInput.value, t)
+                ||this.isInputEmpty(this.state.secondNameInput.value, t);
     };
 
-    isPasswordInputsEquals = () =>{
-      if (!this.state.passwordValue.localeCompare(this.state.repeatPasswordValue)){
-
-          return false;
-      }
-      return true;
-    }
+    makeInputsStatusChanged = () =>{
+        this.setState({
+            emailInput: this.updateStateObject(this.state.emailInput, this.state.emailInput.value)
+        });
+        this.setState({
+            firstNameInput: this.updateStateObject(this.state.firstNameInput, this.state.firstNameInput.value)
+        });
+        this.setState({
+            passwordInput: this.updateStateObject(this.state.passwordInput, this.state.passwordInput.value)
+        });this.setState({
+            repeatPasswordInput: this.updateStateObject(this.state.repeatPasswordInput, this.state.repeatPasswordInput.value)
+        });
+        this.setState({
+            secondNameInput: this.updateStateObject(this.state.secondNameInput, this.state.secondNameInput.value)
+        });
+    };
 
     sendRegistration = (t) =>{
-        if (!this.isInputsEmpty(t)){
+        this.makeInputsStatusChanged();
+        if (!this.isAllInputsEmpty(t)){
             const headers = new Headers();
             headers.append('Content-Type', 'application/json');
             const options = {
                 method: 'POST',
                 body: JSON.stringify({
-                    email:this.state.emailValue,
-                    password: this.state.passwordValue,
-                    firstName: this.state.firstNameValue,
-                    secondName: this.state.secondNameValue
+                    email:this.state.emailInput.value,
+                    password: this.state.passwordInput.value,
+                    firstName: this.state.firstNameInput.value,
+                    secondName: this.state.secondNameInput.value
                 }),
                 headers: headers
             };
 
             fetch('/api/account/register', options)
-                .then(
-                    function(response) {
+                .then((response)=> {
                         if (response.status !== 200) {
                             console.log('Looks like there was a problem. Status Code: ' +
                                 response.status);
@@ -86,100 +113,102 @@ class Registration extends Component {
         }
     };
 
-    isEmpty = (evt, t) =>{
-        if (evt.target.value.length === 0){
-            evt.target.placeholder = t('emptyInput');
+    updateStateObject = (state, value) =>{
+        let tempObject = Object.assign({},state);
+        tempObject.value =  value;
+        tempObject.isChanged = true;
+        return tempObject;
+    };
+
+    updateEmailInput = (evt) =>{
+        this.setState({
+            emailInput:  this.updateStateObject(this.state.emailInput, evt.target.value)
+        });
+    };
+
+    updateSecondNameInput = (evt) =>{
+        this.setState({
+            secondNameInput:  this.updateStateObject(this.state.secondNameInput, evt.target.value)
+        });
+    };
+
+    updatePasswordInput = (evt) =>{
+        this.setState({
+            passwordInput:  this.updateStateObject(this.state.passwordInput, evt.target.value)
+        });
+    };
+
+    updateRepeatPasswordInput = (evt) =>{
+        this.setState({
+            repeatPasswordInput:  this.updateStateObject(this.state.repeatPasswordInput, evt.target.value)
+        });
+        if (this.state.passwordInput.value.localeCompare(evt.target.value) !== 0) {
+            this.setState({
+                isRepeatPasswordIncorrect: true
+            });
+        }
+        else{
+            this.setState({
+                isRepeatPasswordIncorrect: false
+            });
         }
     };
 
-    updateEmailValue = (evt, t) =>{
-        this.isEmpty(evt, t);
+    updateFirstNameInput = (evt) =>{
         this.setState({
-            emailValue: evt.target.value
+            firstNameInput:  this.updateStateObject(this.state.firstNameInput, evt.target.value)
         });
     };
 
-    updateSecondNameValue = (evt, t) =>{
-        this.isEmpty(evt, t);
-        this.setState({
-            secondNameValue: evt.target.value
-        });
-    };
 
-    updatePasswordValue = (evt, t) =>{
-        this.isEmpty(evt, t);
-        this.setState({
-            passwordValue: evt.target.value
-        });
-    };
-
-    updateRepeatPasswordValue = (evt, t) =>{
-        this.isEmpty(evt, t);
-        this.setState({
-            repeatPasswordValue: evt.target.value
-        });
-        if (!this.state.passwordValue.localeCompare(this.state.repeatPasswordValue)) {
-
+    placeHolderValue = (value, t) =>{
+        if (value.length === 0){
+            return t('inputCanNotBeEmpty');
         }
-    };
-
-    updateFirstNameValue = (evt, t) =>{
-        this.isEmpty(evt, t);
-        this.setState({
-            firstNameValue: evt.target.value
-        });
+        else{
+            return '';
+        }
     };
 
     render() {
         const {t} = this.props;
+        const incorrectRepeatPassword =
+            this.state.isRepeatPasswordIncorrect
+            && <span className="incorrectRepeatPassword">{t('incorrectRepeatPassword')}</span>;
 
         return (
             <div className="addNewUserContainer">
                 <div className="addNewUser">
 
-                    <div>
-                        <span className="addNewUser__blockTitle">{t('registrationFirstName')}</span>
-                        <input className="addNewUser__input"
-                               value={this.state.firstNameValue}
-                               onChange={(evt) => this.updateFirstNameValue(evt, t)}
-                               placeholder={this.state.placeholderValue}
-                        />
-                    </div>
-                    <div>
-                        <span className="addNewUser__blockTitle">{t('registrationSecondName')}</span>
-                        <input className="addNewUser__input"
-                               value={this.state.secondNameValue}
-                               onChange={(evt) => this.updateSecondNameValue(evt, t)}
-                               placeholder={this.state.placeholderValue}
-                        />
-                    </div>
-                    <div>
-                        <span className="addNewUser__blockTitle">{t('registrationEmail')}</span>
-                        <input className="addNewUser__input"
-                               value={this.state.emailValue}
-                               onChange={(evt) => this.updateEmailValue(evt, t)}
-                               placeholder={this.state.placeholderValue}
-                        />
-                    </div>
-                    <div>
-                        <span className="addNewUser__blockTitle">{t('registrationPassword')}</span>
-                        <input type="password" className="addNewUser__input"
-                               value={this.state.passwordValue}
-                               onChange={(evt) => this.updatePasswordValue(evt, t)}
-                               placeholder={this.state.placeholderValue}
-                        />
-                    </div>
-                    <div>
-                        <span className="addNewUser__blockTitle">{t('registrationRepeatPassword')}</span>
-                        <input type="password" className="addNewUser__input"
-                               value={this.state.repeatPasswordValue}
-                               onChange={(evt) => this.updateRepeatPasswordValue(evt, t)}
-                               placeholder={this.state.placeholderValue}
-                        />
-                    </div>
-                    <button type="submit" className="addNewUser__registerBtn" onClick={() => {
-                        this.sendRegistration(t)
-                    }}>
+                    <RegistrationField inputType={'text'} spanText={t('registrationFirstName')}
+                                       state={this.state.firstNameInput} placeholderValue={this.state.placeholderValue}
+                                       t={t} updateFunction={this.updateFirstNameInput} placeholder={this.placeHolderValue}/>
+
+                    <RegistrationField  inputType={'text'} spanText={t('registrationSecondName')}
+                                        state={this.state.secondNameInput} placeholderValue={this.state.placeholderValue}
+                                       t={t} updateFunction={this.updateSecondNameInput} placeholder={this.placeHolderValue}/>
+
+                    <RegistrationField  inputType={'text'} spanText={t('registrationEmail')}
+                                        state={this.state.emailInput} placeholderValue={this.state.placeholderValue}
+                                       t={t} updateFunction={this.updateEmailInput} placeholder={this.placeHolderValue}/>
+
+                    <RegistrationField  inputType={'password'} spanText={t('registrationPassword')}
+                                        state={this.state.passwordInput} placeholderValue={this.state.placeholderValue}
+                                       t={t} updateFunction={this.updatePasswordInput} placeholder={this.placeHolderValue}/>
+
+                    <RegistrationField  inputType={'password'} spanText={t('registrationRepeatPassword')}
+                                        state={this.state.repeatPasswordInput} placeholderValue={this.state.placeholderValue}
+                                       t={t} updateFunction={this.updateRepeatPasswordInput} placeholder={this.placeHolderValue}>
+                    </RegistrationField>
+
+                    {incorrectRepeatPassword}
+
+                    <button type="submit" className="addNewUser__registerBtn"
+                            onClick={() => {
+                                    this.sendRegistration(t)
+                                }
+                            }
+                    >
                         {t('register')}
                     </button>
                 </div>
