@@ -4,6 +4,7 @@ import {translate} from 'react-i18next';
 import Modal from 'react-modal';
 import RegistrationField from '../registrationField';
 import {Redirect, withRouter} from 'react-router-dom';
+import UserService from '../userService';
 
 
 Modal.setAppElement('#content');
@@ -74,7 +75,7 @@ class Registration extends Component {
 
    sendRegistration = (t) =>{
        this.makeInputsStatusChanged();
-
+       const userService = new UserService;
        if (!this.isAllInputsEmpty(t) && this.state.passwordInput.value.localeCompare(this.state.repeatPasswordInput.value) === 0) {
            const headers = new Headers();
            headers.append('Content-Type', 'application/json');
@@ -97,7 +98,8 @@ class Registration extends Component {
                            return;
                        }
                        response.json().then(data => {
-                           console.log(data);
+                           userService.initializeNewUser(data.email, data.firstName, data.lastName, data.id, 'student');
+                           console.log(userService.getCurrentUser());
                        });
                    }
                )

@@ -15,11 +15,12 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
     public class AccountController : Controller
     {
         private readonly IAccountService _accountService;
+        private readonly IUserService _userService;
 
-
-        public AccountController(IAccountService accountService)
+        public AccountController(IAccountService accountService, IUserService userService)
         {
             _accountService = accountService;
+            _userService = userService;
         }
 
         [HttpPost]
@@ -32,7 +33,7 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
                 return StatusCode(401, "Invalid login or password");
             }
 
-           List<Claim> claims = new List<Claim>
+            List<Claim> claims = new List<Claim>
                {
                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                    new Claim(ClaimTypes.Email, user.Email)
@@ -46,7 +47,7 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(claimsIdentity)
             );
-            
+
             return Ok(new ResponseModel
             (
                 user.Id,
@@ -70,7 +71,7 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
 
             if (user == null)
             {
-                return StatusCode(422, "User already exists"); 
+                return StatusCode(422, "User already exists");
             }
 
             List<Claim> claims = new List<Claim>
@@ -94,6 +95,20 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
                 user.LastName,
                 user.Email
             ));
+        }
+
+        [HttpGet]
+        [Route("{id:int}")]
+        public async Task<IActionResult> getUserById(int id)
+        {
+            UserModel user = await _userService.GetUserById(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return null;
         }
     }
 }

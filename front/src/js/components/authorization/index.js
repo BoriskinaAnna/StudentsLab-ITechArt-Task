@@ -3,6 +3,7 @@ import './authorizationStyle.scss';
 import { translate } from 'react-i18next';
 import Modal from 'react-modal';
 import ModalWindowHeader from '../modalWindowHeader';
+import UserService from "../userService";
 
 
 Modal.setAppElement('#content');
@@ -18,7 +19,7 @@ class Authorization extends Component {
     }
 
     sendToAuthentication = (closeLogin) =>{
-
+        const userService = new UserService;
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
         const options = {
@@ -40,10 +41,13 @@ class Authorization extends Component {
                     }
                     response.json().then((data) =>
                         {
-                            console.log(data);
+                            userService.initializeNewUser(data.email, data.firstName, data.lastName, data.id, 'student');
+
+                            console.log(userService.currentUser);
                         });
                 }
             )
+
             .then(() =>{
                 closeLogin()
             })
@@ -51,6 +55,7 @@ class Authorization extends Component {
                 {
                     console.log('Fetch Error :-S', err);
                 });
+
     };
 
     updateLoginValue = (evt) =>{
@@ -66,6 +71,7 @@ class Authorization extends Component {
     };
 
     render() {
+        const userService = new UserService;
         const {t, isLoginShowed, closeLogin} = this.props;
 
         return (
@@ -86,6 +92,7 @@ class Authorization extends Component {
                         <a href="">{t('forgotPassword')}</a>
                     </div>
                     <button className="authorization__btnLogin" type="submit" onClick={() => this.sendToAuthentication(closeLogin)}>{t('btnAuthorization')}</button>
+                    <button onClick={()=>{console.log(userService.getCurrentUser());}}>gfdfg</button>
                 </div>
             </Modal>
         )

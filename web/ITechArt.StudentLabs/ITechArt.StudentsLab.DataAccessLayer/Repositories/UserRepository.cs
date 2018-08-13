@@ -23,8 +23,22 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Services
             using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))
             {
                 UserResponse user = await connection.QuerySingleOrDefaultAsync<UserResponse>(
-                    "GetUser",
+                    "GetUserByEmail",
                     new { Email = email },
+                    commandType: CommandType.StoredProcedure
+                );
+
+                return user;
+            }
+        }
+
+        public async Task<UserResponse> GetUserById(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))
+            {
+                UserResponse user = await connection.QuerySingleOrDefaultAsync<UserResponse>(
+                    "GetUserById",
+                    new { Id = id },
                     commandType: CommandType.StoredProcedure
                 );
 

@@ -7,5 +7,7 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Contracts
     {
         Task<UserResponse> GetUser(string email);
         Task<int> UpsertUser(UserRequest userRequest);
+        Task<UserResponse> GetUserById(int id);
+        
     }
 }
