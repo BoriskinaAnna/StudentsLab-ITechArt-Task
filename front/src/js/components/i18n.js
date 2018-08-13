@@ -38,7 +38,15 @@ options.resources = {
             "logIn": "Log in",
             "rememberMe": "Remember me",
             "forgotPassword": "Forgot password ?",
-            "comments": "Comments"
+            "comments": "Comments",
+            "registrationFirstName": "Enter your first name:",
+            "registrationSecondName": "Enter your second name:",
+            "registrationEmail": "Enter your email:",
+            "registrationPassword": "Enter your password",
+            "registrationRepeatPassword": "Enter your password again",
+            "register": "Register",
+            "inputCanNotBeEmpty": "This field can't be empty",
+            "incorrectRepeatPassword": "Passwords do not match"
         }
     },
     ru: {
@@ -62,7 +70,15 @@ options.resources = {
             "logIn": "Вход",
             "rememberMe": "Запомнить меня",
             "forgotPassword": "Забыли пароль ?",
-            "comments": "Комментарии"
+            "comments": "Комментарии",
+            "registrationFirstName": "Введите имя:",
+            "registrationSecondName": "Введите фамилию:",
+            "registrationEmail": "Введите адрес электронной почты:",
+            "registrationPassword": "Введите пароль:",
+            "registrationRepeatPassword": "Повторите пароль:",
+            "register": "Зарегистрироваться",
+            "inputCanNotBeEmpty": "Это поле не может быть пустым",
+            "incorrectRepeatPassword": "Пароли не совпадают"
         }
     }
 };

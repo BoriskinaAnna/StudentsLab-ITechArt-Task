@@ -682,3 +682,4 @@ ASALocalRun/
 # End of https://www.gitignore.io/api/csharp,database,visualstudio,visualstudiocode
 
 # End of https://www.gitignore.io/api/node,windows,webstorm
+wwwroot/

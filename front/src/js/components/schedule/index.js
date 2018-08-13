@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import Lecture from 'js/components/lecture/';
-import 'js/components/schedule/scheduleStyle.scss';
+import Lecture from '../lecture/';
+import './scheduleStyle.scss';
 
 
 class Index extends Component {

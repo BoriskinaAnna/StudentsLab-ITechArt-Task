@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import 'js/components/modalWindowHeader/modalWindowHeaderStyle.scss';
+import './modalWindowHeaderStyle.scss';
 
 
 class ModalWindowHeader extends Component {

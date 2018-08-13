@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import 'js/components/lecture/lectureStyle.scss';
+import './lectureStyle.scss';
 import { translate } from 'react-i18next';
 
 
 class Index extends Component {
 
     render() {
-        const {lecture, t, showChangeLecture} = this.props;
+        const {lecture, t, showChangeLecture } = this.props;
 
         return (
             <div className="lecture">

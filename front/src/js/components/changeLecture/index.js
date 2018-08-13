@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import 'js/components/changeLecture/changeLectureStyle.scss';
+import './changeLectureStyle.scss';
 import {translate} from 'react-i18next';
 import Modal from 'react-modal';
-import ModalWindowHeader from 'js/components/modalWindowHeader';
+import ModalWindowHeader from '../modalWindowHeader';
 
 
 Modal.setAppElement('#content');
