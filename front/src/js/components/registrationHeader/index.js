@@ -9,7 +9,7 @@ class Header extends Component {
 
         return (
             <header>
-                <Link to="/" className="registrationLogo"><img className="registrationLogo__img" src="img/logo.svg"/></Link>
+                <Link to="/" className="registrationLogo"><img className="registrationLogo__img" src="img/logo.svg" alt="ITechArtLogo"/></Link>
             </header>
         )
     }

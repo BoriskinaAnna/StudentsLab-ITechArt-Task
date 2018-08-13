@@ -17,7 +17,7 @@ class Authorization extends Component {
         }
     }
 
-    sendToAuthentication = () =>{
+    sendToAuthentication = (closeLogin) =>{
 
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
@@ -44,6 +44,9 @@ class Authorization extends Component {
                         });
                 }
             )
+            .then(() =>{
+                closeLogin()
+            })
             .catch((err) =>
                 {
                     console.log('Fetch Error :-S', err);
@@ -82,7 +85,7 @@ class Authorization extends Component {
                     <div className="authorization__forgotPassword">
                         <a href="">{t('forgotPassword')}</a>
                     </div>
-                    <button className="authorization__btnLogin" type="submit" onClick={this.sendToAuthentication}>{t('btnAuthorization')}</button>
+                    <button className="authorization__btnLogin" type="submit" onClick={() => this.sendToAuthentication(closeLogin)}>{t('btnAuthorization')}</button>
                 </div>
             </Modal>
         )

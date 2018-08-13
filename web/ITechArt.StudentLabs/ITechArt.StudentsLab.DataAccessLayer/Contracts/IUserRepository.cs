@@ -6,6 +6,6 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Contracts
     public interface IUserRepository
     {
         Task<UserResponse> GetUser(string email);
-        Task<int> RegisterUser(UserRequest userRequest);
+        Task<int> UpsertUser(UserRequest userRequest);
     }
 }

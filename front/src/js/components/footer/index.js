@@ -16,7 +16,7 @@ class Footer extends Component {
         return (
             <footer>
                 <div>
-                    <Link to="/" className="footer__logo"><img src="img/footer-logo.svg"/></Link>
+                    <Link to="/" className="footer__logo"><img src="img/footer-logo.svg" alt="ITechArtFooterLogo"/></Link>
                 </div>
                 <div className="footer__phones">
                     <div className="footer__phonesTitle">

@@ -20,7 +20,7 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Services
 
         public async Task<UserResponse> GetUser(string email)
         {
-            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))
             {
                 UserResponse user = await connection.QuerySingleOrDefaultAsync<UserResponse>(
                     "GetUser",
@@ -32,9 +32,9 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Services
             }
         }
 
-        public async Task<int> RegisterUser(UserRequest userRequest)
+        public async Task<int> UpsertUser(UserRequest userRequest)
         {
-            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))
             {
                 int userId = await connection.ExecuteScalarAsync<int>(
                     "AddUser",

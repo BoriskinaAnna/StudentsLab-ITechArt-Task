@@ -11,29 +11,25 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 namespace ITechArt.StudentsLab.PresentationLayer.Controllers
 {
     [Route("api/[controller]/[action]")]
+    [ApiController]
     public class AccountController : Controller
     {
-        private readonly IUserService _userService;
+        private readonly IAccountService _accountService;
 
 
-        public AccountController(IUserService userService)
+        public AccountController(IAccountService accountService)
         {
-            _userService = userService;
+            _accountService = accountService;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login([FromBody] LoginModel model)
+        public async Task<IActionResult> Login(LoginModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            UserModel user = await _userService.Login(model.Email, model.Password);
+            UserModel user = await _accountService.Login(model.Email, model.Password);
 
             if (user == null)
             {
-                return BadRequest("Invalid login or password");
+                return StatusCode(401, "Invalid login or password");
             }
 
            List<Claim> claims = new List<Claim>
@@ -61,13 +57,8 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register([FromBody] RegisterModel model)
+        public async Task<IActionResult> Register(RegisterModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             RegisterUserModel registerUser = new RegisterUserModel(
                 model.FirstName,
                 model.SecondName,
@@ -75,11 +66,11 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
                 model.Password
             );
 
-            UserModel user = await _userService.Register(registerUser);
+            UserModel user = await _accountService.Register(registerUser);
 
             if (user == null)
             {
-                return BadRequest("User already exists");
+                return StatusCode(422, "User already exists"); 
             }
 
             List<Claim> claims = new List<Claim>

@@ -8,7 +8,7 @@ namespace ITechArt.StudentsLab.BusinessLayer
     {
         public static void Register(IServiceCollection collection)
         {
-            collection.AddSingleton<IUserService, UserService>();
+            collection.AddSingleton<IAccountService, AccountService>();
         }
     }
 }

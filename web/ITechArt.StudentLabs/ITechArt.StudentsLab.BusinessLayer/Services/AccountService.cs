@@ -6,12 +6,12 @@ using ITechArt.StudentsLab.DataAccessLayer.Contracts;
 
 namespace ITechArt.StudentsLab.BusinessLayer.Services
 {
-    public class UserService : IUserService
+    public class AccountService : IAccountService
     {
         private readonly IUserRepository _userRepository;
 
 
-        public UserService(IUserRepository userRepository)
+        public AccountService(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
@@ -79,7 +79,7 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
                 Salt = passworObjecth.Salt
             };
 
-            int userId = await _userRepository.RegisterUser(user);
+            int userId = await _userRepository.UpsertUser(user);
 
             UserModel userModel = new UserModel
             (

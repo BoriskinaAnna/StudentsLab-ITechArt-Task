@@ -11,8 +11,8 @@ import '../components/appStyle.scss';
 import Schedule from '../components/schedule';
 import schedule from '../schedule.json';
 import ChangeLecture from '../components/changeLecture';
-import Registration from '../components/registration';
 import RegistrationHeader from '../components/registrationHeader';
+import Registration from '../components/registration'
 
 
 export class App extends Component {
@@ -56,11 +56,13 @@ export class App extends Component {
     };
 
     render() {
-        return (
 
+        return (
             <Router>
                 <div className="content">
+
                     <Route exact path="/" component={() => (<Header showLogin={this.showLogin}/>)}/>
+                    <Route exact path="/schedule" component={() => (<Header showLogin={this.showLogin}/>)}/>
                     <Authorization isLoginShowed={this.state.isLoginShowed} closeLogin={this.closeLogin}/>
                     <AddLabForm isAddLabShowed={this.state.isAddLabShowed} closeAddLab={this.closeAddLab}/>
                     <ChangeLecture isAddLabShowed={this.state.isChangeLectureShowed} closeAddLab={this.closeChangeLecture}/>
@@ -68,6 +70,7 @@ export class App extends Component {
                     <Route exact path="/registration" component={() => ( <Registration />)}/>
                     <Route exact path="/" component={() => (<LabsList labs={labs} showAddLab={this.showAddLab}/>)}/>
                     <Route exact path="/schedule" component={() => (<Schedule schedule={schedule} showChangeLecture={this.showChangeLecture}/>)}/>
+
                     <Footer/>
                 </div>
             </Router>

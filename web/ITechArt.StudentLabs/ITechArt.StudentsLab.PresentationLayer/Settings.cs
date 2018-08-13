@@ -6,7 +6,7 @@ namespace ITechArt.StudentsLab.PresentationLayer
     public class Settings : IDalSettings
     {
         private readonly IConfiguration _configuration;
-        public string ConnectionString => _configuration[nameof(ConnectionString)];
+        public string DefaultConnectionString => _configuration.GetConnectionString("DefaultConnectionString");
 
 
         public Settings(IConfiguration configuration)
