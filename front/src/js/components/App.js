@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Header from '../components/header';
 import Footer from '../components/footer';
 import { BrowserRouter as Router, Route} from 'react-router-dom';
-import Authorization from '../components/authorization';
+import Authentication from '../components/authentication';
 import AddLabForm from '../components/addLabForm';
 import '../components/appStyle.scss';
 import Schedule from '../components/schedule';
@@ -63,9 +63,11 @@ export class App extends Component {
 
                     <Route exact path="/" component={() => (<Header showLogin={this.showLogin}/>)}/>
                     <Route exact path="/schedule" component={() => (<Header showLogin={this.showLogin}/>)}/>
-                    <Authorization isLoginShowed={this.state.isLoginShowed} closeLogin={this.closeLogin}/>
+
                     <AddLabForm isAddLabShowed={this.state.isAddLabShowed} closeAddLab={this.closeAddLab}/>
                     <ChangeLecture isAddLabShowed={this.state.isChangeLectureShowed} closeAddLab={this.closeChangeLecture}/>
+                    <Route exact path="/authentication" component={() => ( <RegistrationHeader />)}/>
+                    <Route exact path="/authentication" component={() => ( <Authentication />)}/>
                     <Route exact path="/registration" component={() => ( <RegistrationHeader />)}/>
                     <Route exact path="/registration" component={() => ( <Registration />)}/>
                     <Route exact path="/" component={() => (<LabsList labs={labs} showAddLab={this.showAddLab}/>)}/>

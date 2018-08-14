@@ -19,7 +19,8 @@ const options = {
 options.resources = {
     en: {
         translations: {
-            "btnAuthorization": "Log in",
+            "btnAuthorizationLogin": "Log in",
+            "btnAuthorizationLogout": "Log out",
             "city": "City",
             "admissionDate": "Admission to courses",
             "trainingDate": "Training dates",
@@ -51,7 +52,8 @@ options.resources = {
     },
     ru: {
         translations: {
-            "btnAuthorization": "Войти",
+            "btnAuthorizationLogin": "Войти",
+            "btnAuthorizationLogout": "Выйти",
             "city": "Город",
             "admissionDate": "Набор на курсы",
             "trainingDate": "Даты обучения",

@@ -37,7 +37,7 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
             }
             else
             {
-                UserResponse user = await _userRepository.GetUser(email);
+                UserResponse user = await _userRepository.GetUserByEmail(email);
                 if (user == null)
                 {
                     return null;
@@ -52,7 +52,8 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
                             user.Id,
                             user.FirstName,
                             user.LastName,
-                            user.Email
+                            user.Email,
+                            user.Role
                         );
                     return userModel;
                 }
@@ -63,7 +64,7 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
 
         public async Task<UserModel> Register(RegisterUserModel registerModel)
         {
-            if (await _userRepository.GetUser(registerModel.Email) != null)
+            if (await _userRepository.GetUserByEmail(registerModel.Email) != null)
             {
                 return null;
             }
@@ -86,7 +87,8 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
                 userId,
                 user.FirstName,
                 user.SecondName,
-                user.Email
+                user.Email,
+                user.Role
             );
 
             return userModel;

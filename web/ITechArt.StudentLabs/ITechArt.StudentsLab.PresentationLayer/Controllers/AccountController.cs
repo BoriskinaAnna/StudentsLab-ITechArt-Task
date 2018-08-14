@@ -53,7 +53,8 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
                 user.Id,
                 user.FirstName,
                 user.LastName,
-                user.Email
+                user.Email,
+                user.Role
             ));
         }
 
@@ -93,7 +94,8 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
                 user.Id,
                 user.FirstName,
                 user.LastName,
-                user.Email
+                user.Email,
+                user.Role
             ));
         }
 
@@ -108,7 +110,20 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
                 return NotFound();
             }
 
-            return null;
+            return Ok(new ResponseModel
+            (
+                user.Id,
+                user.FirstName,
+                user.LastName,
+                user.Email,
+                user.Role
+            ));
+        }
+
+        public async void Logout(int id)
+        {
+            await HttpContext.SignOutAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme);
         }
     }
 }

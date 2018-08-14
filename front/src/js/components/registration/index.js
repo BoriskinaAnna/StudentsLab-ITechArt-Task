@@ -99,15 +99,15 @@ class Registration extends Component {
                        }
                        response.json().then(data => {
                            userService.initializeNewUser(data.email, data.firstName, data.lastName, data.id, 'student');
-                           console.log(userService.getCurrentUser());
-                       });
+
+                       })
+                       .then(() => {
+                           this.setState({
+                               isRedirect:  true
+                           })
+                       })
                    }
                )
-               .then(() => {
-                    this.setState({
-                      isRedirect:  true
-                   })
-               })
                .catch(function (err) {
                    console.log('Fetch Error :-S', err);
                });

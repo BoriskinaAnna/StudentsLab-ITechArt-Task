@@ -59,3 +59,7 @@ SET IDENTITY_INSERT [dbo].[UserLabRole] ON
 
 INSERT [dbo].[UserLabRole] ([Id], [UserId], [RoleId], [LabId]) VALUES (1, 3, 1, 1)
 SET IDENTITY_INSERT [dbo].[UserLabRole] OFF
+SET IDENTITY_INSERT [dbo].[UserRole] ON 
+
+INSERT [dbo].[UserRole] ([Id], [UserId], [RoleId]) VALUES (1, 3, 1)
+SET IDENTITY_INSERT [dbo].[UserRole] OFF

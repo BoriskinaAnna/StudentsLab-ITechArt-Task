@@ -5,7 +5,7 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Contracts
 {
     public interface IUserRepository
     {
-        Task<UserResponse> GetUser(string email);
+        Task<UserResponse> GetUserByEmail(string email);
         Task<int> UpsertUser(UserRequest userRequest);
         Task<UserResponse> GetUserById(int id);
         

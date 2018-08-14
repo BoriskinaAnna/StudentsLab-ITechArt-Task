@@ -1,17 +1,16 @@
-import React, {Component} from 'react';
+import React from 'react';
 
 
-class UserService extends Component{
+class UserService{
 
-    constructor (){
-        super();
-    }
 
-     currentUser = {
-        email: '',
-        firstName: '',
-        lastName: '',
-        id: -1,
+
+     static currentUser = {
+         email: '',
+         firstName: '',
+         lastName: '',
+         id: null,
+         role: ''
     };
 
      roleEnum = {
@@ -22,26 +21,33 @@ class UserService extends Component{
     };
 
      initializeNewUser = (email, firstName, lastName, id, role) => {
-        this.currentUser.id = id;
-        this.currentUser.firstName = firstName;
-        this.currentUser.lastName = lastName;
-        this.currentUser.email = email;
-
+         this.constructor.currentUser.id = id;
+         this.constructor.currentUser.firstName = firstName;
+         this.constructor.currentUser.lastName = lastName;
+         this.constructor.currentUser.email = email;
+         this.constructor.currentUser.role = role;
     };
 
-    getUserInformationFromServer = setInterval(()=>{
-        if(this.currentUser.id !== -1) {
-            const headers = new Headers();
-            headers.append('Content-Type', 'application/json');
+     logout = () =>{
+         clearTimeout(this.getUserInformationFromServer);
+         this.constructor.currentUser.id = null;
+         this.constructor.currentUser.firstName = '';
+         this.constructor.currentUser.lastName = '';
+         this.constructor.currentUser.email = '';
+         this.constructor.currentUser.role = '';
+     };
+
+     fetchRequest = () =>{
+        if(this.constructor.currentUser.id !== null) {
+            console.log(UserService.currentUser);
             const options = {
                 method: 'GET',
-                body: JSON.stringify({
-                    id: this.currentUser.id
-                }),
-                headers: headers
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             };
 
-            fetch('/api/account/getUserById/'+this.currentUser.id, options)
+            fetch('/api/account/getUserById/'+this.constructor.currentUser.id, options)
                 .then((response) => {
                         if (response.status !== 200) {
                             console.log('Looks like there was a problem. Status Code: ' +
@@ -49,16 +55,17 @@ class UserService extends Component{
                             return;
                         }
                         response.json().then((data) => {
-                            this.initializeNewUser(data.email, data.firstName, data.lastName, data.id, 'student');
-
-                            console.log(this.currentUser);
+                            this.initializeNewUser(data.email, data.firstName, data.lastName, data.id, data.role);
                         });
                     }
                 )
                 .catch((err) => {
                     console.log('Fetch Error :-S', err);
-                });
+                })
         }
-    }, 30000)
+        setTimeout(this.fetchRequest, 10000);
+    };
+
+     getUserInformationFromServer = setTimeout (this.fetchRequest, 10000)
 }
 export default UserService
