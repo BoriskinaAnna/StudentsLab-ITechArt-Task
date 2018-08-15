@@ -9,6 +9,7 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
     public class AccountService : IAccountService
     {
         private readonly IUserRepository _userRepository;
+        private const string defaultRole = "Student";
 
 
         public AccountService(IUserRepository userRepository)
@@ -77,7 +78,8 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
                 SecondName = registerModel.SecondName,
                 Email = registerModel.Email,
                 PasswordHash = passworObjecth.PasswordHash,
-                Salt = passworObjecth.Salt
+                Salt = passworObjecth.Salt,
+                Role = defaultRole
             };
 
             int userId = await _userRepository.UpsertUser(user);

@@ -58,7 +58,8 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Services
                         LastName = userRequest.SecondName,
                         Email = userRequest.Email,
                         PasswordHash = userRequest.PasswordHash,
-                        Salt = userRequest.Salt
+                        Salt = userRequest.Salt,
+                        Role = userRequest.Role
                     },
                     commandType: CommandType.StoredProcedure
                 );

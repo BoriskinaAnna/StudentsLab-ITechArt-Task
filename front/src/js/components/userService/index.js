@@ -1,71 +1,88 @@
-import React from 'react';
-
+let currentUser = {
+    email: '',
+    firstName: '',
+    lastName: '',
+    id: null,
+    role: '',
+};
 
 class UserService{
 
-
-
-     static currentUser = {
-         email: '',
-         firstName: '',
-         lastName: '',
-         id: null,
-         role: ''
-    };
-
-     roleEnum = {
-        Curator : 0,
-        Lector : 1,
-        Mentor : 2,
-        Student: 3
-    };
+     currentUserInfoTimeout = true;
 
      initializeNewUser = (email, firstName, lastName, id, role) => {
-         this.constructor.currentUser.id = id;
-         this.constructor.currentUser.firstName = firstName;
-         this.constructor.currentUser.lastName = lastName;
-         this.constructor.currentUser.email = email;
-         this.constructor.currentUser.role = role;
+         currentUser.id = id;
+         currentUser.firstName = firstName;
+         currentUser.lastName = lastName;
+         currentUser.email = email;
+         currentUser.role = role;
+         this.setTimeout();
     };
 
-     logout = () =>{
-         clearTimeout(this.getUserInformationFromServer);
-         this.constructor.currentUser.id = null;
-         this.constructor.currentUser.firstName = '';
-         this.constructor.currentUser.lastName = '';
-         this.constructor.currentUser.email = '';
-         this.constructor.currentUser.role = '';
+     setTimeout =() =>{
+         this.currentUserInfoTimeout = false;
+         setTimeout(
+             ()=>{this.currentUserInfoTimeout = true},
+             3000
+         );
      };
 
-     fetchRequest = () =>{
-        if(this.constructor.currentUser.id !== null) {
-            console.log(UserService.currentUser);
-            const options = {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            };
+     getCurrentUser = () =>{
+         if (this.currentUserInfoTimeout){
+             this.getInfoAboutCurrentUser();
+             this.setTimeout();
+         }
+         return {
+             email: currentUser.email,
+             firstName: currentUser.firstName,
+             lastName: currentUser.lastName,
+             id: currentUser.id,
+             role: currentUser.role
+         }
+     };
 
-            fetch('/api/account/getUserById/'+this.constructor.currentUser.id, options)
+     getOptions = (method) =>{
+         return {
+             method: method,
+             headers: {
+                 'Content-Type': 'application/json'
+             }
+         };
+     } ;
+
+     logout = () =>{
+         this.initializeNewUser('', '', '', null, '');
+
+         fetch('/api/account/Logout/', this.getOptions('POST'))
+             .catch((error) => {
+                 console.log(error);
+             })
+     };
+
+    getInfoAboutCurrentUser = () =>{
+        if(currentUser.id !== null) {
+            fetch('/api/account/getInfoAboutCurrentUser/'+currentUser.id, this.getOptions('GET'))
                 .then((response) => {
-                        if (response.status !== 200) {
-                            console.log('Looks like there was a problem. Status Code: ' +
-                                response.status);
-                            return;
-                        }
-                        response.json().then((data) => {
-                            this.initializeNewUser(data.email, data.firstName, data.lastName, data.id, data.role);
-                        });
+                    switch (response.status) {
+                        case 401:
+                            window.location.pathname =  '/authentication';
+                            break;
+                        case 500:
+                            window.location.pathname =  '/error';
+                            break;
+                        case 200:
+                            response.json().then((data) => {
+                                this.initializeNewUser(data.email, data.firstName, data.lastName, data.id, data.role);
+                            });
                     }
-                )
-                .catch((err) => {
-                    console.log('Fetch Error :-S', err);
+                })
+                .catch((error) => {
+                    console.log(error);
                 })
         }
-        setTimeout(this.fetchRequest, 10000);
     };
-
-     getUserInformationFromServer = setTimeout (this.fetchRequest, 10000)
 }
-export default UserService
+
+const userService = new UserService();
+
+export default userService

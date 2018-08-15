@@ -9,15 +9,15 @@ class Header extends Component {
 
     constructor(){
         super();
+        const userService = UserService;
         this.state = {
             btnAuthorizationName: '',
-            isUserNotAuthenticate: UserService.currentUser.id === null
+            isUserNotAuthenticate: userService.getCurrentUser().id === null
         }
     }
 
-
     logout = () =>{
-        const userService = new UserService;
+        const userService = UserService;
         userService.logout();
         this.setState({
             isUserNotAuthenticate: true
@@ -26,31 +26,37 @@ class Header extends Component {
 
     render() {
         const {t} = this.props;
+
         const btnAuthorizationAction = this.state.isUserNotAuthenticate
-            ? <Link to={{
+            ? <Link
+                to={{
                   pathname:'/authentication',
                   state: { redirectPage : window.location.pathname}
-              }}
-                  className="headerBtn"
+                }}
+                className="headerBtn"
               >
-                  {t('btnAuthorizationLogin')}
+                {t('btnAuthorizationLogin')}
               </Link>
-            :<button onClick={this.logout} className="headerBtn">{t('btnAuthorizationLogout')}</button>
+            : <button onClick={this.logout} className="headerBtn">
+                {t('btnAuthorizationLogout')}
+              </button>;
 
-        ;
-            const btnRegistration = this.state.isUserNotAuthenticate
-                && <Link to={{
-                        pathname:'/registration',
-                        state: { redirectPage : window.location.pathname}
-                    }}
-                          className="headerBtn"
-                    >
-                        {t('register')}
-                    </Link>;
+        const btnRegistration = this.state.isUserNotAuthenticate
+            && <Link
+                 to={{
+                     pathname:'/registration',
+                     state: { redirectPage : window.location.pathname}
+                 }}
+                 className="headerBtn"
+               >
+                   {t('register')}
+               </Link>;
 
         return (
             <header>
-                <Link to="/" className="headerLogo"><img className="headerLogo__img" src="img/logo.svg" alt="ITechArtHeaderLogo"/></Link>
+                <Link to="/" className="headerLogo">
+                    <img className="headerLogo__img" src="img/logo.svg" alt="ITechArtHeaderLogo"/>
+                </Link>
                 <div className="login">
                     {btnAuthorizationAction}
                     {btnRegistration}

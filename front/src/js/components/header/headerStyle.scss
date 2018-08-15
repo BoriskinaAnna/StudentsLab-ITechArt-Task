@@ -1,44 +1,47 @@
 header {
-    display: flex;
-    justify-content: space-around;
-    height: 85px;
-    margin-bottom: 30px;
-    align-items: center;
+  display: flex;
+  justify-content: space-around;
+  height: 85px;
+  margin-bottom: 30px;
+  align-items: center;
 
-    .headerLogo {
+   .headerLogo {
       margin-top: 30px;
       width: 200px;
       display: inline-block;
       height: 100px;
+
       &__img{
         width: 200px;
         height: 100px;
       }
-    }
+   }
 
-    .login {
+   .login {
       margin-top: 30px;
       display: flex;
       flex-direction: row;
       align-items: center;
+
       .headerBtn {
-        text-decoration: none;
-        background-color: rgb(235, 29, 36);
-        color: rgb(255, 255, 255);
-        cursor: pointer;
-        font-family: "Open Sans", sans-serif;
-        font-size: 16px;
-        font-weight: 400;
-        text-align: center;
-        text-transform: uppercase;
-        width: 240px;
-        border: none;
-        height: 40px;
-        margin-right: 5px;
-        line-height: 40px;
-        &:focus {
-          outline-width: 0;
-        }
+         text-decoration: none;
+         background-color: rgb(235, 29, 36);
+         color: rgb(255, 255, 255);
+         cursor: pointer;
+         font-family: "Open Sans", sans-serif;
+         font-size: 16px;
+         font-weight: 400;
+         text-align: center;
+         text-transform: uppercase;
+         width: 240px;
+         border: none;
+         height: 40px;
+         margin-right: 5px;
+         line-height: 40px;
+
+         &:focus {
+           outline-width: 0;
+         }
       }
-    }
+   }
 }

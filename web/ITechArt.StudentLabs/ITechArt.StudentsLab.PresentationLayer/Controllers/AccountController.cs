@@ -101,7 +101,7 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
 
         [HttpGet]
         [Route("{id:int}")]
-        public async Task<IActionResult> getUserById(int id)
+        public async Task<IActionResult> GetInfoAboutCurrentUser(int id)
         {
             UserModel user = await _userService.GetUserById(id);
 
@@ -120,10 +120,11 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
             ));
         }
 
-        public async void Logout(int id)
+        public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme);
+            return Ok();
         }
     }
 }

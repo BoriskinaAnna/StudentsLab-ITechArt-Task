@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './registrationHeaderStyle.scss';
+import './accountHeaderStyle.scss';
 import {Link} from 'react-router-dom';
 
 

@@ -36,7 +36,8 @@ class Registration extends Component {
            },
            placeholderValue: '',
            isRepeatPasswordIncorrect: false,
-           isRedirect: false
+           isRedirect: false,
+           userAlreadyExists: false
         };
    }
 
@@ -75,8 +76,10 @@ class Registration extends Component {
 
    sendRegistration = (t) =>{
        this.makeInputsStatusChanged();
-       const userService = new UserService;
-       if (!this.isAllInputsEmpty(t) && this.state.passwordInput.value.localeCompare(this.state.repeatPasswordInput.value) === 0) {
+       const userService =  UserService;
+       if (!this.isAllInputsEmpty(t)
+           && this.state.passwordInput.value.localeCompare(this.state.repeatPasswordInput.value) === 0)
+       {
            const headers = new Headers();
            headers.append('Content-Type', 'application/json');
            const options = {
@@ -92,24 +95,35 @@ class Registration extends Component {
 
            fetch('/api/account/register', options)
                .then((response) => {
-                       if (response.status !== 200) {
-                           console.log('Looks like there was a problem. Status Code: ' +
-                               response.status);
-                           return;
-                       }
-                       response.json().then(data => {
-                           userService.initializeNewUser(data.email, data.firstName, data.lastName, data.id, 'student');
-
-                       })
-                       .then(() => {
+                   switch (response.status) {
+                       case 422:
                            this.setState({
-                               isRedirect:  true
+                               userAlreadyExists: true
+                           });
+                           break;
+                       case 401:
+                           window.location.pathname =  '/authentication';
+                           break;
+                       case 500:
+                           window.location.pathname =  '/error';
+                           break;
+                       case 200:
+                           response.json().then(data => {
+                               userService.initializeNewUser(data.email, data.firstName, data.lastName, data.id, data.role);
+                               this.setState({
+                                   userAlreadyExists: false
+                               });
                            })
-                       })
+                           .then(() => {
+                               this.setState({
+                                   isRedirect:  true
+                               })
+                           });
+                           break;
                    }
-               )
-               .catch(function (err) {
-                   console.log('Fetch Error :-S', err);
+               })
+               .catch(function (error) {
+                   console.log(error);
                });
        }
    };
@@ -176,6 +190,11 @@ class Registration extends Component {
         const incorrectRepeatPassword =
             this.state.isRepeatPasswordIncorrect
             && <span className="incorrectRepeatPassword">{t('incorrectRepeatPassword')}</span>;
+
+        const userAlreadyExists =
+            this.state.userAlreadyExists
+            &&<span className="addNewUser__error">{t('userAlreadyExists')}</span>;
+
         if (this.state.isRedirect){
             return <Redirect to={this.props.location.state.redirectPage}/>
         }
@@ -188,33 +207,31 @@ class Registration extends Component {
                                      state={this.state.firstNameInput} placeholderValue={this.state.placeholderValue}
                                      t={t} updateFunction={this.updateFirstNameInput} placeholder={this.placeHolderValue}/>
 
-                  <RegistrationField  inputType={'text'} spanText={t('registrationSecondName')}
-                                      state={this.state.secondNameInput} placeholderValue={this.state.placeholderValue}
+                 <RegistrationField  inputType={'text'} spanText={t('registrationSecondName')}
+                                     state={this.state.secondNameInput} placeholderValue={this.state.placeholderValue}
                                      t={t} updateFunction={this.updateSecondNameInput} placeholder={this.placeHolderValue}/>
 
-                  <RegistrationField  inputType={'text'} spanText={t('registrationEmail')}
-                                      state={this.state.emailInput} placeholderValue={this.state.placeholderValue}
+                 <RegistrationField  inputType={'email'} spanText={t('registrationEmail')}
+                                     state={this.state.emailInput} placeholderValue={this.state.placeholderValue}
                                      t={t} updateFunction={this.updateEmailInput} placeholder={this.placeHolderValue}/>
 
-                  <RegistrationField  inputType={'password'} spanText={t('registrationPassword')}
-                                      state={this.state.passwordInput} placeholderValue={this.state.placeholderValue}
+                 <RegistrationField  inputType={'password'} spanText={t('registrationPassword')}
+                                     state={this.state.passwordInput} placeholderValue={this.state.placeholderValue}
                                      t={t} updateFunction={this.updatePasswordInput} placeholder={this.placeHolderValue}/>
 
-                  <RegistrationField  inputType={'password'} spanText={t('registrationRepeatPassword')}
-                                      state={this.state.repeatPasswordInput} placeholderValue={this.state.placeholderValue}
+                 <RegistrationField  inputType={'password'} spanText={t('registrationRepeatPassword')}
+                                     state={this.state.repeatPasswordInput} placeholderValue={this.state.placeholderValue}
                                      t={t} updateFunction={this.updateRepeatPasswordInput} placeholder={this.placeHolderValue}/>
-                  {incorrectRepeatPassword}
 
-                  <button type="submit" className="addNewUser__registerBtn"
-                          onClick={() => {
-                                  this.sendRegistration(t)
-                              }
-                          }
-                  >
-                      {t('register')}
-                  </button>
+                 {incorrectRepeatPassword}
 
-                </div>
+                 <button type="submit" className="addNewUser__registerBtn"
+                         onClick={() => {this.sendRegistration(t)}}
+                 >
+                     {t('register')}
+                 </button>
+                 {userAlreadyExists}
+              </div>
             </div>
         )
     }

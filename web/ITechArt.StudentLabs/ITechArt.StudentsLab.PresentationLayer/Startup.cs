@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ITechArt.StudentsLab.DataAccessLayer;
 using ITechArt.StudentsLab.BusinessLayer;
 
+
 namespace ITechArt.StudentsLab.PresentationLayer
 {
     public class Startup
@@ -41,17 +42,17 @@ namespace ITechArt.StudentsLab.PresentationLayer
                         options.LoginPath = "/api/account/LogIn";
                         options.LogoutPath = "/api/account/LogOff";
                     });
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "wwwroot";
+            });
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseDefaultFiles();
-            app.UseStaticFiles();
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -60,10 +61,23 @@ namespace ITechArt.StudentsLab.PresentationLayer
             {
                 app.UseHsts();
             }
-
-            app.UseHttpsRedirection();
+            
             app.UseAuthentication();
-            app.UseMvc();
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseSpaStaticFiles();
+        
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                   name: "default",
+                   template: "{controller}/{action=Index}/{id?}");
+            });
+
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "wwwroot";
+            });
         }
     }
 }
