@@ -1,16 +1,31 @@
-﻿using System;
+﻿using ITechArt.StudentsLab.PresentationLayer.Models;
 using System.Collections.Generic;
-using System.Linq;
+using ITechArt.StudentsLab.BusinessLayer.Contracts;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using BlLabModel = ITechArt.StudentsLab.BusinessLayer.Models.LabModel;
 
 namespace ITechArt.StudentsLab.PresentationLayer.Controllers
 {
-    public class LabsController : Controller
+    [Route("api/[controller]")]
+    public class LabController : Controller
     {
-        public IActionResult Index()
+        private readonly ILabService _labService;
+        public LabController(ILabService labService)
         {
-            return View();
+            _labService = labService;
         }
+            // GET /cinemas
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            IEnumerable<BlLabModel> labs = await _labService.GetLabs();
+            return null;
+        }
+
+           
+        
+           
+        
     }
 }

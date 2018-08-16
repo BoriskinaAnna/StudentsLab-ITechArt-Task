@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using ITechArt.StudentsLab.BusinessLayer.Models;
 
 namespace ITechArt.StudentsLab.BusinessLayer.Contracts
 {
-    interface ILabsService
+    public interface ILabService
     {
+        Task<IEnumerable<LabModel>> GetLabs();
     }
 }

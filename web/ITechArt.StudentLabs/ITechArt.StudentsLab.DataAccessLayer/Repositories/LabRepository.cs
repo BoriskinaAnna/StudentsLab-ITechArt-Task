@@ -5,5 +5,6 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
 {
     class LabRepository: ILabRepository
     {
+
     }
 }

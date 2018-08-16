@@ -6,7 +6,7 @@ using Dapper;
 using System.Data;
 using ITechArt.StudentsLab.BusinessLayer.Contracts;
 
-namespace ITechArt.StudentsLab.DataAccessLayer.Services
+namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
 {
     public class UserRepository : IUserRepository
     {
