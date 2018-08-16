@@ -19,13 +19,14 @@ const options = {
 options.resources = {
     en: {
         translations: {
-            "btnAuthorization": "Log in",
+            "btnAuthorizationLogin": "Log in",
+            "btnAuthorizationLogout": "Log out",
             "city": "City",
             "admissionDate": "Admission to courses",
             "trainingDate": "Training dates",
             "numbers": "Numbers",
-            "e-mail": "E-mail",
-            "password": "Password",
+            "e-mail": "E-mail:",
+            "password": "Password:",
             "courseName": "Сourse name",
             "start": "Start",
             "end": "End",
@@ -35,8 +36,7 @@ options.resources = {
             "lecturer": "Lecturer",
             "place": "Place",
             "duration": "Duration",
-            "logIn": "Log in",
-            "rememberMe": "Remember me",
+            "logIn": "Login",
             "forgotPassword": "Forgot password ?",
             "comments": "Comments",
             "registrationFirstName": "Enter your first name:",
@@ -46,18 +46,21 @@ options.resources = {
             "registrationRepeatPassword": "Enter your password again",
             "register": "Register",
             "inputCanNotBeEmpty": "This field can't be empty",
-            "incorrectRepeatPassword": "Passwords do not match"
+            "incorrectRepeatPassword": "Passwords do not match",
+            "userAlreadyExists": "User with this email already exists",
+            "incorrectAuthentication": "Invalid login or password"
         }
     },
     ru: {
         translations: {
-            "btnAuthorization": "Войти",
+            "btnAuthorizationLogin": "Войти",
+            "btnAuthorizationLogout": "Выйти",
             "city": "Город",
             "admissionDate": "Набор на курсы",
             "trainingDate": "Даты обучения",
             "numbers": "Телефоны:",
-            "e-mail": "Адрес электронной почты",
-            "password": "Пароль",
+            "e-mail": "Адрес электронной почты:",
+            "password": "Пароль:",
             "courseName": "Название курсов",
             "start": "Начало",
             "end": "Конец",
@@ -68,7 +71,6 @@ options.resources = {
             "place": "Место",
             "duration": "Продолжительность",
             "logIn": "Вход",
-            "rememberMe": "Запомнить меня",
             "forgotPassword": "Забыли пароль ?",
             "comments": "Комментарии",
             "registrationFirstName": "Введите имя:",
@@ -78,7 +80,9 @@ options.resources = {
             "registrationRepeatPassword": "Повторите пароль:",
             "register": "Зарегистрироваться",
             "inputCanNotBeEmpty": "Это поле не может быть пустым",
-            "incorrectRepeatPassword": "Пароли не совпадают"
+            "incorrectRepeatPassword": "Пароли не совпадают",
+            "userAlreadyExists": "Пользователь с данным адресом электронной почты уже существует",
+            "incorrectAuthentication": "Неверный логин или пароль"
         }
     }
 };

@@ -9,6 +9,7 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
     public class AccountService : IAccountService
     {
         private readonly IUserRepository _userRepository;
+        private const string defaultRole = "Student";
 
 
         public AccountService(IUserRepository userRepository)
@@ -37,7 +38,7 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
             }
             else
             {
-                UserResponse user = await _userRepository.GetUser(email);
+                UserResponse user = await _userRepository.GetUserByEmail(email);
                 if (user == null)
                 {
                     return null;
@@ -52,7 +53,8 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
                             user.Id,
                             user.FirstName,
                             user.LastName,
-                            user.Email
+                            user.Email,
+                            user.Role
                         );
                     return userModel;
                 }
@@ -63,7 +65,7 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
 
         public async Task<UserModel> Register(RegisterUserModel registerModel)
         {
-            if (await _userRepository.GetUser(registerModel.Email) != null)
+            if (await _userRepository.GetUserByEmail(registerModel.Email) != null)
             {
                 return null;
             }
@@ -76,7 +78,8 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
                 SecondName = registerModel.SecondName,
                 Email = registerModel.Email,
                 PasswordHash = passworObjecth.PasswordHash,
-                Salt = passworObjecth.Salt
+                Salt = passworObjecth.Salt,
+                Role = defaultRole
             };
 
             int userId = await _userRepository.UpsertUser(user);
@@ -86,7 +89,8 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
                 userId,
                 user.FirstName,
                 user.SecondName,
-                user.Email
+                user.Email,
+                user.Role
             );
 
             return userModel;

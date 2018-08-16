@@ -18,13 +18,27 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Services
             _settings = settings;
         }
 
-        public async Task<UserResponse> GetUser(string email)
+        public async Task<UserResponse> GetUserByEmail(string email)
         {
             using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))
             {
                 UserResponse user = await connection.QuerySingleOrDefaultAsync<UserResponse>(
-                    "GetUser",
+                    "GetUserByEmail",
                     new { Email = email },
+                    commandType: CommandType.StoredProcedure
+                );
+
+                return user;
+            }
+        }
+
+        public async Task<UserResponse> GetUserById(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))
+            {
+                UserResponse user = await connection.QuerySingleOrDefaultAsync<UserResponse>(
+                    "GetUserById",
+                    new { Id = id },
                     commandType: CommandType.StoredProcedure
                 );
 
@@ -44,7 +58,8 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Services
                         LastName = userRequest.SecondName,
                         Email = userRequest.Email,
                         PasswordHash = userRequest.PasswordHash,
-                        Salt = userRequest.Salt
+                        Salt = userRequest.Salt,
+                        Role = userRequest.Role
                     },
                     commandType: CommandType.StoredProcedure
                 );
