@@ -1,3 +1,5 @@
+import redirectAwareFetch from "./redirectAwareFetch";
+
 let currentUser = {
     email: '',
     firstName: '',
@@ -61,26 +63,19 @@ class UserService{
 
     getInfoAboutCurrentUser = () =>{
         if(currentUser.id !== null) {
-            fetch('/api/account/getInfoAboutCurrentUser/'+currentUser.id, this.getOptions('GET'))
-                .then((response) => {
-                    switch (response.status) {
-                        case 401:
-                            window.location.pathname =  '/authentication';
-                            break;
-                        case 500:
-                            window.location.pathname =  '/error';
-                            break;
-                        case 200:
-                            response.json().then((data) => {
-                                this.initializeNewUser(data.email, data.firstName, data.lastName, data.id, data.role);
-                            });
+            redirectAwareFetch('/api/account/getInfoAboutCurrentUser/'+currentUser.id, this.getOptions('GET'))
+                .then(result =>{
+                        userService.initializeNewUser(
+                            result.data.email,
+                            result.data.firstName,
+                            result.data.lastName,
+                            result.data.id,
+                            result.data.role
+                        );
                     }
-                })
-                .catch((error) => {
-                    console.log(error);
-                })
+                );
         }
-    };
+    }
 }
 
 const userService = new UserService();

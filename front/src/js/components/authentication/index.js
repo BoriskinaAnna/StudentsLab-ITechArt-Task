@@ -2,8 +2,10 @@ import React, {Component} from 'react';
 import './authenticationStyle.scss';
 import { translate } from 'react-i18next';
 import Modal from 'react-modal';
-import UserService from "../userService";
+import userService from "../userService";
 import {Redirect, withRouter} from "react-router-dom";
+import redirectAwareFetch from "../userService/redirectAwareFetch";
+import {FetchResultTypeEnum} from "../userService/fetchResultTypeEnum";
 
 
 Modal.setAppElement('#content');
@@ -20,49 +22,43 @@ class Authentication extends Component {
         }
     }
 
-    sendToAuthentication = () =>{
-        const userService = UserService;
-        const headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        const options = {
+    getOptions = () =>{
+        return {
             method: 'POST',
             body: JSON.stringify({
                 email:this.state.emailValue,
                 password: this.state.passwordValue
             }),
-            headers: headers
-        };
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+    };
 
-        fetch('/api/account/login', options)
-            .then((response) =>
-                {
-                    if (response.status === 401) {
+    sendToAuthentication = () =>{
+        redirectAwareFetch('/api/account/login', this.getOptions(), true)
+            .then(result =>{
+                switch (result.type) {
+                    case FetchResultTypeEnum.USER_FAIL_LOGIN:
                         this.setState({
                             incorrectAuthentication: true
                         });
-                        return;
-                    }
-                    if (response.status === 500) {
-                        window.location.pathname =  '/error';
-                        return;
-                    }
-                    response.json().then((data) => {
-                            userService.initializeNewUser(data.email, data.firstName, data.lastName, data.id, data.role);
-                            this.setState({
-                                incorrectAuthentication: false
-                            });
-                    })
-                    .then(() => {
+                        break;
+
+                    default:
+                        userService.initializeNewUser(
+                            result.data.email,
+                            result.data.firstName,
+                            result.data.lastName,
+                            result.data.id,
+                            result.data.role
+                        );
                         this.setState({
+                            incorrectAuthentication: false,
                             isRedirect:  true
-                        })
-                    })
+                        });
                 }
-            )
-            .catch((error) => {
-                    console.log(error);
-                }
-            );
+            });
     };
 
     updateLoginValue = (evt) =>{

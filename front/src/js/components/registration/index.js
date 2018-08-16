@@ -4,7 +4,9 @@ import {translate} from 'react-i18next';
 import Modal from 'react-modal';
 import RegistrationField from '../registrationField';
 import {Redirect, withRouter} from 'react-router-dom';
-import UserService from '../userService';
+import userService from '../userService';
+import {FetchResultTypeEnum} from '../userService/fetchResultTypeEnum';
+import redirectAwareFetch from '../userService/redirectAwareFetch';
 
 
 Modal.setAppElement('#content');
@@ -74,57 +76,49 @@ class Registration extends Component {
        });
    };
 
+   getOptions = () =>{
+       return {
+           method: 'POST',
+           body: JSON.stringify({
+               email: this.state.emailInput.value,
+               password: this.state.passwordInput.value,
+               firstName: this.state.firstNameInput.value,
+               secondName: this.state.secondNameInput.value
+           }),
+           headers: {
+               'Content-Type': 'application/json'
+           }
+       }
+   };
+
    sendRegistration = (t) =>{
        this.makeInputsStatusChanged();
-       const userService =  UserService;
        if (!this.isAllInputsEmpty(t)
            && this.state.passwordInput.value.localeCompare(this.state.repeatPasswordInput.value) === 0)
        {
-           const headers = new Headers();
-           headers.append('Content-Type', 'application/json');
-           const options = {
-               method: 'POST',
-               body: JSON.stringify({
-                   email: this.state.emailInput.value,
-                   password: this.state.passwordInput.value,
-                   firstName: this.state.firstNameInput.value,
-                   secondName: this.state.secondNameInput.value
-               }),
-               headers: headers
-           };
-
-           fetch('/api/account/register', options)
-               .then((response) => {
-                   switch (response.status) {
-                       case 422:
+           redirectAwareFetch('/api/account/register', this.getOptions())
+               .then(result =>{
+                   switch (result.type) {
+                       case FetchResultTypeEnum.USER_FAIL_REGISTRATION:
                            this.setState({
                                userAlreadyExists: true
                            });
                            break;
-                       case 401:
-                           window.location.pathname =  '/authentication';
-                           break;
-                       case 500:
-                           window.location.pathname =  '/error';
-                           break;
-                       case 200:
-                           response.json().then(data => {
-                               userService.initializeNewUser(data.email, data.firstName, data.lastName, data.id, data.role);
-                               this.setState({
-                                   userAlreadyExists: false
-                               });
-                           })
-                           .then(() => {
-                               this.setState({
-                                   isRedirect:  true
-                               })
+
+                       default:
+                           userService.initializeNewUser(
+                               result.data.email,
+                               result.data.firstName,
+                               result.data.lastName,
+                               result.data.id,
+                               result.data.role
+                           );
+                           this.setState({
+                               userAlreadyExists: false,
+                               isRedirect:  true
                            });
-                           break;
                    }
                })
-               .catch(function (error) {
-                   console.log(error);
-               });
        }
    };
 

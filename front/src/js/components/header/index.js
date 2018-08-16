@@ -26,7 +26,6 @@ class Header extends Component {
 
     render() {
         const {t} = this.props;
-
         const btnAuthorizationAction = this.state.isUserNotAuthenticate
             ? <Link
                 to={{
