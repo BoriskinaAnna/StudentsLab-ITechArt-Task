@@ -23,6 +23,7 @@ export class App extends Component {
             isAddLabShowed: false,
             isChangeLectureShowed: false
         };
+
     }
 
     showAddLab = () =>{

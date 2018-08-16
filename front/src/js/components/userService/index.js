@@ -25,7 +25,7 @@ class UserService{
          this.currentUserInfoTimeout = false;
          setTimeout(
              ()=>{this.currentUserInfoTimeout = true},
-             3000
+             15000
          );
      };
 
@@ -50,7 +50,7 @@ class UserService{
                  'Content-Type': 'application/json'
              }
          };
-     } ;
+     };
 
      logout = () =>{
          this.initializeNewUser('', '', '', null, '');

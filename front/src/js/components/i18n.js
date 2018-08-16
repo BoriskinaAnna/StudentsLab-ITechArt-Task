@@ -48,7 +48,8 @@ options.resources = {
             "inputCanNotBeEmpty": "This field can't be empty",
             "incorrectRepeatPassword": "Passwords do not match",
             "userAlreadyExists": "User with this email already exists",
-            "incorrectAuthentication": "Invalid login or password"
+            "incorrectAuthentication": "Invalid login or password",
+            "addFeedbackDates": "Add feedback dates"
         }
     },
     ru: {
@@ -82,7 +83,8 @@ options.resources = {
             "inputCanNotBeEmpty": "Это поле не может быть пустым",
             "incorrectRepeatPassword": "Пароли не совпадают",
             "userAlreadyExists": "Пользователь с данным адресом электронной почты уже существует",
-            "incorrectAuthentication": "Неверный логин или пароль"
+            "incorrectAuthentication": "Неверный логин или пароль",
+            "addFeedbackDates": "Добавить даты отзывов"
         }
     }
 };
