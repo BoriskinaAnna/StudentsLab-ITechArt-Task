@@ -5,14 +5,16 @@ function redirectAwareFetch(url, option, isCalledFromAuthentication) {
     return errorAwareFetch(url, option)
         .then(result => {
             switch (result.type) {
+
                 case FetchResultTypeEnum.USER_FAIL_LOGIN:
-                    if(isCalledFromAuthentication){
+                    if (isCalledFromAuthentication){
                         return result;
                     }
-                     else{
+                     else {
                         window.location.pathname = '/authentication';
                         break;
                     }
+
                 case FetchResultTypeEnum.INTERNAL_SERVER_ERROR:
                     window.location.pathname = '/error';
                     break;

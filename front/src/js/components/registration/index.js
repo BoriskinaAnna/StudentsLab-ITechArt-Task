@@ -99,6 +99,7 @@ class Registration extends Component {
            redirectAwareFetch('/api/account/register', this.getOptions())
                .then(result =>{
                    switch (result.type) {
+
                        case FetchResultTypeEnum.USER_FAIL_REGISTRATION:
                            this.setState({
                                userAlreadyExists: true

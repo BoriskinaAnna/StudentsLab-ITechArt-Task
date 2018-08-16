@@ -39,6 +39,7 @@ class Authentication extends Component {
         redirectAwareFetch('/api/account/login', this.getOptions(), true)
             .then(result =>{
                 switch (result.type) {
+
                     case FetchResultTypeEnum.USER_FAIL_LOGIN:
                         this.setState({
                             incorrectAuthentication: true

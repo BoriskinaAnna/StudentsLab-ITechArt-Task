@@ -63,7 +63,7 @@ class UserService{
 
     getInfoAboutCurrentUser = () =>{
         if(currentUser.id !== null) {
-            redirectAwareFetch('/api/account/getInfoAboutCurrentUser/'+currentUser.id, this.getOptions('GET'))
+            redirectAwareFetch(`/api/account/getInfoAboutCurrentUser/${currentUser.id}`, this.getOptions('GET'))
                 .then(result =>{
                         userService.initializeNewUser(
                             result.data.email,
