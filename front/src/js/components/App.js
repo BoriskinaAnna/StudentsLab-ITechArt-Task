@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
+import labService from './labService';
 import LabsList from '../components/labsList';
-import labs from '../information-aboute-labs.json';
+//import labs from '../information-aboute-labs.json';
 import 'bootstrap/dist/css/bootstrap.css';
 import Header from '../components/header';
 import Footer from '../components/footer';
@@ -46,7 +47,8 @@ export class App extends Component {
     };
 
     render() {
-
+        const labs = labService.getLabsListFromServer();
+        console.log(labs);
         return (
             <Router>
                 <div className="content">

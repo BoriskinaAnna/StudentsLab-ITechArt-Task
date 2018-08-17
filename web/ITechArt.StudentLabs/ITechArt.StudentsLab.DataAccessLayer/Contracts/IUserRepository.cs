@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using ITechArt.StudentsLab.DataAccessLayer.Models;
+using ITechArt.StudentsLab.DataAccessLayer.Models.DataTransferObjects;
 
 namespace ITechArt.StudentsLab.DataAccessLayer.Contracts
 {

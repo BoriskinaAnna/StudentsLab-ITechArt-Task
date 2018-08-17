@@ -1,14 +1,9 @@
 import redirectAwareFetch from "../userService/redirectAwareFetch";
 
-let currentLab = {
-    email: '',
-    firstName: '',
-    lastName: '',
-    id: null,
-    role: '',
-};
 
-class UserService{
+let LabsList = [];
+
+class LabService{
 
     getOptions = (method) =>{
         return {
@@ -20,20 +15,36 @@ class UserService{
     };
 
     getLabsList = () =>{
-        redirectAwareFetch(`/api/account/getInfoAboutCurrentUser/`, this.getOptions('GET'))
+        this.getLabsListFromServer();
+        return LabsList;
+    };
+
+    initialaizeLabsList = (data) =>{
+       data.forEach((item, i)=>{
+           LabsList.push({
+               id: item.id,
+               type: item.type,
+               city: item.city,
+               name: item.name,
+               admissionStart: item.admissionStart,
+               admissionEnd: item.admissionEnd,
+               trainingStart: item.trainingStart,
+               trainingEnd: item.trainingEnd,
+               isDraft: item.isDraft
+           })
+       });
+    };
+
+    getLabsListFromServer = () =>{
+        redirectAwareFetch(`/api/lab`, this.getOptions('GET'))
             .then(result =>{
-                userService.initializeNewUser(
-                    result.data.email,
-                    result.data.firstName,
-                    result.data.lastName,
-                    result.data.id,
-                    result.data.role
-                );
+                console.log(result.data);
+                return result.data;
             });
 
     }
 }
 
-const userService = new UserService();
+const labService = new LabService();
 
-export default userService
+export default labService;

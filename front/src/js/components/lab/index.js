@@ -46,7 +46,7 @@ class Lab extends Component {
         const labStatus = !this.state.isCurrent &&
                 <div className="labContent__labStatus"/>;
         const imageURL = Lab.getImageURL(lab.type);
-
+        console.log(lab);
         return (
             <div className="lab">
                 <div className="labLogo">
@@ -56,18 +56,18 @@ class Lab extends Component {
                 <div className="labContent">
                     <div className="labContent__labType">
                         {labStatus}
-                        <h3 className="labContent__title">{lab.trainingName}</h3>
+                        <h3 className="labContent__title">{lab.name}</h3>
                         <div className="labContent__dates">
                             <div>
                                <span className="labContent__admissionDate">{t('admissionDate')}</span>
-                                {lab.admissionStartDate} - {lab.admissionEndDate}
+                                {lab.admissionStart} - {lab.admissionEnd}
                             </div>
                         </div>
                     </div>
                     <div className="labContent__trainingDates">
                         <span className="labContent__headerTrainingDate">{t('trainingDate')}</span>
                         <div className="labContent__dates">
-                            {lab.trainingStartDate} - {lab.trainingEndDate}
+                            {lab.trainingStart} - {lab.trainingEnd}
                             </div>
                     </div>
                     <span className="labContent__city">{lab.city}</span>

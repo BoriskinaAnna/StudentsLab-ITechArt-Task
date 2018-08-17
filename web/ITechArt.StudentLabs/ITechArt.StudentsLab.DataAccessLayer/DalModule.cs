@@ -10,6 +10,7 @@ namespace ITechArt.StudentsLab.DataAccessLayer
         {
             collection.AddSingleton<IUserRepository, UserRepository>();
             collection.AddSingleton<ILabRepository, LabRepository>();
+            collection.AddSingleton<IScheduleRepository, ScheduleRepository>();
         }
     }
 }

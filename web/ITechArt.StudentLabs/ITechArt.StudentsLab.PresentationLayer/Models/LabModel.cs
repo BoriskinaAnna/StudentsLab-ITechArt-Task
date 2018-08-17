@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace ITechArt.StudentsLab.BusinessLayer.Models
+namespace ITechArt.StudentsLab.PresentationLayer.Models
 {
     public class LabModel
     {

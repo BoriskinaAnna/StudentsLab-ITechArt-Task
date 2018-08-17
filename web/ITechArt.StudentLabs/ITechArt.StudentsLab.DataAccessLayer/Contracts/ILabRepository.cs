@@ -1,10 +1,13 @@
-﻿using System;
+﻿using ITechArt.StudentsLab.DataAccessLayer.Models.DataTransferObjects;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ITechArt.StudentsLab.DataAccessLayer.Contracts
 {
-    interface ILabRepository
+    public interface ILabRepository
     {
+        Task<IEnumerable<LabModel>> GetLabs();
     }
 }

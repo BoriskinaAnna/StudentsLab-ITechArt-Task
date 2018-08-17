@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using ITechArt.StudentsLab.BusinessLayer.Contracts;
 using ITechArt.StudentsLab.BusinessLayer.Models;
-using ITechArt.StudentsLab.DataAccessLayer.Models;
+using ITechArt.StudentsLab.DataAccessLayer.Models.DataTransferObjects;
 using ITechArt.StudentsLab.DataAccessLayer.Contracts;
 
 namespace ITechArt.StudentsLab.BusinessLayer.Services

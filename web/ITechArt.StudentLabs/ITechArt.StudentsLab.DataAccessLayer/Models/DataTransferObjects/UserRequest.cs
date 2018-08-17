@@ -1,4 +1,4 @@
-﻿namespace ITechArt.StudentsLab.DataAccessLayer.Models
+﻿namespace ITechArt.StudentsLab.DataAccessLayer.Models.DataTransferObjects
 {
     public class UserRequest
     {

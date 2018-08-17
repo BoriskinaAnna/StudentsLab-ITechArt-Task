@@ -8,11 +8,14 @@ class LabList extends Component {
 
     render() {
         const {labs, showAddLab} = this.props;
+
         const labElements = labs.map((lab, index) =>
             <Link to="/schedule" key = {index} className="lab-list__lab">
                 <Lab lab={lab}/>
             </Link>
         );
+        console.log(12222221);
+        console.log(labElements);
 
         return (
             <div className="labsContainer">
