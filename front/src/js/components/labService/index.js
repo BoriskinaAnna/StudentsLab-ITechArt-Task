@@ -36,11 +36,12 @@ class LabService{
     };
 
     getLabsListFromServer = () =>{
-        redirectAwareFetch(`/api/lab`, this.getOptions('GET'))
+
+        return redirectAwareFetch(`/api/lab`, this.getOptions('GET'))
             .then(result =>{
-                console.log(result.data);
+
                 return result.data;
-            });
+            })
 
     }
 }

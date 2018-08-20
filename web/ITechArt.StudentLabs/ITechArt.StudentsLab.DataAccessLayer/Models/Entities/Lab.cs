@@ -8,7 +8,7 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Models.Entities
     {
         public int Id { get; set; }
 
-        public string Type { get; set; }
+        public string LabType { get; set; }
 
         public string City { get; set; }
 

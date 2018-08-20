@@ -21,11 +21,12 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
          
         public async  Task<IActionResult> Get()
         {
-            IEnumerable<BlLectureModel> cinemas = await _scheduleService.GetLectures();
+            //  IEnumerable<BlLectureModel> cinemas = await _scheduleService.GetLectures();
 
-            return Ok(
-                cinemas.Select(Mapper.Map<ScheduleModel>)
-                );
+            // return Ok(
+            //   cinemas.Select(Mapper.Map<ScheduleModel>)
+            //    );
+            return null;
         }
     }
 }

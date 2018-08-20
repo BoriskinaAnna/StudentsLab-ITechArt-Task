@@ -8,7 +8,7 @@ namespace ITechArt.StudentsLab.BusinessLayer.Models
     {
         public int Id { get; }
 
-        public string Type { get; }
+        public string LabType { get; }
 
         public string City { get; }
 
@@ -26,7 +26,7 @@ namespace ITechArt.StudentsLab.BusinessLayer.Models
 
         public LabModel(
             int id,
-            string type,
+            string labType,
             string city,
             string name,
             DateTime admissionStart,
@@ -37,7 +37,7 @@ namespace ITechArt.StudentsLab.BusinessLayer.Models
         )
         {
             Id = id;
-            Type = type;
+            LabType = labType;
             City = city;
             Name = name;
             AdmissionStart = admissionStart;

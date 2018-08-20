@@ -6,7 +6,7 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Models.DataTransferObjects
     {
         public int Id { get; }
 
-        public string Type { get; }
+        public string LabType { get; }
 
         public string City { get; }
 
@@ -24,7 +24,7 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Models.DataTransferObjects
 
         public LabModel(
             int id,
-            string type,
+            string labType,
             string city,
             string name,
             DateTime admissionStart,
@@ -35,7 +35,7 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Models.DataTransferObjects
         )
         {
             Id = id;
-            Type = type;
+            LabType = labType;
             City = city;
             Name = name;
             AdmissionStart = admissionStart;

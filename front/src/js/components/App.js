@@ -16,15 +16,25 @@ import AccountHeader from './accountHeader';
 import Registration from '../components/registration'
 import ErrorPage from '../components/errorPage'
 
+let labs;
+
 export class App extends Component {
 
     constructor(){
         super();
         this.state ={
             isAddLabShowed: false,
-            isChangeLectureShowed: false
+            isChangeLectureShowed: false,
+            isDataLoaded: false
         };
 
+        labService.getLabsListFromServer()
+            .then(data =>{
+                labs = data;
+                this.setState({
+                    isDataLoaded: true
+                })
+            });
     }
 
     showAddLab = () =>{
@@ -47,35 +57,41 @@ export class App extends Component {
     };
 
     render() {
-        const labs = labService.getLabsListFromServer();
-        console.log(labs);
-        return (
-            <Router>
-                <div className="content">
 
-                    <Route exact path="/" component={() => (<Header />)}/>
-                    <Route exact path="/" component={() => (<LabsList labs={labs} showAddLab={this.showAddLab}/>)}/>
-                    <Route exact path="/" component={() => (<Footer />)}/>
+       if(!this.state.isDataLoaded){
+           return null;
+       }
+       else {
+           return (
+               <Router>
+                   <div className="content">
 
-                    <Route exact path="/schedule" component={() => (<Header />)}/>
-                    <Route exact path="/schedule" component={() => (<Schedule schedule={schedule} showChangeLecture={this.showChangeLecture}/>)}/>
-                    <Route exact path="/schedule" component={() => (<Footer />)}/>
+                       <Route exact path="/" component={() => (<Header/>)}/>
+                       <Route exact path="/" component={() => (<LabsList labs={labs} showAddLab={this.showAddLab}/>)}/>
+                       <Route exact path="/" component={() => (<Footer/>)}/>
 
-                    <Route exact path="/authentication" component={() => ( <AccountHeader />)}/>
-                    <Route exact path="/authentication" component={() => ( <Authentication />)}/>
-                    <Route exact path="/authentication" component={() => ( <Footer />)}/>
+                       <Route exact path="/schedule" component={() => (<Header/>)}/>
+                       <Route exact path="/schedule" component={() => (
+                           <Schedule schedule={schedule} showChangeLecture={this.showChangeLecture}/>)}/>
+                       <Route exact path="/schedule" component={() => (<Footer/>)}/>
 
-                    <Route exact path="/registration" component={() => ( <AccountHeader />)}/>
-                    <Route exact path="/registration" component={() => ( <Registration />)}/>
-                    <Route exact path="/registration" component={() => ( <Footer />)}/>
+                       <Route exact path="/authentication" component={() => (<AccountHeader/>)}/>
+                       <Route exact path="/authentication" component={() => (<Authentication/>)}/>
+                       <Route exact path="/authentication" component={() => (<Footer/>)}/>
 
-                    <AddLabForm isAddLabShowed={this.state.isAddLabShowed} closeAddLab={this.closeAddLab}/>
-                    <ChangeLecture isAddLabShowed={this.state.isChangeLectureShowed} closeAddLab={this.closeChangeLecture}/>
+                       <Route exact path="/registration" component={() => (<AccountHeader/>)}/>
+                       <Route exact path="/registration" component={() => (<Registration/>)}/>
+                       <Route exact path="/registration" component={() => (<Footer/>)}/>
 
-                    <Route exact path="/error" component={() => ( <ErrorPage />)}/>
-                </div>
-            </Router>
-        )
+                       <AddLabForm isAddLabShowed={this.state.isAddLabShowed} closeAddLab={this.closeAddLab}/>
+                       <ChangeLecture isAddLabShowed={this.state.isChangeLectureShowed}
+                                      closeAddLab={this.closeChangeLecture}/>
+
+                       <Route exact path="/error" component={() => (<ErrorPage/>)}/>
+                   </div>
+               </Router>
+           )
+       }
     }
 }
 export default App;

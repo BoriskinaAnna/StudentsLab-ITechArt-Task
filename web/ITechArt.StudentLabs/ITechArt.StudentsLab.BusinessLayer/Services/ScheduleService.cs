@@ -23,9 +23,10 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
         }
         public async Task<IEnumerable<LectureModel>> GetCinemas()
         {
-            IEnumerable<DalLectureModel> cinemas = await _scheduleRepository.GetSchedule();
+            //   IEnumerable<DalLectureModel> cinemas = await _scheduleRepository.GetSchedule();
 
-            return cinemas.Select(Mapper.Map<LectureModel>);
+            //  return cinemas.Select(Mapper.Map<LectureModel>);
+            return null;
         }
 
     }
