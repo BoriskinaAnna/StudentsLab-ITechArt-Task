@@ -7,5 +7,6 @@ namespace ITechArt.StudentsLab.BusinessLayer.Contracts
     public interface ILabService
     {
         Task<IEnumerable<LabModel>> GetLabs();
+        Task<IEnumerable<FeedbackDateModel>> GetFeedbackDates(int labId);
     }
 }

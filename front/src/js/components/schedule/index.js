@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import Lecture from '../lecture/';
 import './scheduleStyle.scss';
-import {translate} from "react-i18next";
+import {translate} from 'react-i18next';
 import AddFeedbackDates from '../addFeedbackDates';
 import scheduleService from '../scheduleService';
-import {withRouter} from "react-router-dom";
+import {withRouter} from 'react-router-dom';
 
 
 let schedule;
@@ -43,7 +43,7 @@ class Schedule extends Component {
 
             const addFeedbackDatesBtnName = this.state.isAddFeedbackDatesShowed? t('add'):t('addFeedbackDates');
 
-            const addFeedbackDates = this.state.isAddFeedbackDatesShowed&&<AddFeedbackDates/>;
+            const addFeedbackDates = this.state.isAddFeedbackDatesShowed&&<AddFeedbackDates labId={this.props.location.state.labId}/>;
 
             return (
                 <div className="schedule">

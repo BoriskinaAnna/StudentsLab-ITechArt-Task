@@ -27,7 +27,11 @@ class Index extends Component {
                     <span>
                         {t('duration')}
                         :
-                        <span className="lecture__duration"> {lectureDuration.getHours()}</span>
+                        <span className="lecture__duration">
+                            {lectureDuration.getHours()}
+                            :
+                            {lectureDuration.getMinutes()}
+                        </span>
                     </span>
                 </div>
                 <div>

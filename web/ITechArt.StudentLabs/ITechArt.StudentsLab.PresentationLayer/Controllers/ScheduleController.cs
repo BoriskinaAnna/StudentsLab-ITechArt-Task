@@ -11,6 +11,7 @@ using System;
 namespace ITechArt.StudentsLab.PresentationLayer.Controllers
 {
     [Route("api/[controller]/[action]")]
+    [ApiController]
     public class ScheduleController : Controller
     {
         private readonly IScheduleService _scheduleService;

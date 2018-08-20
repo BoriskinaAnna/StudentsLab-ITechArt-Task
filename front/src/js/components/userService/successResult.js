@@ -1,5 +1,5 @@
 import Result from './result';
-import {FetchResultTypeEnum} from "./fetchResultTypeEnum";
+import {FetchResultTypeEnum} from './fetchResultTypeEnum';
 
 
 class SuccessResult extends Result {

@@ -1,4 +1,4 @@
-import redirectAwareFetch from "./redirectAwareFetch";
+import redirectAwareFetch from './redirectAwareFetch';
 
 let currentUser = {
     email: '',

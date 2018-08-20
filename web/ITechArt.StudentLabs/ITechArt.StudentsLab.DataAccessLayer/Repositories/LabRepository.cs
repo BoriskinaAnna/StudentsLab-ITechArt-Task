@@ -25,22 +25,27 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
 
         public async Task<IEnumerable<LabModel>> GetLabs()
         {
-            try
+            using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))
             {
-                using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))
-                {
-                    IEnumerable<Lab> labs = await connection.QueryAsync<Lab>(
-                        "GetLabs",
-                        commandType: CommandType.StoredProcedure);
+                IEnumerable<Lab> labs = await connection.QueryAsync<Lab>(
+                    "GetLabs",
+                    commandType: CommandType.StoredProcedure);
 
-                    return labs.Select(Mapper.Map<LabModel>);
-                }
+                return labs.Select(Mapper.Map<LabModel>);
             }
-            catch (Exception e)
+        }
+
+        public async Task<IEnumerable<FeedbackDateModel>> GetFeedbackDates(int labId)
+        {
+            using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))
             {
-                return null;
+                IEnumerable<FeedbackDate> feedbackDates = await connection.QueryAsync<FeedbackDate>(
+                    "GetFeedbackDates",
+                    new {Id = labId },
+                    commandType: CommandType.StoredProcedure);
+
+                return feedbackDates.Select(Mapper.Map<FeedbackDateModel>);
             }
-           
         }
     }
 }

@@ -9,5 +9,6 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Contracts
     public interface ILabRepository
     {
         Task<IEnumerable<LabModel>> GetLabs();
+        Task<IEnumerable<FeedbackDateModel>> GetFeedbackDates(int labId);
     }
 }

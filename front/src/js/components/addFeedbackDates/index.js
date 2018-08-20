@@ -1,16 +1,27 @@
 import React, {Component} from 'react';
 import './addFeedbackDatesStyle.scss';
-import {translate} from "react-i18next";
-import redirectAwareFetch from "../userService/redirectAwareFetch";
-import {FetchResultTypeEnum} from "../userService/fetchResultTypeEnum";
-import userService from "../userService";
+import {translate} from 'react-i18next';
+import redirectAwareFetch from '../userService/redirectAwareFetch';
+import FeedBackDate from './addFeedbackDate';
 
+let feedBackDates;
 
 class AddFeedbackDates extends Component {
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
 
+        this.state = {
+            isDataLoaded: false
+        };
+
+        this.getFeedbackDates(this.props.labId)
+            .then(data =>{
+                feedBackDates = data;
+                this.setState({
+                    isDataLoaded: true
+                })
+            });
     }
 
     getOptions = (method) =>{
@@ -22,30 +33,34 @@ class AddFeedbackDates extends Component {
         };
     };
 
-    getFeedbackDates = () =>{
-        redirectAwareFetch(`/api/account/getInfoAboutCurrentUser/`, this.getOptions('GET'))
+    getFeedbackDates = (Id) =>{
+        redirectAwareFetch(`/api/lab/getFeedbackDates/${Id}`, this.getOptions('GET'))
             .then(result =>{
-                    userService.initializeNewUser(
-                        result.data.email,
-                        result.data.firstName,
-                        result.data.lastName,
-                        result.data.id,
-                        result.data.role
-                    );
+                   return result.data;
                 }
             );
     };
 
     render() {
-        const {t} = this.props;
 
-        return (
-            <div className="addFeedbackDates">
-                <div>
+        if(!this.state.isDataLoaded) {
+            return null;
+        }
+        else{
+            const {t} = this.props;
 
+            const dateElements = feedBackDates.map((feedBackDate, index) =>
+                <div key = {index} className="feedback__date">
+                    <FeedBackDate feedBackDate={feedBackDate}/>
                 </div>
-            </div>
-        )
+            );
+
+            return (
+                <ol className="addFeedbackDates">
+                    <li>{dateElements}</li>
+                </ol>
+            )
+        }
     }
 }
 export default translate('translations')(AddFeedbackDates)

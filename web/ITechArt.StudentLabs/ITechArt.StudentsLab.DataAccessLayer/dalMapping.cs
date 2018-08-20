@@ -10,6 +10,7 @@ namespace ITechArt.StudentsLab.DataAccessLayer
         {
             configuration.CreateMap<Lab, LabModel>();
             configuration.CreateMap<Lecture, LectureModel>();
+            configuration.CreateMap<FeedbackDate, FeedbackDateModel>();
         }
     }
 }

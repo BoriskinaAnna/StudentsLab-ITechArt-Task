@@ -2,6 +2,7 @@
 using ITechArt.StudentsLab.PresentationLayer.Models;
 using BlLabModel = ITechArt.StudentsLab.BusinessLayer.Models.LabModel;
 using BlLectureModel = ITechArt.StudentsLab.BusinessLayer.Models.LectureModel;
+using BlFeedbackdateModel = ITechArt.StudentsLab.BusinessLayer.Models.FeedbackDateModel;
 
 namespace ITechArt.StudentsLab.PresentationLayer
 {
@@ -11,6 +12,7 @@ namespace ITechArt.StudentsLab.PresentationLayer
         {
             configuration.CreateMap<LabModel, BlLabModel>();
             configuration.CreateMap<LectureModel, BlLectureModel>();
+            configuration.CreateMap<FeedbackDateModel, BlFeedbackdateModel>();
         }
     }
 }

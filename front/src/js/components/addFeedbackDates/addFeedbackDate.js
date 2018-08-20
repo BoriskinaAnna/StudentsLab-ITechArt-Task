@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './addFeedbackDatesStyle.scss';
-import {translate} from "react-i18next";
+import {translate} from 'react-i18next';
 
 
 class AddFeedbackDate extends Component {
