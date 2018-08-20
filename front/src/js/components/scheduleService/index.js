@@ -1,7 +1,7 @@
 import redirectAwareFetch from "../userService/redirectAwareFetch";
 
 
-class LabService{
+class ScheduleService{
 
     getOptions = (method) =>{
         return {
@@ -12,17 +12,16 @@ class LabService{
         };
     };
 
-    getLabsListFromServer = () =>{
+    getScheduleFromServer = (id) =>{
 
-        return redirectAwareFetch(`/api/lab`, this.getOptions('GET'))
+        return redirectAwareFetch(`/api/schedule/get/${id}`, this.getOptions('GET'))
             .then(result =>{
-
                 return result.data;
             })
 
     }
 }
 
-const labService = new LabService();
+const scheduleService = new ScheduleService();
 
-export default labService;
+export default scheduleService;

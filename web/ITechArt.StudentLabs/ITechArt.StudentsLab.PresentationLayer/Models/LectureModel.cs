@@ -2,39 +2,39 @@
 
 namespace ITechArt.StudentsLab.PresentationLayer.Models
 {
-    public class ScheduleModel
+    public class LectureModel
     {
         public int Id { get; }
 
-        public int LabId { get; }
+        public string LectorFirstName { get; }
 
-        public string Lector { get; }
+        public string LectorLastName { get; }
 
         public string Place { get; }
 
         public string Theme { get; }
 
         public DateTime DateTime { get; }
-        
-        public DateTime Durstion { get; }
 
-        public ScheduleModel(
+        public DateTime Duration { get; }
+
+        public LectureModel(
             int id,
-            int labId,
-            string lector,
+            string lectorFirstName,
+            string lectorLastName,
             string place,
             string theme,
             DateTime dateTime,
-            DateTime durstion
+            DateTime duration
         )
         {
             Id = id;
-            LabId = labId;
-            Lector = lector;
+            LectorFirstName = lectorFirstName;
+            LectorLastName = lectorLastName;
             Place = place;
             Theme = theme;
             DateTime = dateTime;
-            Durstion = durstion;
+            Duration = duration;
         }
     }
 }

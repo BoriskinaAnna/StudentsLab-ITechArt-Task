@@ -9,6 +9,7 @@ namespace ITechArt.StudentsLab.DataAccessLayer
         public static void Initialize(IMapperConfigurationExpression configuration)
         {
             configuration.CreateMap<Lab, LabModel>();
+            configuration.CreateMap<Lecture, LectureModel>();
         }
     }
 }

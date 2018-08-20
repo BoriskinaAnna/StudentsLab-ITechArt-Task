@@ -21,12 +21,11 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
         {
             _scheduleRepository = scheduleRepository;
         }
-        public async Task<IEnumerable<LectureModel>> GetCinemas()
+        public async Task<IEnumerable<LectureModel>> GetSchedule(int labId)
         {
-            //   IEnumerable<DalLectureModel> cinemas = await _scheduleRepository.GetSchedule();
-
-            //  return cinemas.Select(Mapper.Map<LectureModel>);
-            return null;
+               IEnumerable<DalLectureModel> schedule = await _scheduleRepository.GetSchedule(labId);
+        
+              return schedule.Select(Mapper.Map<LectureModel>);
         }
 
     }

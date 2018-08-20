@@ -81,6 +81,7 @@
     <Build Include="StoredProcedures\GetUserById.sql" />
     <Build Include="StoredProcedures\AddUser.sql" />
     <Build Include="StoredProcedures\GetLabs.sql" />
+    <Build Include="StoredProcedures\GetLabSchedule.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="ITechArt.StudentLabs.Database.refactorlog" />

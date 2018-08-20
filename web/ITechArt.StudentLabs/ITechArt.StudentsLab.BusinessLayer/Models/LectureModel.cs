@@ -8,9 +8,9 @@ namespace ITechArt.StudentsLab.BusinessLayer.Models
     {
         public int Id { get; }
 
-        public int LabId { get; }
+        public string LectorFirstName { get; }
 
-        public string Lector { get; }
+        public string LectorLastName { get; }
 
         public string Place { get; }
 
@@ -18,25 +18,25 @@ namespace ITechArt.StudentsLab.BusinessLayer.Models
 
         public DateTime DateTime { get; }
 
-        public DateTime Durstion { get; }
+        public DateTime Duration { get; }
 
         public LectureModel(
             int id,
-            int labId,
-            string lector,
+            string lectorFirstName,
+            string lectorLastName,
             string place,
             string theme,
             DateTime dateTime,
-            DateTime durstion
+            DateTime duration
         )
         {
             Id = id;
-            LabId = labId;
-            Lector = lector;
+            LectorFirstName = lectorFirstName;
+            LectorLastName = lectorLastName;
             Place = place;
             Theme = theme;
             DateTime = dateTime;
-            Durstion = durstion;
+            Duration = duration;
         }
     }
 }

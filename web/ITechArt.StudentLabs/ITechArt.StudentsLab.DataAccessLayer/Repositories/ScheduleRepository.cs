@@ -9,7 +9,6 @@ using Dapper;
 using AutoMapper;
 using System.Data;
 using System.Linq;
-using System;
 
 namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
 {
@@ -22,15 +21,15 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
         {
             _settings = settings;
         }
-        public async Task<IEnumerable<LectureModel>> GetSchedule()
+        public async Task<IEnumerable<LectureModel>> GetSchedule(int labId)
         {
             using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))
             {
-                IEnumerable<Lecture> cinemas = await connection.QueryAsync<Lecture>(
-                    "GetCinemas",
+                IEnumerable<Lecture> schedule = await connection.QueryAsync<Lecture>(
+                    "GetLabSchedule",
+                    new { Id = labId },
                     commandType: CommandType.StoredProcedure);
-
-                return cinemas.Select(Mapper.Map<LectureModel>);
+                return schedule.Select(Mapper.Map<LectureModel>);
             }
         }
     }

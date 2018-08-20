@@ -10,6 +10,7 @@ using System;
 
 namespace ITechArt.StudentsLab.PresentationLayer.Controllers
 {
+    [Route("api/[controller]/[action]")]
     public class ScheduleController : Controller
     {
         private readonly IScheduleService _scheduleService;
@@ -18,15 +19,16 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
         {
             _scheduleService = scheduleService;
         }
-         
-        public async  Task<IActionResult> Get()
-        {
-            //  IEnumerable<BlLectureModel> cinemas = await _scheduleService.GetLectures();
 
-            // return Ok(
-            //   cinemas.Select(Mapper.Map<ScheduleModel>)
-            //    );
-            return null;
+        [HttpGet]
+        [Route("{labId:int}")]
+        public async  Task<IActionResult> Get(int labId)
+        {
+             IEnumerable<BlLectureModel> schedule = await _scheduleService.GetSchedule(labId);
+
+             return Ok(
+               schedule.Select(Mapper.Map<LectureModel>)
+                );
         }
     }
 }

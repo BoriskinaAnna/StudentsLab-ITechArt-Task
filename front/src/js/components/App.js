@@ -62,6 +62,7 @@ export class App extends Component {
            return null;
        }
        else {
+           console.log(labs);
            return (
                <Router>
                    <div className="content">

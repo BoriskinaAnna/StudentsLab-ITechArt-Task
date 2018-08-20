@@ -49,7 +49,19 @@ options.resources = {
             "incorrectRepeatPassword": "Passwords do not match",
             "userAlreadyExists": "User with this email already exists",
             "incorrectAuthentication": "Invalid login or password",
-            "addFeedbackDates": "Add feedback dates"
+            "addFeedbackDates": "Add feedback dates",
+            "january": "January",
+            "february": "February",
+            "march": "March",
+            "april": "April",
+            "may": "May",
+            "june":  "June",
+            "july": "July",
+            "august": "August",
+            "september": "September",
+            "october": "October",
+            "november": "November",
+            "december": "December"
         }
     },
     ru: {
@@ -84,7 +96,19 @@ options.resources = {
             "incorrectRepeatPassword": "Пароли не совпадают",
             "userAlreadyExists": "Пользователь с данным адресом электронной почты уже существует",
             "incorrectAuthentication": "Неверный логин или пароль",
-            "addFeedbackDates": "Добавить даты отзывов"
+            "addFeedbackDates": "Добавить даты отзывов",
+            "january": "Января",
+            "february": "Февраля",
+            "march": "Марта",
+            "april": "Апреля",
+            "may": "Мая",
+            "june":  "Июня",
+            "july": "Июля",
+            "august": "Августа",
+            "september": "Сентября",
+            "october": "Октября",
+            "november": "Ноября",
+            "december": "Декабря"
         }
     }
 };

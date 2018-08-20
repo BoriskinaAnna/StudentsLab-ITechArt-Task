@@ -6,18 +6,19 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Models.Entities
 {
     class Lecture
     {
-        public int Id { get; set; }
+        public int Id { get; }
 
-        public int LabId { get; set; }
+        public string LectorFirstName { get; }
 
-        public string Lector { get; set; }
+        public string LectorLastName { get; }
 
-        public string Place { get; set; }
+        public string Place { get; }
 
-        public string Theme { get; set; }
+        public string Theme { get; }
 
-        public DateTime DateTime { get; set; }
+        public DateTime DateTime { get; }
 
-        public DateTime Durstion { get; set; }
+        public DateTime Duration { get; }
+
     }
 }
