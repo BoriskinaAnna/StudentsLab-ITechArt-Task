@@ -10,7 +10,6 @@ import Authentication from '../components/authentication';
 import AddLabForm from '../components/addLabForm';
 import '../components/appStyle.scss';
 import Schedule from '../components/schedule';
-import schedule from '../schedule.json';
 import ChangeLecture from '../components/changeLecture';
 import AccountHeader from './accountHeader';
 import Registration from '../components/registration'
@@ -27,14 +26,6 @@ export class App extends Component {
             isChangeLectureShowed: false,
             isDataLoaded: false
         };
-
-        labService.getLabsListFromServer()
-            .then(data =>{
-                labs = data;
-                this.setState({
-                    isDataLoaded: true
-                })
-            });
     }
 
     showAddLab = () =>{
@@ -59,6 +50,13 @@ export class App extends Component {
     render() {
 
        if(!this.state.isDataLoaded){
+           labService.getLabsListFromServer()
+               .then(data =>{
+                   labs = data;
+                   this.setState({
+                       isDataLoaded: true
+                   })
+               });
            return null;
        }
        else {
@@ -73,7 +71,7 @@ export class App extends Component {
 
                        <Route exact path="/schedule" component={() => (<Header/>)}/>
                        <Route exact path="/schedule" component={() => (
-                           <Schedule schedule={schedule} showChangeLecture={this.showChangeLecture}/>)}/>
+                           <Schedule showChangeLecture={this.showChangeLecture}/>)}/>
                        <Route exact path="/schedule" component={() => (<Footer/>)}/>
 
                        <Route exact path="/authentication" component={() => (<AccountHeader/>)}/>

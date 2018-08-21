@@ -1,8 +1,46 @@
-.addFeedbackDates{
+@mixin _font() {
+  font-family: "Open Sans",sans-serif;
+  font-weight: bold;
+  color: #454949;
+}
+
+.feedbackDates{
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  &__addedDates{
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__date{
+    @include _font();
+    margin-left:20px;
+  }
+
+  &__addBtn{
+    @include _font();
+    border: none;
+    background-color: #F6F6F5;
+    &:focus{
+      outline: none;
+    }
+  }
 
   &__addNext{
       color: #a6a6a6;
       background-color: rgb(69,69,69);
       border: none;
+      margin-left:20px;
   }
+
+  &__addDate{
+      width: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+  }
+
 }

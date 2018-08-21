@@ -47,5 +47,31 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
                 return feedbackDates.Select(Mapper.Map<FeedbackDateModel>);
             }
         }
+
+        public async Task<int> AddOrUpdateFeedbackDates(FeedbackDateModel feedbackDate)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))
+                {
+                    int id = await connection.ExecuteScalarAsync<int>(
+                        "AddOrUpdateFeedbackDate",
+                        new
+                        {
+                            Id = feedbackDate.Id,
+                            Date = feedbackDate.Date.Date,
+                            LabId = feedbackDate.LabId
+                        },
+                        commandType: CommandType.StoredProcedure
+                    );
+
+                    return id;
+                }
+            }
+           catch(Exception e)
+            {
+                return 1;
+            }
+        }
     }
 }

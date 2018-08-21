@@ -32,5 +32,20 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
             IEnumerable<DalFeedbackDateModel> feedbackDates = await _labRepository.GetFeedbackDates(labId);
             return feedbackDates.Select(Mapper.Map<FeedbackDateModel>);
         }
+
+        public async Task<FeedbackDateModel> AddOrUpdateFeedbackDate(FeedbackDateModel feedbackDate)
+        {
+            DalFeedbackDateModel feedbackDateRequest = Mapper.Map<DalFeedbackDateModel>(feedbackDate);
+
+            int feedbackDateResponseId = await _labRepository.AddOrUpdateFeedbackDates(feedbackDateRequest);
+
+            return new FeedbackDateModel
+            (
+                (feedbackDateResponseId != 0) ? feedbackDateResponseId : feedbackDate.Id,
+                feedbackDate.LabId,
+                feedbackDate.Date
+
+            );
+        }
     }
 }

@@ -83,6 +83,7 @@
     <Build Include="StoredProcedures\GetLabs.sql" />
     <Build Include="StoredProcedures\GetLabSchedule.sql" />
     <Build Include="StoredProcedures\GetFeedbackDates.sql" />
+    <Build Include="StoredProcedures\AddOrUpdateFeedbackDate.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="ITechArt.StudentLabs.Database.refactorlog" />

@@ -31,12 +31,22 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
         }
 
         [HttpGet]
-        [Route("{id:int}")]
+        [Route("{labId:int}")]
         public async Task<IActionResult> GetFeedbackDates(int labId)
         {
             IEnumerable<BlFeedbackDateModel> feedbackDates = await _labService.GetFeedbackDates(labId);
             return Ok(
                 feedbackDates.Select(Mapper.Map<FeedbackDateModel>)
+            );
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddOrUpdateFeedbackDate(FeedbackDateModel model)
+        {
+            BlFeedbackDateModel feedbackDateResponse = 
+                await _labService.AddOrUpdateFeedbackDate(Mapper.Map<BlFeedbackDateModel>(model));
+            return Ok(
+                Mapper.Map<FeedbackDateModel>(feedbackDateResponse)
             );
         }
     }

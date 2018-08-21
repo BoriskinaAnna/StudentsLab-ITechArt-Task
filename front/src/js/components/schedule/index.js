@@ -17,19 +17,19 @@ class Schedule extends Component {
             isAddFeedbackDatesShowed: false,
             isScheduleLoaded: false
         };
-
-        scheduleService.getScheduleFromServer(this.props.location.state.labId)
-            .then(data =>{
-                schedule = data;
-                this.setState({
-                    isScheduleLoaded: true
-                });
-                console.log(schedule)
-            });
     }
 
     render() {
         if(!this.state.isScheduleLoaded) {
+
+            scheduleService.getScheduleFromServer(this.props.location.state.labId)
+                .then(data =>{
+                    schedule = data;
+                    this.setState({
+                        isScheduleLoaded: true
+                    });
+                });
+
             return null;
         }
         else {

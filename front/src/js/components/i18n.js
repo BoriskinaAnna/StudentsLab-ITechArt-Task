@@ -61,7 +61,8 @@ options.resources = {
             "september": "September",
             "october": "October",
             "november": "November",
-            "december": "December"
+            "december": "December",
+            "change": "Change"
         }
     },
     ru: {
@@ -108,7 +109,8 @@ options.resources = {
             "september": "Сентября",
             "october": "Октября",
             "november": "Ноября",
-            "december": "Декабря"
+            "december": "Декабря",
+            "change": "Изменить"
         }
     }
 };
