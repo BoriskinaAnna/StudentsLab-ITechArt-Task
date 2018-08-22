@@ -1,0 +1,31 @@
+@mixin _standardFont(){
+  font-family: "Open Sans",sans-serif;
+  color: #454949;
+}
+
+@mixin _boldFont() {
+  @include _standardFont();
+  font-weight: bold;
+}
+
+.feedbackContainer{
+  background-color: #F6F6F5;
+  flex: 1;
+
+  .feedback{
+    width: 1200px;
+    margin: auto;
+    background-color: rgb(232, 232, 232);
+    height: 100%;
+
+    &__question{
+      @include _boldFont();
+    }
+
+    &__answer{
+      width: 900px;
+      height: 50px;
+      margin: auto;
+    }
+  }
+}

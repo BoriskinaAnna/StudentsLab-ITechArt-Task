@@ -1,7 +1,11 @@
-@mixin _font() {
+@mixin _standardFont(){
   font-family: "Open Sans",sans-serif;
-  font-weight: bold;
   color: #454949;
+}
+
+@mixin _boldFont() {
+  @include _standardFont();
+  font-weight: bold;
 }
 
 .feedbackDates{
@@ -9,6 +13,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  background-color: #F6F6F5;
 
   &__addedDates{
     display: flex;
@@ -16,16 +21,31 @@
   }
 
   &__date{
-    @include _font();
+    @include _boldFont();
     margin-left:20px;
   }
 
   &__addBtn{
-    @include _font();
+    @include _boldFont();
     border: none;
     background-color: #F6F6F5;
+
     &:focus{
       outline: none;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__fillFeedbackBtn{
+    @include _standardFont();
+    border: none;
+    background-color: #F6F6F5;
+
+    &:hover {
+      text-decoration: underline;
     }
   }
 
@@ -42,5 +62,4 @@
       flex-direction: column;
       align-items: flex-end;
   }
-
 }

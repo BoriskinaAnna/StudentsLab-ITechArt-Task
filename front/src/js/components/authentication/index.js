@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 import './authenticationStyle.scss';
 import { translate } from 'react-i18next';
 import Modal from 'react-modal';
-import userService from "../userService";
+import userService from "../services/userService";
 import {Redirect, withRouter} from "react-router-dom";
-import redirectAwareFetch from "../userService/redirectAwareFetch";
-import {FetchResultTypeEnum} from "../userService/fetchResultTypeEnum";
+import redirectAwareFetch from "../services/userService/redirectAwareFetch";
+import {FetchResultTypeEnum} from "../services/userService/fetchResultTypeEnum";
 
 
 Modal.setAppElement('#content');

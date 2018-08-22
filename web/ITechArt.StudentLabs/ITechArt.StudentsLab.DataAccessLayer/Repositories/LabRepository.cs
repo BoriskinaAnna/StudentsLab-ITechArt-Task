@@ -50,28 +50,99 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
 
         public async Task<int> AddOrUpdateFeedbackDates(FeedbackDateModel feedbackDate)
         {
-            try
+            using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))
             {
-                using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))
-                {
-                    int id = await connection.ExecuteScalarAsync<int>(
-                        "AddOrUpdateFeedbackDate",
-                        new
-                        {
-                            Id = feedbackDate.Id,
-                            Date = feedbackDate.Date.Date,
-                            LabId = feedbackDate.LabId
-                        },
-                        commandType: CommandType.StoredProcedure
-                    );
+                int id = await connection.ExecuteScalarAsync<int>(
+                    "AddOrUpdateFeedbackDate",
+                    new
+                    {
+                        Id = feedbackDate.Id,
+                        Date = feedbackDate.Date.Date,
+                        LabId = feedbackDate.LabId
+                    },
+                    commandType: CommandType.StoredProcedure
+                );
 
-                    return id;
-                }
+                return id;
             }
-           catch(Exception e)
+            
+        }
+
+        public async Task<int> AddOrUpdateFeedbackAnswer(FeedbackDateModel feedbackDate)
+        {
+            using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))
             {
-                return 1;
+                int id = await connection.ExecuteScalarAsync<int>(
+                    "",
+                    new
+                    {
+                       
+                    },
+                    commandType: CommandType.StoredProcedure
+                );
+
+                return id;
             }
+
+        }
+
+        public async Task<IEnumerable<FeedbackAnswerResponseModel>> GetFeedbackAnswer(FeedbackAnswerRequestModel feedbackRequest)
+        {
+            using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))
+            {
+                IEnumerable<FeedbackAnswer> feedback = await connection.QueryAsync<FeedbackAnswer>(
+                    "GetFeedbackAnswer",
+                    new
+                    { 
+                        FeedbackQuestionId = feedbackRequest.FeedbackQuestionId,
+                        MentorId = feedbackRequest.MentorId,
+                        StudentId = feedbackRequest.StudentId,
+                        FeedbackdateId = feedbackRequest.FeedbackDateId
+                    },
+                    commandType: CommandType.StoredProcedure
+                );
+
+                return feedback.Select(Mapper.Map<FeedbackAnswerResponseModel>);
+            }
+
+        }
+
+        public async Task<IEnumerable<FeedbackQuestionModel>> GetFeedbackQuestions(int labId)
+        {
+            using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))
+            {
+                try
+                {
+                    IEnumerable<FeedbackQuestion> feedback = await connection.QueryAsync<FeedbackQuestion>(
+                   "GetFeedbackQuestions",
+                   new { LabId = labId },
+                   commandType: CommandType.StoredProcedure
+               );
+
+                    return feedback.Select(Mapper.Map<FeedbackQuestionModel>);
+                }
+                catch(Exception e)
+                {
+                    return null;
+                }
+               
+            }
+
+        }
+
+        public async Task<IEnumerable<UserNameModel>> GetStudentByMentorId(int mentorId)
+        {
+            using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))
+            {
+                IEnumerable<UserName> feedback = await connection.QueryAsync<UserName>(
+                    "GetStudentsByMentorId",
+                    new {MentorId = mentorId},
+                    commandType: CommandType.StoredProcedure
+                );
+
+                return feedback.Select(Mapper.Map<UserNameModel>);
+            }
+
         }
     }
 }

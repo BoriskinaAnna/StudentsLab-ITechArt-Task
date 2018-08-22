@@ -62,7 +62,8 @@ options.resources = {
             "october": "October",
             "november": "November",
             "december": "December",
-            "change": "Change"
+            "change": "Change",
+            "fillFeedback": "Fill the feedback"
         }
     },
     ru: {
@@ -110,7 +111,8 @@ options.resources = {
             "october": "Октября",
             "november": "Ноября",
             "december": "Декабря",
-            "change": "Изменить"
+            "change": "Изменить",
+            "fillFeedback": "Заполнить фидбек"
         }
     }
 };

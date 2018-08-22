@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import './addFeedbackDatesStyle.scss';
 import {translate} from 'react-i18next';
-import redirectAwareFetch from '../userService/redirectAwareFetch';
+import redirectAwareFetch from '../services/userService/redirectAwareFetch';
 import Calendar from 'react-calendar';
+import {Link} from 'react-router-dom';
+import userService from "../services/userService";
+
 
 let feedBackDates;
 
@@ -71,9 +74,8 @@ class AddFeedbackDates extends Component {
     };
 
     changeFeedbackDate = () =>{
-        console.log(444);
-        console.log(new Date(this.state.changeDate).getDate());
-        redirectAwareFetch('/api/lab/addOrUpdateFeedbackDate', this.getAddFeedbackDateOptions(this.state.changeDate))
+
+        redirectAwareFetch('/api/lab/addOrUpdateFeedbackDate', this.getAddFeedbackDateOptions(new Date(this.state.changeDate).toLocaleDateString()))
             .then( () => {
                 this.setState({
                     isDataLoaded: false,
@@ -83,10 +85,10 @@ class AddFeedbackDates extends Component {
     };
 
     render() {
-
+        const {t, labId} = this.props;
         if(!this.state.isDataLoaded) {
 
-            this.getFeedbackDates(this.props.labId)
+            this.getFeedbackDates(labId)
                 .then(data =>{
                     feedBackDates = data;
                     this.setState({
@@ -96,17 +98,13 @@ class AddFeedbackDates extends Component {
             return null;
         }
         else{
-            const {t} = this.props;
+
 
             const dateElements = feedBackDates.map((feedBackDate, index) =>{
 
                 const  date = new Date(feedBackDate.date);
 
                 if( feedBackDate.id === this.state.changingDateId){
-
-                 /*   this.setState({
-                        changeDate: date
-                    });*/
 
                     return   <li key = {index} className="feedbackDates__date">
                         <Calendar
@@ -125,13 +123,22 @@ class AddFeedbackDates extends Component {
                     return <li key = {index}
                                className="feedbackDates__date"
                                onClick={() => this.setState({changingDateId: feedBackDate.id})}
-                    >
-                        {date.getDate().toString().length === 1?'0'+date.getDate():date.getDate()}
-                        .
-                        {date.getMonth().toString().length === 1?'0'+date.getMonth():date.getMonth()}
-                        .
-                        {date.getFullYear()}
-                    </li>
+                        >
+                            {date.getDate().toString().length === 1?'0'+date.getDate():date.getDate()}
+                            .
+                            {date.getMonth().toString().length === 1?'0'+date.getMonth():date.getMonth()}
+                            .
+                            {date.getFullYear()}
+                            <Link
+                                to={{
+                                    pathname:'/feedback',
+                                    state: {
+                                        feedbackDateId : feedBackDate.id,
+                                        labId: labId
+                                    }
+                                }}
+                                className="feedbackDates__fillFeedbackBtn">({t('fillFeedback')})</Link>
+                        </li>
                 }
             });
 

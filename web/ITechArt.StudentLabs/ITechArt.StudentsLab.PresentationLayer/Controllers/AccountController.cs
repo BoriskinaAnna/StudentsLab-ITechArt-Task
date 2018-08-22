@@ -48,7 +48,7 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
                 new ClaimsPrincipal(claimsIdentity)
             );
 
-            return Ok(new ResponseModel
+            return Ok(new UserResponseModel
             (
                 user.Id,
                 user.FirstName,
@@ -89,7 +89,7 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
                 new ClaimsPrincipal(claimsIdentity)
             );
 
-            return Ok(new ResponseModel
+            return Ok(new UserResponseModel
             (
                 user.Id,
                 user.FirstName,
@@ -110,7 +110,7 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
                 return NotFound();
             }
 
-            return Ok(new ResponseModel
+            return Ok(new UserResponseModel
             (
                 user.Id,
                 user.FirstName,

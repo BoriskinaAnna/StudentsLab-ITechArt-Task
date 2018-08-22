@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './headerStyle.scss';
 import {translate} from 'react-i18next';
 import {Link} from 'react-router-dom';
-import UserService from '../userService';
+import UserService from '../services/userService';
 
 
 class Header extends Component {

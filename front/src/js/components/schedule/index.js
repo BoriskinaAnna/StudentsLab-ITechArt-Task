@@ -3,7 +3,7 @@ import Lecture from '../lecture/';
 import './scheduleStyle.scss';
 import {translate} from 'react-i18next';
 import AddFeedbackDates from '../addFeedbackDates';
-import scheduleService from '../scheduleService';
+import scheduleService from '../services/scheduleService';
 import {withRouter} from 'react-router-dom';
 
 

@@ -1,6 +1,6 @@
 ﻿namespace ITechArt.StudentsLab.PresentationLayer.Models
 {
-    public class ResponseModel
+    public class UserResponseModel
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
@@ -8,7 +8,7 @@
         public string Email { get; set; }
         public string Role { get; set; }
 
-        public ResponseModel(
+        public UserResponseModel(
             int id,
             string firstName,
             string lastName,
