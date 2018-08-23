@@ -68,29 +68,41 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
             
         }
 
-        public async Task<int> AddOrUpdateFeedbackAnswer(FeedbackDateModel feedbackDate)
+        public async Task AddOrUpdateFeedbackAnswers(FeedbackAnswerPostRequestModel feedbackAnswers)
         {
             using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))
             {
-                int id = await connection.ExecuteScalarAsync<int>(
-                    "",
-                    new
+                for (int i = 0; i < feedbackAnswers.Answers.Length; i++)
+                {
+                    try
                     {
-                       
-                    },
-                    commandType: CommandType.StoredProcedure
-                );
+                        await connection.ExecuteScalarAsync<int>(
+                       "AddOrUpdateFeedbackAnswer",
+                       new
+                       {
+                           MentorId = feedbackAnswers.MentorId,
+                           FeedbackQuestionId = feedbackAnswers.QuestionId[i],
+                           FeedbackDateId = feedbackAnswers.FeedbackDateId,
+                           StudentId = feedbackAnswers.StudentId,
+                           Answer = feedbackAnswers.Answers[i]
+                       },
+                       commandType: CommandType.StoredProcedure
+                   );
+                    }
+                    catch(Exception e)
+                    {
 
-                return id;
+                    }
+                   
+                }
             }
-
         }
 
-        public async Task<IEnumerable<FeedbackAnswerResponseModel>> GetFeedbackAnswer(FeedbackAnswerRequestModel feedbackRequest)
+        public async Task<FeedbackAnswerResponseModel> GetFeedbackAnswer(FeedbackAnswerRequestModel feedbackRequest)
         {
             using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))
             {
-                IEnumerable<FeedbackAnswer> feedback = await connection.QueryAsync<FeedbackAnswer>(
+                FeedbackAnswer feedback = await connection.QuerySingleOrDefaultAsync<FeedbackAnswer>(
                     "GetFeedbackAnswer",
                     new
                     { 
@@ -102,7 +114,7 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
                     commandType: CommandType.StoredProcedure
                 );
 
-                return feedback.Select(Mapper.Map<FeedbackAnswerResponseModel>);
+                return Mapper.Map<FeedbackAnswerResponseModel>(feedback);
             }
 
         }

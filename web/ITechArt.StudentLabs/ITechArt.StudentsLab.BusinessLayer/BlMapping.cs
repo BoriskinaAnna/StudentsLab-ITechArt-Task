@@ -5,6 +5,8 @@ using DalLectureModel = ITechArt.StudentsLab.DataAccessLayer.Models.DataTransfer
 using LectureModel = ITechArt.StudentsLab.BusinessLayer.Models.LectureModel;
 using DalFeedbackModel = ITechArt.StudentsLab.DataAccessLayer.Models.DataTransferObjects.FeedbackDateModel;
 using FeedbackModel = ITechArt.StudentsLab.BusinessLayer.Models.FeedbackDateModel;
+using DalFeedbackAnswerResponseModel = ITechArt.StudentsLab.DataAccessLayer.Models.DataTransferObjects.FeedbackAnswerResponseModel;
+using FeedbackAnswerResponseModel = ITechArt.StudentsLab.BusinessLayer.Models.FeedbackAnswerResponseModel;
 
 namespace ITechArt.StudentsLab.BusinessLayer
 {
@@ -15,6 +17,7 @@ namespace ITechArt.StudentsLab.BusinessLayer
             configuration.CreateMap<DalLabModel, LabModel>();
             configuration.CreateMap<DalLectureModel, LectureModel>();
             configuration.CreateMap<DalFeedbackModel, FeedbackModel>();
+            configuration.CreateMap<DalFeedbackAnswerResponseModel, FeedbackAnswerResponseModel>();
         }
     }
 }

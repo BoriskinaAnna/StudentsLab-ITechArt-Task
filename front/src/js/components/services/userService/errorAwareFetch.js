@@ -9,9 +9,10 @@ function errorAwareFetch(url, options) {
                     return Promise.reject(response)
                 }
 
-                return response.json();
+                return response.text();
             }
         )
+        .then((text) => text.length ? JSON.parse(text) : {})
         .then(data =>{
             return new SuccessResult(data);
         })

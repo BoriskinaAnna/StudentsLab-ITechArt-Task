@@ -62,6 +62,7 @@ class UserService{
      };
 
     getInfoAboutCurrentUser = () =>{
+        console.log(6);
         if(currentUser.id !== null) {
             redirectAwareFetch(`/api/account/getInfoAboutCurrentUser/${currentUser.id}`, this.getOptions('GET'))
                 .then(result =>{

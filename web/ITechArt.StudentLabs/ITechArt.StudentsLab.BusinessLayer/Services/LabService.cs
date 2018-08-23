@@ -6,14 +6,16 @@ using DalLabModel = ITechArt.StudentsLab.DataAccessLayer.Models.DataTransferObje
 using LabModel = ITechArt.StudentsLab.BusinessLayer.Models.LabModel;
 using DalFeedbackDateModel = ITechArt.StudentsLab.DataAccessLayer.Models.DataTransferObjects.FeedbackDateModel;
 using FeedbackDateModel = ITechArt.StudentsLab.BusinessLayer.Models.FeedbackDateModel;
-using DalFeedbackRequestModel = ITechArt.StudentsLab.DataAccessLayer.Models.DataTransferObjects.FeedbackAnswerRequestModel;
-using DalFeedbackResponseModel = ITechArt.StudentsLab.DataAccessLayer.Models.DataTransferObjects.FeedbackAnswerResponseModel;
+using DalFeedbackAnswerRequestModel = ITechArt.StudentsLab.DataAccessLayer.Models.DataTransferObjects.FeedbackAnswerRequestModel;
+using DalFeedbackAnswerResponseModel = ITechArt.StudentsLab.DataAccessLayer.Models.DataTransferObjects.FeedbackAnswerResponseModel;
 using FeedbackAnswerResponseModel = ITechArt.StudentsLab.BusinessLayer.Models.FeedbackAnswerResponseModel;
 using FeedbackAnswerRequestModel = ITechArt.StudentsLab.BusinessLayer.Models.FeedbackAnswerRequestModel;
 using DalUserNameModel = ITechArt.StudentsLab.DataAccessLayer.Models.DataTransferObjects.UserNameModel;
 using UserNameModel = ITechArt.StudentsLab.BusinessLayer.Models.UserNameModel;
 using DalFeedbackQuestionModel = ITechArt.StudentsLab.DataAccessLayer.Models.DataTransferObjects.FeedbackQuestionModel;
 using FeedbackQuestionModel = ITechArt.StudentsLab.BusinessLayer.Models.FeedbackQuestionModel;
+using DalFeedbackAnswerPostRequestModel = ITechArt.StudentsLab.DataAccessLayer.Models.DataTransferObjects.FeedbackAnswerPostRequestModel;
+using FeedbackAnswerPostRequestModel = ITechArt.StudentsLab.BusinessLayer.Models.FeedbackAnswerPostRequestModel;
 using System.Linq;
 using AutoMapper;
 using System;
@@ -53,13 +55,19 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
                 (feedbackDateResponseId != 0) ? feedbackDateResponseId : feedbackDate.Id,
                 feedbackDate.LabId,
                 feedbackDate.Date
-
             );
         }
 
-        public async Task<IEnumerable<FeedbackAnswerResponseModel>> GetFeedbackAnswer(FeedbackAnswerRequestModel feedbackRequest)
+        public async Task AddOrUpdateFeedbackAnswer(FeedbackAnswerPostRequestModel feedbackAnswer)
         {
-            DalFeedbackRequestModel dalFeedback = new DalFeedbackRequestModel
+            DalFeedbackAnswerPostRequestModel feedbackAnswerRequest = Mapper.Map<DalFeedbackAnswerPostRequestModel>(feedbackAnswer);
+
+           await _labRepository.AddOrUpdateFeedbackAnswers(feedbackAnswerRequest);
+        }
+
+        public async Task<FeedbackAnswerResponseModel> GetFeedbackAnswer(FeedbackAnswerRequestModel feedbackRequest)
+        {
+            DalFeedbackAnswerRequestModel dalFeedback = new DalFeedbackAnswerRequestModel
             (
                 feedbackRequest.FeedbackQuestionId,
                 feedbackRequest.StudentId,
@@ -67,9 +75,9 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
                 feedbackRequest.FeedbackDateId
             );
 
-            IEnumerable<DalFeedbackResponseModel> feedbackDates = await _labRepository.GetFeedbackAnswer(dalFeedback);
+            DalFeedbackAnswerResponseModel feedbackDates = await _labRepository.GetFeedbackAnswer(dalFeedback);
 
-            return feedbackDates.Select(Mapper.Map<FeedbackAnswerResponseModel>);
+            return Mapper.Map<FeedbackAnswerResponseModel>(feedbackDates);
         }
 
         public async Task<IEnumerable<FeedbackQuestionModel>> GetFeedbackQuestions(int labId)

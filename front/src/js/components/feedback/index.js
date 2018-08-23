@@ -6,24 +6,26 @@ import {withRouter} from 'react-router-dom';
 import './feedbackStyle.scss';
 
 
-let feedback;
-let students;
-let questions;
-let answers;
+let answer, questions, students,
+    feedback = {questionId: [], answers: []},
+    studentId = undefined;
+
 
 class Feedback extends Component {
 
     constructor(){
         super();
         this.state = {
-            currentQuestionId: -1,
+            currentQuestionId: undefined,
             answerValue: '',
             isStudentsLoaded: false,
             isQuestionsLoaded: false,
-            isUserSelectError: false,
-            studentId: undefined
+            isAnswerLoaded: false,
+            isUserSelectError: false
         }
     }
+
+
 
     answerValueChange = (evt) =>{
         this.setState({
@@ -31,47 +33,75 @@ class Feedback extends Component {
         })
     };
 
-    getAnswer = () =>{
+    getAnswer = (questionId) =>{
         feedbackService.getFeedbackAnswerFromServer(
-            this.state.studentId,
+            studentId,
             userService.getCurrentUser().id,
             this.props.location.state.feedbackDateId,
-            this.state.currentQuestionId
+            questionId
         )
             .then(data =>{
-                feedback = data;
+                answer = data;
                 this.setState({
-                    isDataLoaded: true
+                    isAnswerLoaded: true,
+                    answerValue: answer.answer
                 })
             });
-
     };
 
-    render() {
-        if(!(this.state.isQuestionsLoaded&&this.state.isStudentsLoaded)){
+    selectChange = event =>{
+        studentId = event.target.value;
+        this.setState({currentQuestionId: undefined});
+    };
 
-            feedbackService.getStudentByMentorIdFromServer( userService.getCurrentUser().id)
-                .then(data =>{
-                    students = data;
-                    this.setState({
-                        isStudentsLoaded: true
-                    })
-                });
-            feedbackService.getFeedbackQuestionsFromServer( this.props.location.state.labId)
-                .then(data =>{
-                    questions = data;
-                    this.setState({
-                        isQuestionsLoaded: true
-                    })
-                });
+    saveFeedback = () =>{
+
+        feedback.questionId.push(this.state.currentQuestionId);
+        feedback.answers.push(this.state.answerValue);
+
+        feedbackService.saveFeedback(
+            feedback,
+            userService.getCurrentUser().id,
+            this.props.location.state.feedbackDateId,
+            studentId
+        );
+
+        this.setState({currentQuestionId: undefined});
+
+    } ;
+
+    render() {
+
+        if (!(this.state.isQuestionsLoaded&&this.state.isStudentsLoaded)){
+
+            if (!this.state.isStudentsLoaded){
+                feedbackService.getStudentByMentorIdFromServer( userService.getCurrentUser().id)
+                    .then(data =>{
+                        students = data;
+                        this.setState({
+                            isStudentsLoaded: true
+                        })
+                    });
+            }
+
+            if (!this.state.isQuestionsLoaded){
+                feedbackService.getFeedbackQuestionsFromServer( this.props.location.state.labId)
+                    .then(data =>{
+                        questions = data;
+                        this.setState({
+                            isQuestionsLoaded: true
+                        })
+                    });
+            }
 
             return null;
         }
         else{
             const {t} = this.props;
-            console.log(questions, students);
+
             const questionElements = questions.map((questionElement, index) => {
-                if( questionElement.id === this.state.currentQuestionId) {
+
+                if( questionElement.questionId === this.state.currentQuestionId) {
                     return <li key={index} className="feedback">
                         <div className="feedback__question"
                         >
@@ -84,10 +114,23 @@ class Feedback extends Component {
                     return <li key={index} className="feedback">
                         <div className="feedback__question"
                              onClick={() => {
-                                 console.log(this.state.studentId);
-                                 if(this.state.studentId !== undefined) {
-                                     this.setState({currentQuestionId: questionElement.id});
-                                     this.getAnswer();
+                                 if (studentId !== undefined) {
+                                     const changedAnswer = feedback.questionId.findIndex((value)=> value === questionElement.questionId);
+
+                                     if (changedAnswer !== -1){
+                                         this.setState({
+                                             answerValue: feedback.answers[changedAnswer]
+                                         })
+                                     }
+                                     else {
+                                         this.getAnswer(questionElement.questionId);
+                                     }
+
+                                     if (this.state.currentQuestionId !== undefined){
+                                         feedback.questionId.push(this.state.currentQuestionId);
+                                         feedback.answers.push(this.state.answerValue);
+                                     }
+                                     this.setState({currentQuestionId: questionElement.questionId});
                                  }
                                  else{
                                      this.setState({isUserSelectError: true});
@@ -98,13 +141,14 @@ class Feedback extends Component {
                         </div>
                     </li>
                 }
-
             });
 
-
             const studentElement = students.map((studentElement, index) =>{
-                return <option key={index}  onClick={()=>this.setState({studentId: studentElement.id})} value={this.state.studentId}>
-                    {studentElement.firstName} {studentElement.lastName}
+                if(index === 0){
+
+                }
+                return <option key={index} value={studentElement.id}>
+                   {studentElement.firstName} {studentElement.lastName}
                 </option>
             });
 
@@ -112,13 +156,17 @@ class Feedback extends Component {
 
             return (
                 <div className="feedbackContainer">
-                    <select>
+                    <select onChange={this.selectChange} >
+                        <option value={undefined}/>
                         {studentElement}
                     </select>
                     {chooseUser}
                     <ol>
                         {questionElements}
                     </ol>
+                    <button onClick={this.saveFeedback}>
+                        {t('save')}
+                    </button>
                 </div>
             )
         }

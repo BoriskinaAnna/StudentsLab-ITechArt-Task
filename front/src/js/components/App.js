@@ -15,7 +15,6 @@ import Registration from './registration'
 import ErrorPage from './errorPage'
 import Feedback from './feedback';
 
-let labs;
 
 export class App extends Component {
 
@@ -23,8 +22,8 @@ export class App extends Component {
         super();
         this.state ={
             isAddLabShowed: false,
-            isChangeLectureShowed: false,
-            isDataLoaded: false
+            isChangeLectureShowed: false
+
         };
     }
 
@@ -49,24 +48,14 @@ export class App extends Component {
 
     render() {
 
-       if(!this.state.isDataLoaded){
-           labService.getLabsListFromServer()
-               .then(data =>{
-                   labs = data;
-                   this.setState({
-                       isDataLoaded: true
-                   })
-               });
-           return null;
-       }
-       else {
-           console.log(labs);
+
+
            return (
                <Router>
                    <div className="content">
 
                        <Route exact path="/" component={() => (<Header/>)}/>
-                       <Route exact path="/" component={() => (<LabsList labs={labs} showAddLab={this.showAddLab}/>)}/>
+                       <Route exact path="/" component={() => (<LabsList showAddLab={this.showAddLab}/>)}/>
                        <Route exact path="/" component={() => (<Footer/>)}/>
 
                        <Route exact path="/schedule" component={() => (<Header/>)}/>
@@ -95,6 +84,6 @@ export class App extends Component {
                </Router>
            )
        }
-    }
+
 }
 export default App;

@@ -11,8 +11,9 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Contracts
         Task<IEnumerable<LabModel>> GetLabs();
         Task<IEnumerable<FeedbackDateModel>> GetFeedbackDates(int labId);
         Task<int> AddOrUpdateFeedbackDates(FeedbackDateModel feedbackDate);
-        Task<IEnumerable<FeedbackAnswerResponseModel>> GetFeedbackAnswer(FeedbackAnswerRequestModel feedbackRequest);
+        Task<FeedbackAnswerResponseModel> GetFeedbackAnswer(FeedbackAnswerRequestModel feedbackRequest);
         Task<IEnumerable<FeedbackQuestionModel>> GetFeedbackQuestions(int labId);
         Task<IEnumerable<UserNameModel>> GetStudentByMentorId(int mentorId);
+        Task AddOrUpdateFeedbackAnswers(FeedbackAnswerPostRequestModel feedbackAnswers);
     }
 }

@@ -10,6 +10,7 @@ using BlFeedbackDateModel = ITechArt.StudentsLab.BusinessLayer.Models.FeedbackDa
 using BlFeedbackRequestModel = ITechArt.StudentsLab.BusinessLayer.Models.FeedbackAnswerRequestModel;
 using BlFeedbackResponseModel = ITechArt.StudentsLab.BusinessLayer.Models.FeedbackAnswerResponseModel;
 using BlFeedbackQuestionModel = ITechArt.StudentsLab.BusinessLayer.Models.FeedbackQuestionModel;
+using BlFeedbackAnswerPostRequestModel = ITechArt.StudentsLab.BusinessLayer.Models.FeedbackAnswerPostRequestModel;
 using System.Linq;
 using System;
 
@@ -66,10 +67,10 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
                 feedbackDateId
             );
 
-            IEnumerable<BlFeedbackResponseModel> feedbackResponse = await _labService.GetFeedbackAnswer(blFeedbackRequest);
+           BlFeedbackResponseModel feedbackResponse = await _labService.GetFeedbackAnswer(blFeedbackRequest);
 
             return Ok(
-                feedbackResponse.Select(Mapper.Map<FeedbackAnswerResponseModel>)
+                Mapper.Map<FeedbackAnswerResponseModel>(feedbackResponse)
             );
         }
 
@@ -93,6 +94,13 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
             return Ok(
                 feedbackResponse.Select(Mapper.Map<FeedbackQuestionModel>)
             );
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddOrUpdateFeedbackAnswer(FeedbackAnswerPostRequestModel model)
+        {
+            await _labService.AddOrUpdateFeedbackAnswer(Mapper.Map<BlFeedbackAnswerPostRequestModel>(model));
+            return Ok();
         }
     }
 }
