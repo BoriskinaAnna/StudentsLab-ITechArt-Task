@@ -16,7 +16,7 @@ function redirectAwareFetch(url, option, isCalledFromAuthentication) {
                     }
 
                 case FetchResultTypeEnum.INTERNAL_SERVER_ERROR:
-                    window.location.pathname = '/error';
+                    //window.location.pathname = '/error';
                     break;
 
                 default:

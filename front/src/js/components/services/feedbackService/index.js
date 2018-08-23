@@ -23,7 +23,7 @@ class FeedbackService{
 
     getFeedbackQuestionsFromServer = (labId) =>{
         console.log(2);
-        return redirectAwareFetch(`/api/lab/getFeedbackQuestions/${labId}`, this.getOptions())
+        return redirectAwareFetch(`/api/feedback/getFeedbackQuestions/${labId}`, this.getOptions())
             .then(result =>{
                 return result.data;
             })
@@ -31,7 +31,7 @@ class FeedbackService{
 
     getFeedbackAnswerFromServer = (studentId, mentorId, feedbackDateId, feedbackQuestionId) =>{
         console.log(3);
-        return redirectAwareFetch(`/api/lab/GetFeedbackAnswer//${studentId}/${mentorId}/${feedbackDateId}/${feedbackQuestionId}`, this.getOptions())
+        return redirectAwareFetch(`/api/feedback/GetFeedbackAnswer/${studentId}/${mentorId}/${feedbackDateId}/${feedbackQuestionId}`, this.getOptions())
             .then(result =>{
                 return result.data;
             })
@@ -57,7 +57,7 @@ class FeedbackService{
 
     saveFeedback = (feedback, mentorId, dateId, studentId) =>{
         console.log(5);
-        redirectAwareFetch(`/api/lab/AddOrUpdateFeedbackAnswer/`, this.getPostOptions(feedback, mentorId, dateId, studentId));
+        redirectAwareFetch(`/api/feedback/AddOrUpdateFeedbackAnswer/`, this.getPostOptions(feedback, mentorId, dateId, studentId));
         console.log(10);
 
     };

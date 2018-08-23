@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import './headerStyle.scss';
 import {translate} from 'react-i18next';
-import {Link} from 'react-router-dom';
+import {Link, Route} from 'react-router-dom';
 import UserService from '../services/userService';
+import AccountHeader from "../accountHeader";
+import Authentication from "../authentication";
+import Footer from "../footer";
 
 
 class Header extends Component {
@@ -30,7 +33,10 @@ class Header extends Component {
             ? <Link
                 to={{
                   pathname:'/authentication',
-                  state: { redirectPage : window.location.pathname}
+                  state: {
+                      redirectPage : window.location.pathname,
+                      labId: this.props.labId
+                  }
                 }}
                 className="headerBtn"
               >
@@ -53,6 +59,8 @@ class Header extends Component {
 
         return (
             <header>
+
+
                 <Link to="/" className="headerLogo">
                     <img className="headerLogo__img" src="img/logo.svg" alt="ITechArtHeaderLogo"/>
                 </Link>

@@ -3,7 +3,7 @@ import './authenticationStyle.scss';
 import { translate } from 'react-i18next';
 import Modal from 'react-modal';
 import userService from "../services/userService";
-import {Redirect, withRouter} from "react-router-dom";
+import {Link, Redirect, withRouter} from "react-router-dom";
 import redirectAwareFetch from "../services/userService/redirectAwareFetch";
 import {FetchResultTypeEnum} from "../services/userService/fetchResultTypeEnum";
 
@@ -81,7 +81,11 @@ class Authentication extends Component {
             &&<span className="authentication__error">{t('incorrectAuthentication')}</span>;
 
         if (this.state.isRedirect){
-            return <Redirect to={this.props.location.state.redirectPage}/>
+            return <Redirect to={{
+                    pathname: this.props.location.state.redirectPage,
+                    state: { labId: this.props.location.state.labId}
+                }}
+            />
         }
 
         return (

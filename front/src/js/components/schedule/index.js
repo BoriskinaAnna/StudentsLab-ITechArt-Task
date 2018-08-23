@@ -4,7 +4,9 @@ import './scheduleStyle.scss';
 import {translate} from 'react-i18next';
 import AddFeedbackDates from '../addFeedbackDates';
 import scheduleService from '../services/scheduleService';
-import {withRouter} from 'react-router-dom';
+import {Route, withRouter} from 'react-router-dom';
+import Header from "../header";
+import Footer from "../footer";
 
 
 let schedule;
@@ -46,20 +48,28 @@ class Schedule extends Component {
             const addFeedbackDates = this.state.isAddFeedbackDatesShowed&&<AddFeedbackDates labId={this.props.location.state.labId}/>;
 
             return (
-                <div className="schedule">
-                    {addFeedbackDates}
-                    <div className="schedule__addFeedbackDates">
-                        <button className="schedule__addFeedbackDatesBtn"
-                                onClick = { () =>
-                                    this.setState({
-                                        isAddFeedbackDatesShowed: !this.state.isAddFeedbackDatesShowed
-                                    })}
-                        >
-                            {addFeedbackDatesBtnName}
-                        </button>
+                <React.Fragment>
+                    <Route exact path="/schedule"
+                           component={() => (<Header labId={this.props.location.state.labId}/>)}
+                    />
+
+                    <div className="schedule">
+                        {addFeedbackDates}
+                        <div className="schedule__addFeedbackDates">
+                            <button className="schedule__addFeedbackDatesBtn"
+                                    onClick = { () =>
+                                        this.setState({
+                                            isAddFeedbackDatesShowed: !this.state.isAddFeedbackDatesShowed
+                                        })}
+                            >
+                                {addFeedbackDatesBtnName}
+                            </button>
+                        </div>
+                        {lectureElements}
                     </div>
-                    {lectureElements}
-                </div>
+
+                    <Route exact path="/schedule" component={() => (<Footer/>)}/>
+                </React.Fragment>
             )
         }
     }

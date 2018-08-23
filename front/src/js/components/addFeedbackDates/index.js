@@ -4,7 +4,6 @@ import {translate} from 'react-i18next';
 import redirectAwareFetch from '../services/userService/redirectAwareFetch';
 import Calendar from 'react-calendar';
 import {Link} from 'react-router-dom';
-import userService from "../services/userService";
 
 
 let feedBackDates;
@@ -31,7 +30,7 @@ class AddFeedbackDates extends Component {
     };
 
     getFeedbackDates = (labId) =>{
-        return redirectAwareFetch(`/api/lab/getFeedbackDates/${labId}`, this.getHttpGetOptions())
+        return redirectAwareFetch(`/api/feedback/getFeedbackDates/${labId}`, this.getHttpGetOptions())
             .then(result =>{
                    return result.data;
                 }
@@ -65,7 +64,7 @@ class AddFeedbackDates extends Component {
     };
 
     addFeedbackDate = () =>{
-         redirectAwareFetch('/api/lab/addOrUpdateFeedbackDate', this.getAddFeedbackDateOptions(this.state.addDate, 0))
+         redirectAwareFetch('/api/feedback/addOrUpdateFeedbackDate', this.getAddFeedbackDateOptions(this.state.addDate, 0))
             .then( () => {
                 this.setState({
                     isDataLoaded: false
@@ -75,7 +74,7 @@ class AddFeedbackDates extends Component {
 
     changeFeedbackDate = () =>{
 
-        redirectAwareFetch('/api/lab/addOrUpdateFeedbackDate', this.getAddFeedbackDateOptions(new Date(this.state.changeDate).toLocaleDateString()))
+        redirectAwareFetch('/api/feedback/addOrUpdateFeedbackDate', this.getAddFeedbackDateOptions(new Date(this.state.changeDate).toLocaleDateString()))
             .then( () => {
                 this.setState({
                     isDataLoaded: false,

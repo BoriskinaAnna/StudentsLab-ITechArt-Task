@@ -2,13 +2,14 @@ import React, {Component} from 'react';
 import {translate} from 'react-i18next';
 import feedbackService from '../services/feedbackService';
 import userService from "../services/userService";
-import {withRouter} from 'react-router-dom';
+import {Route, withRouter} from 'react-router-dom';
 import './feedbackStyle.scss';
+import Header from "../header";
+import Footer from "../footer";
 
 
 let answer, questions, students,
-    feedback = {questionId: [], answers: []},
-    studentId = undefined;
+    feedback = {questionId: [], answers: []};
 
 
 class Feedback extends Component {
@@ -21,7 +22,8 @@ class Feedback extends Component {
             isStudentsLoaded: false,
             isQuestionsLoaded: false,
             isAnswerLoaded: false,
-            isUserSelectError: false
+            isUserSelectError: false,
+            studentId: undefined
         }
     }
 
@@ -35,7 +37,7 @@ class Feedback extends Component {
 
     getAnswer = (questionId) =>{
         feedbackService.getFeedbackAnswerFromServer(
-            studentId,
+            this.state.studentId,
             userService.getCurrentUser().id,
             this.props.location.state.feedbackDateId,
             questionId
@@ -50,8 +52,13 @@ class Feedback extends Component {
     };
 
     selectChange = event =>{
-        studentId = event.target.value;
-        this.setState({currentQuestionId: undefined});
+        this.setState({
+            studentId: event.target.value,
+            isAnswerLoaded: false,
+            currentQuestionId: undefined,
+            isUserSelectError: false
+        });
+        feedback = {questionId: [], answers: []};
     };
 
     saveFeedback = () =>{
@@ -63,10 +70,12 @@ class Feedback extends Component {
             feedback,
             userService.getCurrentUser().id,
             this.props.location.state.feedbackDateId,
-            studentId
+            this.state.studentId
         );
 
         this.setState({currentQuestionId: undefined});
+
+        feedback = {questionId: [], answers: []};
 
     } ;
 
@@ -114,12 +123,12 @@ class Feedback extends Component {
                     return <li key={index} className="feedback">
                         <div className="feedback__question"
                              onClick={() => {
-                                 if (studentId !== undefined) {
-                                     const changedAnswer = feedback.questionId.findIndex((value)=> value === questionElement.questionId);
+                                 if (this.state.studentId !== undefined) {
+                                     const changedAnswerIndex = feedback.questionId.findIndex((value)=> value === questionElement.questionId);
 
-                                     if (changedAnswer !== -1){
+                                     if (changedAnswerIndex !== -1){
                                          this.setState({
-                                             answerValue: feedback.answers[changedAnswer]
+                                             answerValue: feedback.answers[changedAnswerIndex]
                                          })
                                      }
                                      else {
@@ -142,11 +151,13 @@ class Feedback extends Component {
                     </li>
                 }
             });
-
+            console.log(students);
             const studentElement = students.map((studentElement, index) =>{
-                if(index === 0){
-
-                }
+                //if(index === 0){
+              //      this.setState({
+                //        studentId: studentElement.id
+                 //   });
+              //  }
                 return <option key={index} value={studentElement.id}>
                    {studentElement.firstName} {studentElement.lastName}
                 </option>
@@ -155,19 +166,24 @@ class Feedback extends Component {
             const chooseUser = this.state.isUserSelectError&&<span>Please, choose user</span>;
 
             return (
-                <div className="feedbackContainer">
-                    <select onChange={this.selectChange} >
-                        <option value={undefined}/>
-                        {studentElement}
-                    </select>
-                    {chooseUser}
-                    <ol>
-                        {questionElements}
-                    </ol>
-                    <button onClick={this.saveFeedback}>
-                        {t('save')}
-                    </button>
-                </div>
+                <React.Fragment>
+                    <Route exact path="/feedback" component={() => (<Header/>)}/>
+
+                    <div className="feedbackContainer">
+                        <select onChange={this.selectChange} >
+                            {studentElement}
+                        </select>
+                        {chooseUser}
+                        <ol>
+                            {questionElements}
+                        </ol>
+                        <button onClick={this.saveFeedback}>
+                            {t('save')}
+                        </button>
+                    </div>
+
+                    <Route exact path="/feedback" component={() => (<Footer/>)}/>
+                </React.Fragment>
             )
         }
     }

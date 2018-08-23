@@ -54,14 +54,10 @@ export class App extends Component {
                <Router>
                    <div className="content">
 
-                       <Route exact path="/" component={() => (<Header/>)}/>
                        <Route exact path="/" component={() => (<LabsList showAddLab={this.showAddLab}/>)}/>
-                       <Route exact path="/" component={() => (<Footer/>)}/>
 
-                       <Route exact path="/schedule" component={() => (<Header/>)}/>
                        <Route exact path="/schedule" component={() => (
                            <Schedule showChangeLecture={this.showChangeLecture}/>)}/>
-                       <Route exact path="/schedule" component={() => (<Footer/>)}/>
 
                        <Route exact path="/authentication" component={() => (<AccountHeader/>)}/>
                        <Route exact path="/authentication" component={() => (<Authentication/>)}/>
@@ -71,9 +67,7 @@ export class App extends Component {
                        <Route exact path="/registration" component={() => (<Registration/>)}/>
                        <Route exact path="/registration" component={() => (<Footer/>)}/>
 
-                       <Route exact path="/feedback" component={() => (<Header/>)}/>
                        <Route exact path="/feedback" component={() => (<Feedback/>)}/>
-                       <Route exact path="/feedback" component={() => (<Footer/>)}/>
 
                        <AddLabForm isAddLabShowed={this.state.isAddLabShowed} closeAddLab={this.closeAddLab}/>
                        <ChangeLecture isAddLabShowed={this.state.isChangeLectureShowed}

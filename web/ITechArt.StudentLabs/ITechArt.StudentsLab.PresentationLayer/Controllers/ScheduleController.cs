@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BlLectureModel = ITechArt.StudentsLab.BusinessLayer.Models.LectureModel;
 using System.Linq;
-using System;
 
 namespace ITechArt.StudentsLab.PresentationLayer.Controllers
 {

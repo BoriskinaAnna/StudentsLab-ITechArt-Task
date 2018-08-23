@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import Lab from '../lab';
 import './labsListStyle.scss';
-import {Link} from 'react-router-dom';
+import {Link, Route} from 'react-router-dom';
 import labService from "../services/labService";
+import Header from "../header";
+import Footer from "../footer";
 
 let labs;
 class LabList extends Component {
@@ -43,14 +45,20 @@ class LabList extends Component {
             );
 
             return (
-                <div className="labsContainer">
-                    <div className="labsContainer__buttonAdd">
-                        <button onClick={showAddLab} className="labsContainer__buttonContent">
-                            +
-                        </button>
+                <React.Fragment>
+                    <Route exact path="/" component={() => (<Header/>)}/>
+
+                    <div className="labsContainer">
+                        <div className="labsContainer__buttonAdd">
+                            <button onClick={showAddLab} className="labsContainer__buttonContent">
+                                +
+                            </button>
+                        </div>
+                        {labElements}
                     </div>
-                    {labElements}
-                </div>
+
+                    <Route exact path="/" component={() => (<Footer/>)}/>
+                </React.Fragment>
             )
         }
 

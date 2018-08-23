@@ -12,6 +12,7 @@ namespace ITechArt.StudentsLab.BusinessLayer
             collection.AddSingleton<IScheduleService, ScheduleService>();
             collection.AddSingleton<ILabService, LabService>();
             collection.AddSingleton<IUserService, UserService>();
+            collection.AddSingleton<IFeedbackService, FeedbackService>();
         }
     }
 }
