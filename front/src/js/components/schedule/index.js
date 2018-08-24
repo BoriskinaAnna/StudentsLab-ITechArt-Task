@@ -7,6 +7,7 @@ import scheduleService from '../services/scheduleService';
 import {Route, withRouter} from 'react-router-dom';
 import Header from "../header";
 import Footer from "../footer";
+import userService from "../services/userService";
 
 
 let schedule;
@@ -22,6 +23,7 @@ class Schedule extends Component {
     }
 
     render() {
+        console.log(!this.state.isScheduleLoaded);
         if(!this.state.isScheduleLoaded) {
 
             scheduleService.getScheduleFromServer(this.props.location.state.labId)
@@ -45,6 +47,19 @@ class Schedule extends Component {
 
             const addFeedbackDatesBtnName = this.state.isAddFeedbackDatesShowed? t('add'):t('addFeedbackDates');
 
+            console.log(userService.getCurrentUser().role);
+
+            const addFeedbackDatesBtn = userService.getCurrentUser().id !== null
+                && userService.getCurrentUser().role !== 'Student'
+                &&  <button className="schedule__addFeedbackDatesBtn"
+                            onClick = { () =>
+                                this.setState({
+                                    isAddFeedbackDatesShowed: !this.state.isAddFeedbackDatesShowed
+                                })}
+                >
+                    {addFeedbackDatesBtnName}
+                </button>;
+
             const addFeedbackDates = this.state.isAddFeedbackDatesShowed&&<AddFeedbackDates labId={this.props.location.state.labId}/>;
 
             return (
@@ -56,14 +71,7 @@ class Schedule extends Component {
                     <div className="schedule">
                         {addFeedbackDates}
                         <div className="schedule__addFeedbackDates">
-                            <button className="schedule__addFeedbackDatesBtn"
-                                    onClick = { () =>
-                                        this.setState({
-                                            isAddFeedbackDatesShowed: !this.state.isAddFeedbackDatesShowed
-                                        })}
-                            >
-                                {addFeedbackDatesBtnName}
-                            </button>
+                            {addFeedbackDatesBtn}
                         </div>
                         {lectureElements}
                     </div>

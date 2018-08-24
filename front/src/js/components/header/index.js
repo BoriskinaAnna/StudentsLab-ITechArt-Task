@@ -1,18 +1,16 @@
 import React, {Component} from 'react';
 import './headerStyle.scss';
 import {translate} from 'react-i18next';
-import {Link, Route} from 'react-router-dom';
-import UserService from '../services/userService';
-import AccountHeader from "../accountHeader";
-import Authentication from "../authentication";
-import Footer from "../footer";
+import {Link} from 'react-router-dom';
+import userService from '../services/userService';
 
 
 class Header extends Component {
 
     constructor(){
+        console.log(555);
+        console.log(userService.getCurrentUser().id);
         super();
-        const userService = UserService;
         this.state = {
             btnAuthorizationName: '',
             isUserNotAuthenticate: userService.getCurrentUser().id === null
@@ -20,7 +18,6 @@ class Header extends Component {
     }
 
     logout = () =>{
-        const userService = UserService;
         userService.logout();
         this.setState({
             isUserNotAuthenticate: true

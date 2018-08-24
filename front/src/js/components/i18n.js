@@ -45,7 +45,7 @@ options.resources = {
             "registrationPassword": "Enter your password",
             "registrationRepeatPassword": "Enter your password again",
             "register": "Register",
-            "inputCanNotBeEmpty": "This field can't be empty",
+            "inputCanNotBeEmpty": "This field is required",
             "incorrectRepeatPassword": "Passwords do not match",
             "userAlreadyExists": "User with this email already exists",
             "incorrectAuthentication": "Invalid login or password",
@@ -64,7 +64,8 @@ options.resources = {
             "december": "December",
             "change": "Change",
             "fillFeedback": "Fill the feedback",
-            "save": "Save"
+            "save": "Save",
+            "chooseStudent": "Choose student:"
         }
     },
     ru: {
@@ -95,7 +96,7 @@ options.resources = {
             "registrationPassword": "Введите пароль:",
             "registrationRepeatPassword": "Повторите пароль:",
             "register": "Зарегистрироваться",
-            "inputCanNotBeEmpty": "Это поле не может быть пустым",
+            "inputCanNotBeEmpty": "Это поле обязательно",
             "incorrectRepeatPassword": "Пароли не совпадают",
             "userAlreadyExists": "Пользователь с данным адресом электронной почты уже существует",
             "incorrectAuthentication": "Неверный логин или пароль",
@@ -114,7 +115,8 @@ options.resources = {
             "december": "Декабря",
             "change": "Изменить",
             "fillFeedback": "Заполнить фидбек",
-            "save": "Сохранить"
+            "save": "Сохранить",
+            "chooseStudent": "Выберите студента:"
         }
     }
 };

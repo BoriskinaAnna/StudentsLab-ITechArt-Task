@@ -4,6 +4,7 @@ import {translate} from 'react-i18next';
 import redirectAwareFetch from '../services/userService/redirectAwareFetch';
 import Calendar from 'react-calendar';
 import {Link} from 'react-router-dom';
+import userService from "../services/userService";
 
 
 let feedBackDates;
@@ -30,6 +31,7 @@ class AddFeedbackDates extends Component {
     };
 
     getFeedbackDates = (labId) =>{
+        console.log(labId);
         return redirectAwareFetch(`/api/feedback/getFeedbackDates/${labId}`, this.getHttpGetOptions())
             .then(result =>{
                    return result.data;
@@ -84,6 +86,7 @@ class AddFeedbackDates extends Component {
     };
 
     render() {
+        console.log(7777);
         const {t, labId} = this.props;
         if(!this.state.isDataLoaded) {
 
@@ -102,6 +105,21 @@ class AddFeedbackDates extends Component {
             const dateElements = feedBackDates.map((feedBackDate, index) =>{
 
                 const  date = new Date(feedBackDate.date);
+
+                const isFillFeedbackVisible = userService.getCurrentUser().role === 'Mentor'
+                    && <Link
+                        to={{
+                            pathname:'/feedback',
+                            state: {
+                                feedbackDateId : feedBackDate.id,
+                                labId: labId
+                            }
+                        }}
+                        className="feedbackDates__fillFeedbackBtn"
+                    >
+                        ({t('fillFeedback')})
+                    </Link>;
+
 
                 if( feedBackDate.id === this.state.changingDateId){
 
@@ -128,15 +146,7 @@ class AddFeedbackDates extends Component {
                             {date.getMonth().toString().length === 1?'0'+date.getMonth():date.getMonth()}
                             .
                             {date.getFullYear()}
-                            <Link
-                                to={{
-                                    pathname:'/feedback',
-                                    state: {
-                                        feedbackDateId : feedBackDate.id,
-                                        labId: labId
-                                    }
-                                }}
-                                className="feedbackDates__fillFeedbackBtn">({t('fillFeedback')})</Link>
+                            {isFillFeedbackVisible}
                         </li>
                 }
             });

@@ -17,7 +17,6 @@ class LabService{
         console.log(8);
         return redirectAwareFetch(`/api/lab/get`, this.getOptions('GET'))
             .then(result =>{
-                console.log(result);
                 return result.data;
             })
     }

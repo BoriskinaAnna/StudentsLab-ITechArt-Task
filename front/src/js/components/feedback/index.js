@@ -111,8 +111,8 @@ class Feedback extends Component {
             const questionElements = questions.map((questionElement, index) => {
 
                 if( questionElement.questionId === this.state.currentQuestionId) {
-                    return <li key={index} className="feedback">
-                        <div className="feedback__question"
+                    return <li key={index}>
+                        <div className="feedback__text"
                         >
                             {questionElement.question}
                         </div>
@@ -120,8 +120,8 @@ class Feedback extends Component {
                     </li>
                 }
                 else{
-                    return <li key={index} className="feedback">
-                        <div className="feedback__question"
+                    return <li key={index}>
+                        <div className="feedback__text"
                              onClick={() => {
                                  if (this.state.studentId !== undefined) {
                                      const changedAnswerIndex = feedback.questionId.findIndex((value)=> value === questionElement.questionId);
@@ -153,33 +153,43 @@ class Feedback extends Component {
             });
             console.log(students);
             const studentElement = students.map((studentElement, index) =>{
-                //if(index === 0){
-              //      this.setState({
-                //        studentId: studentElement.id
-                 //   });
-              //  }
+                if(index === 0){
+                    if(this.state.studentId === undefined){
+                        this.setState({
+                            studentId: studentElement.id
+                        });
+                    }
+                }
+
                 return <option key={index} value={studentElement.id}>
                    {studentElement.firstName} {studentElement.lastName}
                 </option>
             });
 
-            const chooseUser = this.state.isUserSelectError&&<span>Please, choose user</span>;
+            const chooseUser = this.state.isUserSelectError&&<span>{t('inputCanNotBeEmpty')}</span>;
 
             return (
                 <React.Fragment>
                     <Route exact path="/feedback" component={() => (<Header/>)}/>
 
                     <div className="feedbackContainer">
-                        <select onChange={this.selectChange} >
-                            {studentElement}
-                        </select>
-                        {chooseUser}
-                        <ol>
-                            {questionElements}
-                        </ol>
-                        <button onClick={this.saveFeedback}>
-                            {t('save')}
-                        </button>
+                        <div className="feedback">
+                            <span className="feedback__text">{t('chooseStudent')}</span>
+
+                            <select onChange={this.selectChange} >
+                                {studentElement}
+                            </select>
+
+                            {chooseUser}
+
+                            <ol>
+                                {questionElements}
+                            </ol>
+
+                            <button className="feedback__saveBtn" onClick={this.saveFeedback}>
+                                {t('save')}
+                            </button>
+                        </div>
                     </div>
 
                     <Route exact path="/feedback" component={() => (<Footer/>)}/>

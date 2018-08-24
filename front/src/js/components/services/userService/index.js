@@ -8,6 +8,7 @@ let currentUser = {
     role: '',
 };
 
+
 class UserService{
 
      currentUserInfoTimeout = true;
@@ -30,7 +31,7 @@ class UserService{
      };
 
      getCurrentUser = () =>{
-         if (this.currentUserInfoTimeout){
+         if (this.currentUserInfoTimeout && currentUser.id !== null){
              this.getInfoAboutCurrentUser();
              this.setTimeout();
          }
@@ -47,7 +48,8 @@ class UserService{
          return {
              method: method,
              headers: {
-                 'Content-Type': 'application/json'
+                 'Content-Type': 'application/json',
+                 "Accept": "application/json"
              }
          };
      };
@@ -62,8 +64,9 @@ class UserService{
      };
 
     getInfoAboutCurrentUser = () =>{
-        console.log(6);
         if(currentUser.id !== null) {
+           // console.log(6);
+            //console.log(currentUser.id);
             redirectAwareFetch(`/api/account/getInfoAboutCurrentUser/${currentUser.id}`, this.getOptions('GET'))
                 .then(result =>{
                         userService.initializeNewUser(

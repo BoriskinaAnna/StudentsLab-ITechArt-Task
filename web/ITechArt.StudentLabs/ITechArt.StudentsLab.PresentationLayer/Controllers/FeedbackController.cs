@@ -13,6 +13,8 @@ using System.Linq;
 
 namespace ITechArt.StudentsLab.PresentationLayer.Controllers
 {
+    [Route("api/[controller]/[action]")]
+    [ApiController]
     public class FeedbackController : Controller
     {
         private readonly IFeedbackService _feedbackService;

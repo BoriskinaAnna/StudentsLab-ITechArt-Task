@@ -14,6 +14,7 @@ import AccountHeader from './accountHeader';
 import Registration from './registration'
 import ErrorPage from './errorPage'
 import Feedback from './feedback';
+import redirectAwareFetch from "./services/userService/redirectAwareFetch";
 
 
 export class App extends Component {
@@ -47,9 +48,6 @@ export class App extends Component {
     };
 
     render() {
-
-
-
            return (
                <Router>
                    <div className="content">
