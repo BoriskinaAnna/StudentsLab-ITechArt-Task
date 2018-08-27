@@ -16,6 +16,7 @@ class FeedbackService{
     getStudentByMentorIdFromServer = (mentorId) =>{
         return redirectAwareFetch(`/api/lab/GetMentorStudents/${mentorId}`, this.getOptions())
             .then(result =>{
+                console.log(result);
                 return result.data;
             })
     };

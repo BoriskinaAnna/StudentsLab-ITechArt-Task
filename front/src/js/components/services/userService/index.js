@@ -4,14 +4,13 @@ let currentUser = {
     email: '',
     firstName: '',
     lastName: '',
-    id: null,
+    id: undefined,
     role: '',
 };
 
 class UserService {
 
      currentUserInfoTimeout = true;
-     isDataLoaded = false;
 
 
      initializeNewUser = (email, firstName, lastName, id, role) => {
@@ -59,7 +58,7 @@ class UserService {
      };
 
      logout = () =>{
-         this.initializeNewUser('', '', '', null, '');
+         this.initializeNewUser('', '', '', undefined, '');
 
          fetch('/api/account/Logout/', this.getOptions('POST'))
              .catch((error) => {
@@ -70,14 +69,15 @@ class UserService {
     getInfoAboutCurrentUser = () =>{
         return redirectAwareFetch(`/api/account/getInfoAboutCurrentUser`, this.getOptions('GET'))
             .then(result =>{
-                userService.initializeNewUser(
-                    result.data.email,
-                    result.data.firstName,
-                    result.data.lastName,
-                    result.data.id,
-                    result.data.role
-                );
-                this.isDataLoaded = true;
+                if(result !== undefined){
+                    userService.initializeNewUser(
+                        result.data.email,
+                        result.data.firstName,
+                        result.data.lastName,
+                        result.data.id,
+                        result.data.role
+                    );
+                }
             });
         }
 }

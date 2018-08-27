@@ -14,25 +14,43 @@ let schedule;
 
 class Schedule extends Component {
 
+    currentUser = {
+        role: undefined,
+        id: undefined
+    };
+
     constructor(props){
         super(props);
         this.state = {
             isAddFeedbackDatesShowed: false,
-            isScheduleLoaded: false
+            isScheduleLoaded: false,
+            isInfoAboutCurrentUserLoaded: false
         };
     }
 
     render() {
-        if(!this.state.isScheduleLoaded) {
+        if(!(this.state.isScheduleLoaded && this.state.isInfoAboutCurrentUserLoaded)) {
 
-            scheduleService.getScheduleFromServer(this.props.location.state.labId)
-                .then(data =>{
-                    schedule = data;
-                    this.setState({
-                        isScheduleLoaded: true
+            if(!this.state.isInfoAboutCurrentUserLoaded){
+                userService.getCurrentUser()
+                    .then((data) => {
+                        this.setState({
+                            isInfoAboutCurrentUserLoaded: true
+                        });
+                        this.currentUser.id = data.id;
+                        this.currentUser.role = data.role;
                     });
-                });
+            }
 
+            if(!this.state.isScheduleLoaded){
+                scheduleService.getScheduleFromServer(this.props.location.state.labId)
+                    .then(data =>{
+                        schedule = data;
+                        this.setState({
+                            isScheduleLoaded: true
+                        });
+                    });
+            }
             return null;
         }
         else {
@@ -46,8 +64,8 @@ class Schedule extends Component {
 
             const addFeedbackDatesBtnName = this.state.isAddFeedbackDatesShowed? t('add'):t('addFeedbackDates');
 
-            const addFeedbackDatesBtn = userService.getCurrentUser().id !== null
-                && userService.getCurrentUser().role !== 'Student'
+            const addFeedbackDatesBtn = this.currentUser.id !== undefined
+                && this.currentUser.role !== 'Student'
                 &&  <button className="schedule__addFeedbackDatesBtn"
                             onClick = { () =>
                                 this.setState({

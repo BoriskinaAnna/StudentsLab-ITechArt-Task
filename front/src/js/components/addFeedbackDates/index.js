@@ -11,13 +11,18 @@ let feedBackDates;
 
 class AddFeedbackDates extends Component {
 
+    currentUser = {
+        role: undefined
+    };
+
     constructor(props){
         super(props);
         this.state = {
             isDataLoaded: false,
             addDate: new Date(),
             changeDate: new Date(),
-            changingDateId: -1
+            changingDateId: undefined,
+            isInfoAboutCurrentUserLoaded: false
         };
     }
 
@@ -80,28 +85,38 @@ class AddFeedbackDates extends Component {
             .then( () => {
                 this.setState({
                     isDataLoaded: false,
-                    changingDateId: -1
+                    changingDateId: undefined
                 })
             });
     };
 
     cancelChanges = () => {
         this.setState({
-            changingDateId: -1
+            changingDateId: undefined
         })
     };
 
     render() {
         const {t, labId} = this.props;
-        if(!this.state.isDataLoaded) {
-
-            this.getFeedbackDates(labId)
-                .then(data =>{
-                    feedBackDates = data;
-                    this.setState({
-                        isDataLoaded: true
-                    })
-                });
+        if(!(this.state.isDataLoaded && this.state.isInfoAboutCurrentUserLoaded)) {
+            if (!this.state.isDataLoaded){
+                this.getFeedbackDates(labId)
+                    .then(data =>{
+                        feedBackDates = data;
+                        this.setState({
+                            isDataLoaded: true
+                        })
+                    });
+            }
+            if(!this.state.isInfoAboutCurrentUserLoaded){
+                userService.getCurrentUser()
+                    .then((data) => {
+                        this.currentUser.role = data.role;
+                        this.setState({
+                            isInfoAboutCurrentUserLoaded: true
+                        });
+                    });
+            }
             return null;
         }
         else{
@@ -109,7 +124,7 @@ class AddFeedbackDates extends Component {
             const dateElements = feedBackDates.map((feedBackDate, index) =>{
                 const  date = new Date(feedBackDate.date);
 
-                const isFillFeedbackVisible = userService.getCurrentUser().role === 'Mentor'
+                const isFillFeedbackVisible = this.currentUser.role === 'Mentor'
                     && <Link
                         to={{
                             pathname:'/feedback',

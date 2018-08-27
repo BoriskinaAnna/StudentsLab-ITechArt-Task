@@ -110,8 +110,6 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
             {
                 return NotFound();
             }
-          
-          //  var id = User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             UserModel user = await _userService.GetUserById(id);
             

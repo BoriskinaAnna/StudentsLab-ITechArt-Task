@@ -14,6 +14,10 @@ let answers, questions, students,
 
 class Feedback extends Component {
 
+    currentUser = {
+        id: undefined
+    };
+
     constructor(){
         super();
         this.state = {
@@ -23,7 +27,8 @@ class Feedback extends Component {
             isQuestionsLoaded: false,
             isAnswersLoaded: false,
             isUserSelectError: false,
-            studentId: undefined
+            studentId: undefined,
+            isInfoAboutCurrentUserLoaded: false
         }
     }
 
@@ -37,7 +42,7 @@ class Feedback extends Component {
 
         feedbackService.getFeedbackAnswersFromServer(
             this.state.studentId,
-            userService.getCurrentUser().id,
+            this.currentUser.id,
             this.props.location.state.feedbackDateId,
         )
             .then(data =>{
@@ -90,7 +95,7 @@ class Feedback extends Component {
 
         feedbackService.saveFeedback(
             feedback,
-            userService.getCurrentUser().id,
+            this.currentUser.id,
             this.props.location.state.feedbackDateId,
             this.state.studentId
         );
@@ -99,12 +104,25 @@ class Feedback extends Component {
 
     } ;
 
+
+
     render() {
 
-        if (!(this.state.isQuestionsLoaded && this.state.isStudentsLoaded)){
+        if (!(this.state.isQuestionsLoaded && this.state.isStudentsLoaded && this.state.isInfoAboutCurrentUserLoaded)){
 
-            if (!this.state.isStudentsLoaded){
-                feedbackService.getStudentByMentorIdFromServer( userService.getCurrentUser().id)
+            if (!this.state.isInfoAboutCurrentUserLoaded){
+                userService.getCurrentUser()
+                    .then((data) => {
+                        this.setState({
+                            isInfoAboutCurrentUserLoaded: true
+                        });
+                        this.currentUser.id = data.id;
+
+                    });
+            }
+
+            if (!this.state.isStudentsLoaded && this.currentUser.id !== undefined ){
+                feedbackService.getStudentByMentorIdFromServer(this.currentUser.id)
                     .then(data =>{
                         students = data;
                         this.setState({

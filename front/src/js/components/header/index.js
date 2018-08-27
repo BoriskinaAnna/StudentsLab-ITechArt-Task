@@ -29,10 +29,8 @@ class Header extends Component {
         if (!this.state.isCurrentUserInfoLoaded) {
             userService.getCurrentUser()
                 .then((data) => {
-                    console.log(data);
-                    console.log(555);
                     this.setState({
-                        isUserNotAuthenticate: data.id === null,
+                        isUserNotAuthenticate: data.id === undefined,
                         isCurrentUserInfoLoaded: true
                     });
                 });
@@ -40,7 +38,6 @@ class Header extends Component {
         }
         else {
             const {t} = this.props;
-            console.log(this.state.isUserNotAuthenticate);
             const btnAuthorizationAction = this.state.isUserNotAuthenticate
                 ? <Link
                     to={{
