@@ -14,7 +14,6 @@ class ScheduleService{
     };
 
     getScheduleFromServer = (id) =>{
-        console.log(7);
         return redirectAwareFetch(`/api/schedule/get/${id}`, this.getOptions('GET'))
             .then(result =>{
                 return result.data;

@@ -8,7 +8,7 @@ import Header from "../header";
 import Footer from "../footer";
 
 
-let answer, questions, students,
+let answers, questions, students,
     feedback = {questionId: [], answers: []};
 
 
@@ -21,13 +21,11 @@ class Feedback extends Component {
             answerValue: '',
             isStudentsLoaded: false,
             isQuestionsLoaded: false,
-            isAnswerLoaded: false,
+            isAnswersLoaded: false,
             isUserSelectError: false,
             studentId: undefined
         }
     }
-
-
 
     answerValueChange = (evt) =>{
         this.setState({
@@ -35,36 +33,60 @@ class Feedback extends Component {
         })
     };
 
-    getAnswer = (questionId) =>{
-        feedbackService.getFeedbackAnswerFromServer(
+    getAnswers = (questionId) =>{
+
+        feedbackService.getFeedbackAnswersFromServer(
             this.state.studentId,
             userService.getCurrentUser().id,
             this.props.location.state.feedbackDateId,
-            questionId
         )
             .then(data =>{
-                answer = data;
-                this.setState({
-                    isAnswerLoaded: true,
-                    answerValue: answer.answer
-                })
+                answers = data;
+                const currentAnswerIndex = answers.findIndex((value)=> value.questionId === questionId);
+
+                if (currentAnswerIndex !== -1){
+                    this.setState({
+                        isAnswersLoaded: true,
+                        answerValue: answers[currentAnswerIndex].answer
+                    })
+                }
+                else{
+                    this.setState({
+                        isAnswersLoaded: true
+                    })
+                }
+
             });
     };
 
     selectChange = event =>{
         this.setState({
             studentId: event.target.value,
-            isAnswerLoaded: false,
+            isAnswersLoaded: false,
             currentQuestionId: undefined,
             isUserSelectError: false
         });
         feedback = {questionId: [], answers: []};
+        answers = undefined;
     };
 
     saveFeedback = () =>{
 
-        feedback.questionId.push(this.state.currentQuestionId);
-        feedback.answers.push(this.state.answerValue);
+
+        answers = undefined;
+
+//repeat
+        const changedAnswerIndex = feedback.questionId.findIndex((value)=> value === this.state.currentQuestionId);
+        if (changedAnswerIndex !== -1){
+            feedback.questionId[changedAnswerIndex] = this.state.currentQuestionId;
+            feedback.answers[changedAnswerIndex] = this.state.answerValue;
+        }
+        else{
+            feedback.questionId.push(this.state.currentQuestionId);
+            feedback.answers.push(this.state.answerValue);
+        }
+
+
 
         feedbackService.saveFeedback(
             feedback,
@@ -72,16 +94,14 @@ class Feedback extends Component {
             this.props.location.state.feedbackDateId,
             this.state.studentId
         );
-
-        this.setState({currentQuestionId: undefined});
-
         feedback = {questionId: [], answers: []};
+        this.setState({currentQuestionId: undefined});
 
     } ;
 
     render() {
 
-        if (!(this.state.isQuestionsLoaded&&this.state.isStudentsLoaded)){
+        if (!(this.state.isQuestionsLoaded && this.state.isStudentsLoaded)){
 
             if (!this.state.isStudentsLoaded){
                 feedbackService.getStudentByMentorIdFromServer( userService.getCurrentUser().id)
@@ -124,20 +144,43 @@ class Feedback extends Component {
                         <div className="feedback__text"
                              onClick={() => {
                                  if (this.state.studentId !== undefined) {
-                                     const changedAnswerIndex = feedback.questionId.findIndex((value)=> value === questionElement.questionId);
+                                     const changeAnswerIndex = feedback.questionId.findIndex((value)=> value === questionElement.questionId );
 
-                                     if (changedAnswerIndex !== -1){
+                                     if (changeAnswerIndex !== -1){
                                          this.setState({
-                                             answerValue: feedback.answers[changedAnswerIndex]
+                                             answerValue: feedback.answers[changeAnswerIndex]
                                          })
                                      }
                                      else {
-                                         this.getAnswer(questionElement.questionId);
+                                         if(answers === undefined) {
+                                             this.getAnswers(questionElement.questionId);
+                                         }
+                                         else{
+                                             const currentAnswerIndex = answers.findIndex((value)=> value.questionId ===  questionElement.questionId);
+
+                                             if (currentAnswerIndex !== -1){
+                                                 this.setState({
+                                                     answerValue: answers[currentAnswerIndex].answer
+                                                 })
+                                             }
+                                             else{
+                                                 this.setState({
+                                                     answerValue: ''
+                                                 });
+                                             }
+                                         }
                                      }
 
                                      if (this.state.currentQuestionId !== undefined){
-                                         feedback.questionId.push(this.state.currentQuestionId);
-                                         feedback.answers.push(this.state.answerValue);
+                                         const changedAnswerIndex = feedback.questionId.findIndex((value)=> value === this.state.currentQuestionId);
+                                         if (changedAnswerIndex !== -1){
+                                             feedback.questionId[changedAnswerIndex] = this.state.currentQuestionId;
+                                             feedback.answers[changedAnswerIndex] = this.state.answerValue;
+                                         }
+                                         else{
+                                             feedback.questionId.push(this.state.currentQuestionId);
+                                             feedback.answers.push(this.state.answerValue);
+                                         }
                                      }
                                      this.setState({currentQuestionId: questionElement.questionId});
                                  }
@@ -151,7 +194,6 @@ class Feedback extends Component {
                     </li>
                 }
             });
-            console.log(students);
             const studentElement = students.map((studentElement, index) =>{
                 if(index === 0){
                     if(this.state.studentId === undefined){
@@ -176,13 +218,13 @@ class Feedback extends Component {
                         <div className="feedback">
                             <span className="feedback__text">{t('chooseStudent')}</span>
 
-                            <select onChange={this.selectChange} >
+                            <select className="feedback__chooseStudent" onChange={this.selectChange} >
                                 {studentElement}
                             </select>
 
                             {chooseUser}
 
-                            <ol>
+                            <ol className="feedback__questions">
                                 {questionElements}
                             </ol>
 

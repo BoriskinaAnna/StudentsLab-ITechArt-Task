@@ -53,19 +53,18 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
             await _feedbackRepository.AddOrUpdateFeedbackAnswers(feedbackAnswerRequest);
         }
 
-        public async Task<FeedbackAnswerResponseModel> GetFeedbackAnswer(FeedbackAnswerRequestModel feedbackRequest)
+        public async Task<IEnumerable<FeedbackAnswerResponseModel>> GetFeedbackAnswers(FeedbackAnswerRequestModel feedbackRequest)
         {
             DalFeedbackAnswerRequestModel dalFeedback = new DalFeedbackAnswerRequestModel
             (
-                feedbackRequest.FeedbackQuestionId,
                 feedbackRequest.StudentId,
                 feedbackRequest.MentorId,
                 feedbackRequest.FeedbackDateId
             );
 
-            DalFeedbackAnswerResponseModel feedbackDates = await _feedbackRepository.GetFeedbackAnswer(dalFeedback);
+            IEnumerable <DalFeedbackAnswerResponseModel> feedbackDates = await _feedbackRepository.GetFeedbackAnswers(dalFeedback);
 
-            return Mapper.Map<FeedbackAnswerResponseModel>(feedbackDates);
+            return feedbackDates.Select(Mapper.Map<FeedbackAnswerResponseModel>);
         }
 
         public async Task<IEnumerable<FeedbackQuestionModel>> GetFeedbackQuestions(int labId)

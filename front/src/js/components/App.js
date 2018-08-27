@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
-import labService from './services/labService';
 import LabsList from './labsList';
 import 'bootstrap/dist/css/bootstrap.css';
-import Header from './header';
 import Footer from './footer';
 import { BrowserRouter as Router, Route} from 'react-router-dom';
 import Authentication from './authentication';
@@ -14,7 +12,6 @@ import AccountHeader from './accountHeader';
 import Registration from './registration'
 import ErrorPage from './errorPage'
 import Feedback from './feedback';
-import redirectAwareFetch from "./services/userService/redirectAwareFetch";
 
 
 export class App extends Component {

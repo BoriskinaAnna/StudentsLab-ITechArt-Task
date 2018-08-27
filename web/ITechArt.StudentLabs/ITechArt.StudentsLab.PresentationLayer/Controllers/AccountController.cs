@@ -7,6 +7,8 @@ using System.Security.Claims;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Linq;
+using System;
 
 namespace ITechArt.StudentsLab.PresentationLayer.Controllers
 {
@@ -100,11 +102,19 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
         }
 
         [HttpGet]
-        [Route("{id:int}")]
-        public async Task<IActionResult> GetInfoAboutCurrentUser(int id)
+        public async Task<IActionResult> GetInfoAboutCurrentUser()
         {
-            UserModel user = await _userService.GetUserById(id);
+            int id;
 
+            if(!Int32.TryParse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value, out id))
+            {
+                return NotFound();
+            }
+          
+          //  var id = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            UserModel user = await _userService.GetUserById(id);
+            
             if (user == null)
             {
                 return NotFound();

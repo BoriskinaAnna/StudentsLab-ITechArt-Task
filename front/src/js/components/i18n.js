@@ -65,7 +65,8 @@ options.resources = {
             "change": "Change",
             "fillFeedback": "Fill the feedback",
             "save": "Save",
-            "chooseStudent": "Choose student:"
+            "chooseStudent": "Choose student:",
+            "cancel": "Cancel"
         }
     },
     ru: {
@@ -116,7 +117,8 @@ options.resources = {
             "change": "Изменить",
             "fillFeedback": "Заполнить фидбек",
             "save": "Сохранить",
-            "chooseStudent": "Выберите студента:"
+            "chooseStudent": "Выберите студента:",
+            "cancel": "Отменить"
         }
     }
 };

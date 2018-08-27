@@ -28,10 +28,15 @@
       @include _boldFont();
     }
 
+    &__questions{
+      padding-left: 30px;
+    }
+
     &__answer{
       width: 740px;
       height: 70px;
       padding-left: 30px;
+      margin: auto;
     }
 
     &__saveBtn{
@@ -48,6 +53,12 @@
       &:focus {
         outline-width: 0;
       }
+    }
+
+    &__chooseStudent{
+      width: 740px;
+      padding-left: 30px;
+      margin: auto;
     }
   }
 }

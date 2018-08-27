@@ -31,7 +31,6 @@ class AddFeedbackDates extends Component {
     };
 
     getFeedbackDates = (labId) =>{
-        console.log(labId);
         return redirectAwareFetch(`/api/feedback/getFeedbackDates/${labId}`, this.getHttpGetOptions())
             .then(result =>{
                    return result.data;
@@ -66,7 +65,8 @@ class AddFeedbackDates extends Component {
     };
 
     addFeedbackDate = () =>{
-         redirectAwareFetch('/api/feedback/addOrUpdateFeedbackDate', this.getAddFeedbackDateOptions(this.state.addDate, 0))
+        console.log(new Date(this.state.addDate).toLocaleDateString());
+         redirectAwareFetch('/api/feedback/addOrUpdateFeedbackDate', this.getAddFeedbackDateOptions(new Date(this.state.addDate).toLocaleDateString()))
             .then( () => {
                 this.setState({
                     isDataLoaded: false
@@ -75,7 +75,7 @@ class AddFeedbackDates extends Component {
     };
 
     changeFeedbackDate = () =>{
-
+        console.log(new Date(this.state.changeDate).toLocaleDateString());
         redirectAwareFetch('/api/feedback/addOrUpdateFeedbackDate', this.getAddFeedbackDateOptions(new Date(this.state.changeDate).toLocaleDateString()))
             .then( () => {
                 this.setState({
@@ -85,8 +85,13 @@ class AddFeedbackDates extends Component {
             });
     };
 
+    cancelChanges = () => {
+        this.setState({
+            changingDateId: -1
+        })
+    };
+
     render() {
-        console.log(7777);
         const {t, labId} = this.props;
         if(!this.state.isDataLoaded) {
 
@@ -101,9 +106,7 @@ class AddFeedbackDates extends Component {
         }
         else{
 
-
             const dateElements = feedBackDates.map((feedBackDate, index) =>{
-
                 const  date = new Date(feedBackDate.date);
 
                 const isFillFeedbackVisible = userService.getCurrentUser().role === 'Mentor'
@@ -130,8 +133,13 @@ class AddFeedbackDates extends Component {
                             value={this.state.changeDate}
                             className="feedbackDates__calendar"
                         />
-                        <button className="feedbackDates__addBtn" onClick={this.changeFeedbackDate}>
+
+                        <button className="feedbackDates__btn" onClick={this.changeFeedbackDate}>
                             {t('change')}
+                        </button>
+
+                        <button className="feedbackDates__btn" onClick={this.cancelChanges}>
+                            {t('cancel')}
                         </button>
                     </li>
                 }
@@ -143,7 +151,7 @@ class AddFeedbackDates extends Component {
                         >
                             {date.getDate().toString().length === 1?'0'+date.getDate():date.getDate()}
                             .
-                            {date.getMonth().toString().length === 1?'0'+date.getMonth():date.getMonth()}
+                            {date.getMonth().toString().length === 1?'0'+(date.getMonth() + 1):date.getMonth() + 1}
                             .
                             {date.getFullYear()}
                             {isFillFeedbackVisible}
@@ -169,7 +177,7 @@ class AddFeedbackDates extends Component {
                                 className="feedbackDates__calendar"
                             />
 
-                            <button className="feedbackDates__addBtn" onClick={this.addFeedbackDate}>
+                            <button className="feedbackDates__btn" onClick={this.addFeedbackDate}>
                                 {t('add')}
                             </button>
                         </li>

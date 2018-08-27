@@ -14,7 +14,6 @@ class FeedbackService{
     };
 
     getStudentByMentorIdFromServer = (mentorId) =>{
-        console.log(1);
         return redirectAwareFetch(`/api/lab/GetMentorStudents/${mentorId}`, this.getOptions())
             .then(result =>{
                 return result.data;
@@ -22,23 +21,20 @@ class FeedbackService{
     };
 
     getFeedbackQuestionsFromServer = (labId) =>{
-        console.log(2);
         return redirectAwareFetch(`/api/feedback/getFeedbackQuestions/${labId}`, this.getOptions())
             .then(result =>{
                 return result.data;
             })
     };
 
-    getFeedbackAnswerFromServer = (studentId, mentorId, feedbackDateId, feedbackQuestionId) =>{
-        console.log(3);
-        return redirectAwareFetch(`/api/feedback/GetFeedbackAnswer/${studentId}/${mentorId}/${feedbackDateId}/${feedbackQuestionId}`, this.getOptions())
+    getFeedbackAnswersFromServer = (studentId, mentorId, feedbackDateId) =>{
+        return redirectAwareFetch(`/api/feedback/getFeedbackAnswers/${studentId}/${mentorId}/${feedbackDateId}`, this.getOptions())
             .then(result =>{
                 return result.data;
             })
     };
 
     getPostOptions = (feedback, mentorId, dateId, studentId) =>{
-        console.log(4);
         return {
             method: 'POST',
             body: JSON.stringify({
@@ -56,10 +52,7 @@ class FeedbackService{
     };
 
     saveFeedback = (feedback, mentorId, dateId, studentId) =>{
-        console.log(5);
         redirectAwareFetch(`/api/feedback/AddOrUpdateFeedbackAnswer/`, this.getPostOptions(feedback, mentorId, dateId, studentId));
-        console.log(10);
-
     };
 }
 

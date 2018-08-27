@@ -23,7 +23,6 @@ class Schedule extends Component {
     }
 
     render() {
-        console.log(!this.state.isScheduleLoaded);
         if(!this.state.isScheduleLoaded) {
 
             scheduleService.getScheduleFromServer(this.props.location.state.labId)
@@ -46,8 +45,6 @@ class Schedule extends Component {
             );
 
             const addFeedbackDatesBtnName = this.state.isAddFeedbackDatesShowed? t('add'):t('addFeedbackDates');
-
-            console.log(userService.getCurrentUser().role);
 
             const addFeedbackDatesBtn = userService.getCurrentUser().id !== null
                 && userService.getCurrentUser().role !== 'Student'

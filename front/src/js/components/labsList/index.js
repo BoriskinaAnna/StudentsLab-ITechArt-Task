@@ -19,7 +19,6 @@ class LabList extends Component {
     render() {
 
         if(!this.state.isLabsLoaded){
-            console.log(9);
             labService.getLabsListFromServer()
                 .then(data =>{
                     labs = data;

@@ -84,7 +84,7 @@
     <Build Include="StoredProcedures\GetLabSchedule.sql" />
     <Build Include="StoredProcedures\GetFeedbackDates.sql" />
     <Build Include="StoredProcedures\AddOrUpdateFeedbackDate.sql" />
-    <Build Include="StoredProcedures\GetFeedbackAnswer.sql" />
+    <Build Include="StoredProcedures\GetFeedbackAnswers.sql" />
     <Build Include="StoredProcedures\GetStudentsByMentorId.sql" />
     <Build Include="dbo\Tables\MentorStudentLink.sql" />
     <Build Include="StoredProcedures\GetFeedbackQuestions.sql" />

@@ -87,15 +87,14 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
             }
         }
 
-        public async Task<FeedbackAnswerResponseModel> GetFeedbackAnswer(FeedbackAnswerRequestModel feedbackRequest)
+        public async Task<IEnumerable<FeedbackAnswerResponseModel>> GetFeedbackAnswers(FeedbackAnswerRequestModel feedbackRequest)
         {
             using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))
             {
-                FeedbackAnswer feedback = await connection.QuerySingleOrDefaultAsync<FeedbackAnswer>(
-                    "GetFeedbackAnswer",
+                IEnumerable <FeedbackAnswer> feedback = await connection.QueryAsync<FeedbackAnswer>(
+                    "GetFeedbackAnswers",
                     new
                     {
-                        FeedbackQuestionId = feedbackRequest.FeedbackQuestionId,
                         MentorId = feedbackRequest.MentorId,
                         StudentId = feedbackRequest.StudentId,
                         FeedbackdateId = feedbackRequest.FeedbackDateId
@@ -103,7 +102,7 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
                     commandType: CommandType.StoredProcedure
                 );
 
-                return Mapper.Map<FeedbackAnswerResponseModel>(feedback);
+                return feedback.Select(Mapper.Map<FeedbackAnswerResponseModel>);
             }
 
         }
@@ -112,8 +111,6 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
         {
             using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))
             {
-                try
-                {
                     IEnumerable<FeedbackQuestion> feedback = await connection.QueryAsync<FeedbackQuestion>(
                    "GetFeedbackQuestions",
                    new { LabId = labId },
@@ -121,14 +118,8 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
                );
 
                     return feedback.Select(Mapper.Map<FeedbackQuestionModel>);
-                }
-                catch (Exception e)
-                {
-                    return null;
-                }
 
             }
-
         }
     }
 }

@@ -46,20 +46,19 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
         }
 
         [HttpGet]
-        [Route("{studentId:int}/{mentorId:int}/{feedbackDateId:int}/{feedbackQuestionId:int}")]
-        public async Task<IActionResult> GetFeedbackAnswer(int studentId, int mentorId, int feedbackDateId, int feedbackQuestionId)
+        [Route("{studentId:int}/{mentorId:int}/{feedbackDateId:int}")]
+        public async Task<IActionResult> GetFeedbackAnswers(int studentId, int mentorId, int feedbackDateId)
         {
             BlFeedbackRequestModel blFeedbackRequest = new BlFeedbackRequestModel(
-                feedbackQuestionId,
                 studentId,
                 mentorId,
                 feedbackDateId
             );
 
-            BlFeedbackResponseModel feedbackResponse = await _feedbackService.GetFeedbackAnswer(blFeedbackRequest);
+            IEnumerable <BlFeedbackResponseModel> feedbackResponse = await _feedbackService.GetFeedbackAnswers(blFeedbackRequest);
 
             return Ok(
-                Mapper.Map<FeedbackAnswerResponseModel>(feedbackResponse)
+                feedbackResponse.Select(Mapper.Map<FeedbackAnswerResponseModel>)
             );
         }
 
