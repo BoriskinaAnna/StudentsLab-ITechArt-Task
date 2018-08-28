@@ -21,7 +21,6 @@ export class App extends Component {
         this.state ={
             isAddLabShowed: false,
             isChangeLectureShowed: false
-
         };
     }
 
@@ -73,6 +72,5 @@ export class App extends Component {
                </Router>
            )
        }
-
 }
 export default App;

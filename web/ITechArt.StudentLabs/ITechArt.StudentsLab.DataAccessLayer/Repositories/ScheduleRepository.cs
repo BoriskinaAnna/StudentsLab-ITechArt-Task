@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
 {
-    public class ScheduleRepository: IScheduleRepository
+    internal class ScheduleRepository: IScheduleRepository
     {
         private readonly IDalSettings _settings;
 
@@ -21,6 +21,7 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
         {
             _settings = settings;
         }
+
         public async Task<IEnumerable<LectureModel>> GetSchedule(int labId)
         {
             using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))

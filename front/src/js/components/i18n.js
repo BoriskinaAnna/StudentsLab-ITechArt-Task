@@ -66,7 +66,10 @@ options.resources = {
             "fillFeedback": "Fill the feedback",
             "save": "Save",
             "chooseStudent": "Choose student:",
-            "cancel": "Cancel"
+            "cancel": "Cancel",
+            "close": "Close",
+            "nonFeedbackDates": "There isn't any feedback dates",
+            "nonFeedbackQuestions": "There isn't any questions"
         }
     },
     ru: {
@@ -118,7 +121,10 @@ options.resources = {
             "fillFeedback": "Заполнить фидбек",
             "save": "Сохранить",
             "chooseStudent": "Выберите студента:",
-            "cancel": "Отменить"
+            "cancel": "Отменить",
+            "close": "Закрыть",
+            "nonFeedbackDates": "Даты фидбеков отсутствуют",
+            "nonFeedbackQuestions": "Вопросы отсутствуют"
         }
     }
 };

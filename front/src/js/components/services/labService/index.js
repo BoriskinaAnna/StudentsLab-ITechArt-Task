@@ -1,4 +1,4 @@
-import redirectAwareFetch from "../userService/redirectAwareFetch";
+import redirectAwareFetch from '../userService/redirectAwareFetch';
 
 
 class LabService{
@@ -13,7 +13,7 @@ class LabService{
         };
     };
 
-    getLabsListFromServer = () =>{
+    getLabsList = () =>{
         return redirectAwareFetch(`/api/lab/get`, this.getOptions('GET'))
             .then(result =>{
                 return result.data;

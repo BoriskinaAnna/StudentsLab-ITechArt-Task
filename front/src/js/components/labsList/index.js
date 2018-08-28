@@ -6,7 +6,9 @@ import labService from "../services/labService";
 import Header from "../header";
 import Footer from "../footer";
 
+
 let labs;
+
 class LabList extends Component {
 
     constructor(){
@@ -17,9 +19,8 @@ class LabList extends Component {
     }
 
     render() {
-
         if(!this.state.isLabsLoaded){
-            labService.getLabsListFromServer()
+            labService.getLabsList()
                 .then(data =>{
                     labs = data;
                     this.setState({
@@ -60,7 +61,6 @@ class LabList extends Component {
                 </React.Fragment>
             )
         }
-
     }
 }
 export default LabList

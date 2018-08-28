@@ -1,4 +1,4 @@
-import redirectAwareFetch from "../userService/redirectAwareFetch";
+import redirectAwareFetch from '../userService/redirectAwareFetch';
 
 
 class ScheduleService{
@@ -13,12 +13,11 @@ class ScheduleService{
         };
     };
 
-    getScheduleFromServer = (id) =>{
+    getSchedule = (id) =>{
         return redirectAwareFetch(`/api/schedule/get/${id}`, this.getOptions('GET'))
             .then(result =>{
                 return result.data;
             })
-
     }
 }
 

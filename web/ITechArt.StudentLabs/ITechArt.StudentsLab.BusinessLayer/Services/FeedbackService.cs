@@ -21,6 +21,7 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
     {
         private readonly IFeedbackRepository _feedbackRepository;
 
+
         public FeedbackService(IFeedbackRepository feedbackRepository)
         {
             _feedbackRepository = feedbackRepository;
@@ -29,6 +30,7 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
         public async Task<IEnumerable<FeedbackDateModel>> GetFeedbackDates(int labId)
         {
             IEnumerable<DalFeedbackDateModel> feedbackDates = await _feedbackRepository.GetFeedbackDates(labId);
+
             return feedbackDates.Select(Mapper.Map<FeedbackDateModel>);
         }
 

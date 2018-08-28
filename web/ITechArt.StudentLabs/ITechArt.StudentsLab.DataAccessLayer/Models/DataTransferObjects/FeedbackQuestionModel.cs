@@ -6,9 +6,9 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Models.DataTransferObjects
 {
     public class FeedbackQuestionModel
     {
-        public string Question { get; set; }
+        public string Question { get; }
 
-        public int QuestionId { get; set; }
+        public int QuestionId { get; }
 
         public FeedbackQuestionModel(
             string question,

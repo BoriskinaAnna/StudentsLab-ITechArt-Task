@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ITechArt.StudentsLab.BusinessLayer.Models
 {
     public class FeedbackDateModel
     {
+        public int Id { get; }
 
-        public int Id { get; set; }
+        public int LabId { get; }
 
-        public int LabId { get; set; }
-
-        public DateTime Date { get; set; }
+        public DateTime Date { get; }
 
         public FeedbackDateModel(
             int id,

@@ -13,9 +13,8 @@ using System;
 
 namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
 {
-    public class FeedbackRepository: IFeedbackRepository
+    internal class FeedbackRepository: IFeedbackRepository
     {
-
         private readonly IDalSettings _settings;
 
 
@@ -54,7 +53,6 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
 
                 return id;
             }
-
         }
 
         public async Task AddOrUpdateFeedbackAnswers(FeedbackAnswerPostRequestModel feedbackAnswers)
@@ -63,26 +61,18 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
             {
                 for (int i = 0; i < feedbackAnswers.Answers.Length; i++)
                 {
-                    try
-                    {
-                        await connection.ExecuteScalarAsync<int>(
-                       "AddOrUpdateFeedbackAnswer",
-                       new
-                       {
-                           MentorId = feedbackAnswers.MentorId,
-                           FeedbackQuestionId = feedbackAnswers.QuestionId[i],
-                           FeedbackDateId = feedbackAnswers.FeedbackDateId,
-                           StudentId = feedbackAnswers.StudentId,
-                           Answer = feedbackAnswers.Answers[i]
-                       },
-                       commandType: CommandType.StoredProcedure
+                    await connection.ExecuteScalarAsync<int>(
+                        "AddOrUpdateFeedbackAnswer",
+                        new
+                        {
+                            MentorId = feedbackAnswers.MentorId,
+                            FeedbackQuestionId = feedbackAnswers.QuestionId[i],
+                            FeedbackDateId = feedbackAnswers.FeedbackDateId,
+                            StudentId = feedbackAnswers.StudentId,
+                            Answer = feedbackAnswers.Answers[i]
+                        },
+                        commandType: CommandType.StoredProcedure
                    );
-                    }
-                    catch (Exception e)
-                    {
-
-                    }
-
                 }
             }
         }
@@ -104,21 +94,19 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
 
                 return feedback.Select(Mapper.Map<FeedbackAnswerResponseModel>);
             }
-
         }
 
         public async Task<IEnumerable<FeedbackQuestionModel>> GetFeedbackQuestions(int labId)
         {
             using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))
             {
-                    IEnumerable<FeedbackQuestion> feedback = await connection.QueryAsync<FeedbackQuestion>(
-                   "GetFeedbackQuestions",
-                   new { LabId = labId },
-                   commandType: CommandType.StoredProcedure
-               );
+                IEnumerable<FeedbackQuestion> feedback = await connection.QueryAsync<FeedbackQuestion>(
+                    "GetFeedbackQuestions",
+                    new { LabId = labId },
+                    commandType: CommandType.StoredProcedure
+                );
 
-                    return feedback.Select(Mapper.Map<FeedbackQuestionModel>);
-
+                return feedback.Select(Mapper.Map<FeedbackQuestionModel>);
             }
         }
     }

@@ -2,10 +2,10 @@
 {
     public class RegisterUserModel
     {
-        public string FirstName { get; set; }
-        public string SecondName { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
+        public string FirstName { get; }
+        public string SecondName { get; }
+        public string Email { get; }
+        public string Password { get; }
 
         public RegisterUserModel(
             string firstName,

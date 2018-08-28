@@ -108,7 +108,7 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
 
             if(!Int32.TryParse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value, out id))
             {
-                return NotFound();
+                return Ok();
             }
 
             UserModel user = await _userService.GetUserById(id);

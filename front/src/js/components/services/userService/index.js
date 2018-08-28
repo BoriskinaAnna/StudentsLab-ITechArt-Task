@@ -12,7 +12,6 @@ class UserService {
 
      currentUserInfoTimeout = true;
 
-
      initializeNewUser = (email, firstName, lastName, id, role) => {
          currentUser.id = id;
          currentUser.firstName = firstName;
@@ -30,7 +29,7 @@ class UserService {
          );
      };
 
-     async getCurrentUser(){
+     async getCurrentUserInfo(){
          if (this.currentUserInfoTimeout){
              await this.getInfoAboutCurrentUser();
              this.setTimeout();
@@ -44,8 +43,6 @@ class UserService {
              role: currentUser.role
          }
      }
-
-
 
      getOptions = (method) =>{
          return {

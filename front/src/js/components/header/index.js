@@ -15,7 +15,6 @@ class Header extends Component {
             isCurrentUserInfoLoaded: false,
             isUserNotAuthenticate: true
         };
-
     }
 
     logout = () =>{
@@ -27,7 +26,7 @@ class Header extends Component {
 
     render() {
         if (!this.state.isCurrentUserInfoLoaded) {
-            userService.getCurrentUser()
+            userService.getCurrentUserInfo()
                 .then((data) => {
                     this.setState({
                         isUserNotAuthenticate: data.id === undefined,
@@ -51,9 +50,13 @@ class Header extends Component {
                 >
                     {t('btnAuthorizationLogin')}
                 </Link>
-                : <button onClick={this.logout} className="headerBtn">
+                :<Link
+                    to={'/'}
+                    onClick={this.logout}
+                    className="headerBtn"
+                >
                     {t('btnAuthorizationLogout')}
-                </button>;
+                </Link>;
 
             const btnRegistration = this.state.isUserNotAuthenticate
                 && <Link
@@ -68,8 +71,6 @@ class Header extends Component {
 
             return (
                 <header>
-
-
                     <Link to="/" className="headerLogo">
                         <img className="headerLogo__img" src="img/logo.svg" alt="ITechArtHeaderLogo"/>
                     </Link>
@@ -80,7 +81,6 @@ class Header extends Component {
                 </header>
             )
         }
-
     }
 }
 export default translate('translations')(Header)

@@ -13,7 +13,7 @@ using System;
 
 namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
 {
-    class LabRepository: ILabRepository
+    internal class LabRepository: ILabRepository
     {
         private readonly IDalSettings _settings;
 

@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ITechArt.StudentsLab.BusinessLayer.Models
+﻿namespace ITechArt.StudentsLab.BusinessLayer.Models
 {
     public class UserNameModel
     {
-        public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public int Id { get; }
+        public string FirstName { get; }
+        public string LastName { get; }
 
         public UserNameModel(
             int id,

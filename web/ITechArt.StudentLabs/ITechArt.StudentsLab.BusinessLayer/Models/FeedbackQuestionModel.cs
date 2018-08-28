@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ITechArt.StudentsLab.BusinessLayer.Models
+﻿namespace ITechArt.StudentsLab.BusinessLayer.Models
 {
     public class FeedbackQuestionModel
     {
-        public string Question { get; set; }
+        public string Question { get; }
 
-        public int QuestionId { get; set; }
+        public int QuestionId { get; }
 
         public FeedbackQuestionModel(
             string question,

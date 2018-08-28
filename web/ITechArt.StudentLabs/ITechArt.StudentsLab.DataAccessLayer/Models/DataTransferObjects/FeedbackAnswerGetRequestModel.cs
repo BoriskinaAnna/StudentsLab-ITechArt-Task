@@ -6,11 +6,11 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Models.DataTransferObjects
 {
     public class FeedbackAnswerRequestModel
     {
-        public int StudentId { get; set; }
+        public int StudentId { get; }
 
-        public int MentorId { get; set; }
+        public int MentorId { get; }
 
-        public int FeedbackDateId { get; set; }
+        public int FeedbackDateId { get; }
 
         public FeedbackAnswerRequestModel(
             int studentId,

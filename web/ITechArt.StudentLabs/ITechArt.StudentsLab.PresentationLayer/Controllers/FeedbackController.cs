@@ -30,16 +30,18 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
         public async Task<IActionResult> GetFeedbackDates(int labId)
         {
             IEnumerable<BlFeedbackDateModel> feedbackDates = await _feedbackService.GetFeedbackDates(labId);
+
             return Ok(
                 feedbackDates.Select(Mapper.Map<FeedbackDateModel>)
             );
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddOrUpdateFeedbackDate(FeedbackDateModel model)
+        public async Task<IActionResult> PutFeedbackDate(FeedbackDateModel model)
         {
             BlFeedbackDateModel feedbackDateResponse =
                 await _feedbackService.AddOrUpdateFeedbackDate(Mapper.Map<BlFeedbackDateModel>(model));
+
             return Ok(
                 Mapper.Map<FeedbackDateModel>(feedbackDateResponse)
             );
@@ -74,9 +76,10 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddOrUpdateFeedbackAnswer(FeedbackAnswerPostRequestModel model)
+        public async Task<IActionResult> PutFeedbackAnswer(FeedbackAnswerPostRequestModel model)
         {
             await _feedbackService.AddOrUpdateFeedbackAnswer(Mapper.Map<BlFeedbackAnswerPostRequestModel>(model));
+
             return Ok();
         }
 

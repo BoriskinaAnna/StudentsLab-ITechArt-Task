@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import './addFeedbackDatesStyle.scss';
 import {translate} from 'react-i18next';
-import redirectAwareFetch from '../services/userService/redirectAwareFetch';
-import Calendar from 'react-calendar';
 import {Link} from 'react-router-dom';
-import userService from "../services/userService";
+import userService from '../services/userService';
+import feedbackService from '../services/feedbackService';
+import Calendar from './calendar';
 
 
 let feedBackDates;
@@ -17,74 +17,52 @@ class AddFeedbackDates extends Component {
 
     constructor(props){
         super(props);
+
         this.state = {
-            isDataLoaded: false,
+            isFeedbackDatesLoaded: false,
             addDate: new Date(),
             changeDate: new Date(),
             changingDateId: undefined,
-            isInfoAboutCurrentUserLoaded: false
+            isCurrentUserInfoLoaded: false
         };
     }
 
-    getHttpGetOptions = () =>{
-        return {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        };
-    };
-
     getFeedbackDates = (labId) =>{
-        return redirectAwareFetch(`/api/feedback/getFeedbackDates/${labId}`, this.getHttpGetOptions())
-            .then(result =>{
-                   return result.data;
-                }
-            );
+        feedbackService.getFeedbackDates(labId)
+            .then(data =>{
+                feedBackDates = data;
+                this.setState({
+                    isFeedbackDatesLoaded: true
+                })
+            });
     };
 
-    getAddFeedbackDateOptions = (date) =>{
-        return {
-            method: 'POST',
-            body: JSON.stringify({
-                date: date,
-                labId: this.props.labId,
-                id: this.state.changingDateId
-            }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
-    };
-
-    addDateCalendarValueChange = addDate =>{
+    addDateCalendarOnChange = addDate =>{
         this.setState({
             addDate: addDate
         })
     };
 
-    changeDateCalendarValueChange = date =>{
+    updateDateCalendarOnChange = date =>{
         this.setState({
             changeDate: date
         })
     };
 
     addFeedbackDate = () =>{
-        console.log(new Date(this.state.addDate).toLocaleDateString());
-         redirectAwareFetch('/api/feedback/addOrUpdateFeedbackDate', this.getAddFeedbackDateOptions(new Date(this.state.addDate).toLocaleDateString()))
+        feedbackService.addOrUpdateFeedbackDate(this.state.addDate,  this.props.labId, this.state.changingDateId, '/api/feedback/putFeedbackDate')
             .then( () => {
                 this.setState({
-                    isDataLoaded: false
+                    isFeedbackDatesLoaded: false
                 })
             });
     };
 
-    changeFeedbackDate = () =>{
-        console.log(new Date(this.state.changeDate).toLocaleDateString());
-        redirectAwareFetch('/api/feedback/addOrUpdateFeedbackDate', this.getAddFeedbackDateOptions(new Date(this.state.changeDate).toLocaleDateString()))
+    updateFeedbackDate = () =>{
+        feedbackService.addOrUpdateFeedbackDate(this.state.changeDate, this.props.labId, this.state.changingDateId, '/api/feedback/putFeedbackDate')
             .then( () => {
                 this.setState({
-                    isDataLoaded: false,
+                    isFeedbackDatesLoaded: false,
                     changingDateId: undefined
                 })
             });
@@ -96,35 +74,35 @@ class AddFeedbackDates extends Component {
         })
     };
 
+    getCurrentUserInfo = () =>{
+        userService.getCurrentUserInfo()
+            .then((data) => {
+                this.currentUser.role = data.role;
+                this.setState({
+                    isCurrentUserInfoLoaded: true
+                });
+            });
+    };
+
     render() {
         const {t, labId} = this.props;
-        if(!(this.state.isDataLoaded && this.state.isInfoAboutCurrentUserLoaded)) {
-            if (!this.state.isDataLoaded){
-                this.getFeedbackDates(labId)
-                    .then(data =>{
-                        feedBackDates = data;
-                        this.setState({
-                            isDataLoaded: true
-                        })
-                    });
+
+        if(!(this.state.isFeedbackDatesLoaded && this.state.isCurrentUserInfoLoaded)) {
+            if (!this.state.isFeedbackDatesLoaded){
+                this.getFeedbackDates(labId);
             }
-            if(!this.state.isInfoAboutCurrentUserLoaded){
-                userService.getCurrentUser()
-                    .then((data) => {
-                        this.currentUser.role = data.role;
-                        this.setState({
-                            isInfoAboutCurrentUserLoaded: true
-                        });
-                    });
+
+            if(!this.state.isCurrentUserInfoLoaded){
+               this.getCurrentUserInfo();
             }
+
             return null;
         }
         else{
-
             const dateElements = feedBackDates.map((feedBackDate, index) =>{
                 const  date = new Date(feedBackDate.date);
 
-                const isFillFeedbackVisible = this.currentUser.role === 'Mentor'
+                const fillFeedback = this.currentUser.role === 'Mentor'
                     && <Link
                         to={{
                             pathname:'/feedback',
@@ -138,18 +116,14 @@ class AddFeedbackDates extends Component {
                         ({t('fillFeedback')})
                     </Link>;
 
-
-                if( feedBackDate.id === this.state.changingDateId){
-
+                if (feedBackDate.id === this.state.changingDateId){
                     return   <li key = {index} className="feedbackDates__date">
-                        <Calendar
-                            onChange={this.changeDateCalendarValueChange}
-                            showWeekNumbers
-                            value={this.state.changeDate}
-                            className="feedbackDates__calendar"
+                        <Calendar onChangeFunction={
+                            this.updateDateCalendarOnChange}
+                                  value={this.state.changeDate}
                         />
 
-                        <button className="feedbackDates__btn" onClick={this.changeFeedbackDate}>
+                        <button className="feedbackDates__btn" onClick={this.updateFeedbackDate}>
                             {t('change')}
                         </button>
 
@@ -158,8 +132,7 @@ class AddFeedbackDates extends Component {
                         </button>
                     </li>
                 }
-                else{
-
+                else {
                     return <li key = {index}
                                className="feedbackDates__date"
                                onClick={() => this.setState({changingDateId: feedBackDate.id})}
@@ -169,27 +142,26 @@ class AddFeedbackDates extends Component {
                             {date.getMonth().toString().length === 1?'0'+(date.getMonth() + 1):date.getMonth() + 1}
                             .
                             {date.getFullYear()}
-                            {isFillFeedbackVisible}
+
+                            {fillFeedback}
                         </li>
                 }
             });
+
+            const dates = feedBackDates.length === 0 ? t('nonFeedbackDates') : dateElements;
 
             return (
                 <ol className="feedbackDates">
 
                     <div className="feedbackDates__addedDates">
-                        {dateElements}
+                        {dates}
                     </div>
 
                     <div className="feedbackDates__addDate">
-
                         <li className="feedbackDates__date">
-
-                            <Calendar
-                                onChange={this.addDateCalendarValueChange}
-                                showWeekNumbers
-                                value={this.state.addDate}
-                                className="feedbackDates__calendar"
+                            <Calendar onChangeFunction={
+                                this.addDateCalendarOnChange}
+                                      value={this.state.addDate}
                             />
 
                             <button className="feedbackDates__btn" onClick={this.addFeedbackDate}>

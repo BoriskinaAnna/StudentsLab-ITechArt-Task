@@ -8,7 +8,7 @@ using ITechArt.StudentsLab.BusinessLayer.Contracts;
 
 namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
 {
-    public class UserRepository : IUserRepository
+    internal class UserRepository : IUserRepository
     {
         private readonly IDalSettings _settings;
 
