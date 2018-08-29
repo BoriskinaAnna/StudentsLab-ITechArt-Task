@@ -3,7 +3,6 @@ import Lab from '../lab';
 import './labsListStyle.scss';
 import {Link, Route} from 'react-router-dom';
 import labService from "../services/labService";
-import Header from "../header";
 import Footer from "../footer";
 
 
