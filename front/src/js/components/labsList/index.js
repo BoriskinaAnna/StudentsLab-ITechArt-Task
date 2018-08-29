@@ -7,9 +7,9 @@ import Header from "../header";
 import Footer from "../footer";
 
 
-let labs;
-
 class LabList extends Component {
+
+    labs = [];
 
     constructor(){
         super();
@@ -22,7 +22,7 @@ class LabList extends Component {
         if(!this.state.isLabsLoaded){
             labService.getLabsList()
                 .then(data =>{
-                    labs = data;
+                    this.labs = data;
                     this.setState({
                         isLabsLoaded: true
                     })
@@ -31,7 +31,7 @@ class LabList extends Component {
         }
         else{
             const {showAddLab} = this.props;
-            const labElements = labs.map((lab, index) =>
+            const labElements =  this.labs.map((lab, index) =>
                 <Link
                     to={{
                         pathname:'/schedule',
@@ -46,8 +46,6 @@ class LabList extends Component {
 
             return (
                 <React.Fragment>
-                    <Route exact path="/" component={() => (<Header/>)}/>
-
                     <div className="labsContainer">
                         <div className="labsContainer__buttonAdd">
                             <button onClick={showAddLab} className="labsContainer__buttonContent">

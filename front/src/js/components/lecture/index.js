@@ -10,8 +10,9 @@ class Index extends Component {
         const monthNames = [t('january'), t('february'), t('march'), t('april'), t('may'), t('june'),
             t('july'), t('august'), t('september'), t('october'), t('november'), t('december')
         ];
+
         const lectureDate = new Date(lecture.dateTime);
-        const lectureDuration = new Date(lecture.duration);
+
         return (
             <div className="lecture">
                 <div className="lecture__date">
@@ -28,9 +29,7 @@ class Index extends Component {
                         {t('duration')}
                         :
                         <span className="lecture__duration">
-                            {lectureDuration.getHours()}
-                            :
-                            {lectureDuration.getMinutes()}
+                            {lecture.duration}
                         </span>
                     </span>
                 </div>

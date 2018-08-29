@@ -8,7 +8,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ITechArt.StudentsLab.DataAccessLayer;
 using ITechArt.StudentsLab.BusinessLayer;
-using AutoMapper;
 
 
 namespace ITechArt.StudentsLab.PresentationLayer
@@ -30,13 +29,6 @@ namespace ITechArt.StudentsLab.PresentationLayer
 
             DalModule.Register(services);
             BlModule.Register(services);
-
-            Mapper.Initialize(config =>
-            {
-                DalMapping.Initialize(config);
-                BlMapping.Initialize(config);
-                PlMapping.Initialize(config);
-            });
 
             services
                 .AddAuthentication(options =>

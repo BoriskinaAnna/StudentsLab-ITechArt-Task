@@ -3,6 +3,7 @@ using ITechArt.StudentsLab.BusinessLayer.Contracts;
 using ITechArt.StudentsLab.BusinessLayer.Models;
 using ITechArt.StudentsLab.DataAccessLayer.Models.DataTransferObjects;
 using ITechArt.StudentsLab.DataAccessLayer.Contracts;
+
 namespace ITechArt.StudentsLab.BusinessLayer.Services
 {
     public class UserService: IUserService
@@ -14,14 +15,14 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
         {
             _userRepository = userRepository;
         }
+
         public async Task<UserModel> GetUserById(int id)
         {
             UserResponse user = await _userRepository.GetUserById(id);
 
             if(user != null)
             {
-                UserModel userModel = new UserModel
-                (
+                UserModel userModel = new UserModel(
                     user.Id,
                     user.FirstName,
                     user.LastName,
@@ -32,8 +33,6 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
                 return userModel;
             }
             return null;
-         
         }
-
     }
 }

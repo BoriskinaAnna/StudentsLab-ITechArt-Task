@@ -16,7 +16,7 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Models.Entities
 
         public DateTime DateTime { get; }
 
-        public DateTime Duration { get; }
+        public TimeSpan Duration { get; }
 
     }
 }

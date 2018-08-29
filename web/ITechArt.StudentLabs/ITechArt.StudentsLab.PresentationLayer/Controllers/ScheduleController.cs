@@ -1,15 +1,14 @@
 ﻿using ITechArt.StudentsLab.PresentationLayer.Models;
 using System.Collections.Generic;
 using ITechArt.StudentsLab.BusinessLayer.Contracts;
-using AutoMapper;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BlLectureModel = ITechArt.StudentsLab.BusinessLayer.Models.LectureModel;
-using System.Linq;
+using Mapster;
 
 namespace ITechArt.StudentsLab.PresentationLayer.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api")]
     [ApiController]
     public class ScheduleController : Controller
     {
@@ -21,14 +20,14 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
         }
 
         [HttpGet]
-        [Route("{labId:int}")]
+        [Route("labs/{labId:int}/schedule")]
         public async  Task<IActionResult> Get(int labId)
         {
              IEnumerable<BlLectureModel> schedule = await _scheduleService.GetSchedule(labId);
 
              return Ok(
-               schedule.Select(Mapper.Map<LectureModel>)
-                );
+                schedule.Adapt<IEnumerable<LectureModel>>()
+             );
         }
     }
 }

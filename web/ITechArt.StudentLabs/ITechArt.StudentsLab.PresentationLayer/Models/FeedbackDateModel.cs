@@ -4,11 +4,11 @@ namespace ITechArt.StudentsLab.PresentationLayer.Models
 {
     public class FeedbackDateModel
     {
-        public int Id { get; set; }
+        public int Id { get; }
 
-        public int LabId { get; set; }
+        public int LabId { get; }
 
-        public DateTime Date { get; set; }
+        public DateTime Date { get; }
        
         public FeedbackDateModel(
             int id,

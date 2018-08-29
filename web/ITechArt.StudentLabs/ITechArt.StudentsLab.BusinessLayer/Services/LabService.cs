@@ -6,8 +6,7 @@ using DalLabModel = ITechArt.StudentsLab.DataAccessLayer.Models.DataTransferObje
 using LabModel = ITechArt.StudentsLab.BusinessLayer.Models.LabModel;
 using DalUserNameModel = ITechArt.StudentsLab.DataAccessLayer.Models.DataTransferObjects.UserNameModel;
 using UserNameModel = ITechArt.StudentsLab.BusinessLayer.Models.UserNameModel;
-using System.Linq;
-using AutoMapper;
+using Mapster;
 
 namespace ITechArt.StudentsLab.BusinessLayer.Services
 {
@@ -22,14 +21,14 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
         public async Task<IEnumerable<LabModel>> GetLabs()
         {
             IEnumerable<DalLabModel> labs = await _labRepository.GetLabs();
-            return labs.Select(Mapper.Map<LabModel>);
+            return labs.Adapt<IEnumerable<LabModel>>();
         }
 
         public async Task<IEnumerable<UserNameModel>> GetMerntorStudents(int mentorId)
         {
             IEnumerable<DalUserNameModel> feedbackDates = await _labRepository.GetStudentByMentorId(mentorId);
 
-            return feedbackDates.Select(Mapper.Map<UserNameModel>);
+            return feedbackDates.Adapt<IEnumerable<UserNameModel>>();
         }
     }
 }

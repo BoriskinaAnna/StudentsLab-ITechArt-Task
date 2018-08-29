@@ -49,7 +49,7 @@ class UserService {
              method: method,
              headers: {
                  'Content-Type': 'application/json',
-                 "Accept": "application/json"
+                 'Accept': 'application/json'
              }
          };
      };
@@ -64,7 +64,7 @@ class UserService {
      };
 
     getInfoAboutCurrentUser = () =>{
-        return redirectAwareFetch(`/api/account/getInfoAboutCurrentUser`, this.getOptions('GET'))
+        return redirectAwareFetch('/api/account/currentUser', this.getOptions('GET'))
             .then(result =>{
                 if(result !== undefined){
                     userService.initializeNewUser(

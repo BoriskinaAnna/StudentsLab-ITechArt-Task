@@ -6,9 +6,8 @@ using ITechArt.StudentsLab.BusinessLayer.Contracts;
 using System.Data.SqlClient;
 using ITechArt.StudentsLab.DataAccessLayer.Models.Entities;
 using Dapper;
-using AutoMapper;
 using System.Data;
-using System.Linq;
+using Mapster;
 
 namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
 {
@@ -27,10 +26,11 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
             using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))
             {
                 IEnumerable<Lecture> schedule = await connection.QueryAsync<Lecture>(
-                    "GetLabSchedule",
-                    new { Id = labId },
-                    commandType: CommandType.StoredProcedure);
-                return schedule.Select(Mapper.Map<LectureModel>);
+                   "GetLabSchedule",
+                   new { Id = labId },
+                   commandType: CommandType.StoredProcedure
+               );
+                return schedule.Adapt<IEnumerable<LectureModel>>();
             }
         }
     }

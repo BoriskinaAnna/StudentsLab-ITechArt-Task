@@ -1,11 +1,11 @@
 ﻿CREATE PROCEDURE [dbo].[GetFeedbackQuestions]
-	@LabId INT
+    @LabId INT
 AS
-	 SELECT
+    SELECT
        q.Id  AS QuestionId,
-	   q.Question
-		
+       q.Question
+
     FROM Question q
-		INNER JOIN FeedbackQuestion fq
+        INNER JOIN FeedbackQuestion fq
             on fq.LabId = @LabId
-	WHERE q.Id = fq.QuestionId
+    WHERE q.Id = fq.QuestionId

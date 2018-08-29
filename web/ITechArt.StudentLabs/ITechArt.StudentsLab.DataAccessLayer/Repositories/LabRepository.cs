@@ -6,10 +6,8 @@ using ITechArt.StudentsLab.BusinessLayer.Contracts;
 using System.Data.SqlClient;
 using ITechArt.StudentsLab.DataAccessLayer.Models.Entities;
 using Dapper;
-using AutoMapper;
 using System.Data;
-using System.Linq;
-using System;
+using Mapster;
 
 namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
 {
@@ -31,7 +29,7 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
                     "GetLabs",
                     commandType: CommandType.StoredProcedure);
 
-                return labs.Select(Mapper.Map<LabModel>);
+                return labs.Adapt<IEnumerable<LabModel>>();
             }
         }
 
@@ -45,9 +43,8 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
                     commandType: CommandType.StoredProcedure
                 );
 
-                return feedback.Select(Mapper.Map<UserNameModel>);
+                return feedback.Adapt<IEnumerable<UserNameModel>>();
             }
-
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[MentorStudentLink]
 (
-	[Id] INT NOT NULL PRIMARY KEY, 
+    [Id] INT IDENTITY (1, 1) NOT NULL, 
     [MentorId] INT NOT NULL, 
     [StudentId] INT NOT NULL,
 

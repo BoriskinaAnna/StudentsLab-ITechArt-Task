@@ -1,7 +1,6 @@
 ﻿using ITechArt.StudentsLab.PresentationLayer.Models;
 using System.Collections.Generic;
 using ITechArt.StudentsLab.BusinessLayer.Contracts;
-using AutoMapper;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BlFeedbackDateModel = ITechArt.StudentsLab.BusinessLayer.Models.FeedbackDateModel;
@@ -9,11 +8,12 @@ using BlFeedbackRequestModel = ITechArt.StudentsLab.BusinessLayer.Models.Feedbac
 using BlFeedbackResponseModel = ITechArt.StudentsLab.BusinessLayer.Models.FeedbackAnswerResponseModel;
 using BlFeedbackQuestionModel = ITechArt.StudentsLab.BusinessLayer.Models.FeedbackQuestionModel;
 using BlFeedbackAnswerPostRequestModel = ITechArt.StudentsLab.BusinessLayer.Models.FeedbackAnswerPostRequestModel;
-using System.Linq;
+using Mapster;
+using System;
 
 namespace ITechArt.StudentsLab.PresentationLayer.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api")]
     [ApiController]
     public class FeedbackController : Controller
     {
@@ -25,30 +25,28 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
             _feedbackService = feedbackService;
         }
 
-        [HttpGet]
-        [Route("{labId:int}")]
+        [HttpGet("labs/{labId:int}/feedbacks/dates")]
         public async Task<IActionResult> GetFeedbackDates(int labId)
         {
             IEnumerable<BlFeedbackDateModel> feedbackDates = await _feedbackService.GetFeedbackDates(labId);
 
             return Ok(
-                feedbackDates.Select(Mapper.Map<FeedbackDateModel>)
+                feedbackDates.Adapt<IEnumerable<FeedbackDateModel>>()
             );
         }
 
-        [HttpPost]
-        public async Task<IActionResult> PutFeedbackDate(FeedbackDateModel model)
+        [HttpPut("labs/feedbacks/dates")]
+        public async Task<IActionResult> UpsertFeedbackDate(FeedbackDateModel model)
         {
             BlFeedbackDateModel feedbackDateResponse =
-                await _feedbackService.AddOrUpdateFeedbackDate(Mapper.Map<BlFeedbackDateModel>(model));
+                await _feedbackService.UpsertFeedbackDate(model.Adapt<BlFeedbackDateModel>());
 
             return Ok(
-                Mapper.Map<FeedbackDateModel>(feedbackDateResponse)
+                feedbackDateResponse.Adapt<FeedbackDateModel>()
             );
         }
 
-        [HttpGet]
-        [Route("{studentId:int}/{mentorId:int}/{feedbackDateId:int}")]
+        [HttpGet("labs/feedbacks/dates/{feedbackDateId:int}/mentors/{mentorId:int}/students/{studentId:int}")]
         public async Task<IActionResult> GetFeedbackAnswers(int studentId, int mentorId, int feedbackDateId)
         {
             BlFeedbackRequestModel blFeedbackRequest = new BlFeedbackRequestModel(
@@ -60,25 +58,24 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
             IEnumerable <BlFeedbackResponseModel> feedbackResponse = await _feedbackService.GetFeedbackAnswers(blFeedbackRequest);
 
             return Ok(
-                feedbackResponse.Select(Mapper.Map<FeedbackAnswerResponseModel>)
+                feedbackResponse.Adapt<IEnumerable<FeedbackAnswerResponseModel>>()
             );
         }
 
-        [HttpGet]
-        [Route("{labId:int}")]
+        [HttpGet("labs/{labId:int}/feedbacks/questions")]
         public async Task<IActionResult> GetFeedbackQuestions(int labId)
         {
             IEnumerable<BlFeedbackQuestionModel> feedbackResponse = await _feedbackService.GetFeedbackQuestions(labId);
 
             return Ok(
-                feedbackResponse.Select(Mapper.Map<FeedbackQuestionModel>)
+                feedbackResponse.Adapt<IEnumerable<FeedbackQuestionModel>>()
             );
         }
 
-        [HttpPost]
-        public async Task<IActionResult> PutFeedbackAnswer(FeedbackAnswerPostRequestModel model)
+        [HttpPut("labs/feedbacks/answers")]
+        public async Task<IActionResult> UpsertFeedbackAnswer(FeedbackAnswerPostRequestModel model)
         {
-            await _feedbackService.AddOrUpdateFeedbackAnswer(Mapper.Map<BlFeedbackAnswerPostRequestModel>(model));
+            await _feedbackService.UpsertFeedbackAnswer(model.Adapt<BlFeedbackAnswerPostRequestModel>());
 
             return Ok();
         }

@@ -8,10 +8,12 @@ import Header from '../header';
 import Footer from '../footer';
 
 
-let answers, questions, students,
-    feedback = {questionId: [], answers: []};
-
 class Feedback extends Component {
+
+    answers = [];
+    questions = [];
+    students = [];
+    feedback = {questionId: [], answers: []};
 
     currentUser = {
         id: undefined
@@ -45,7 +47,7 @@ class Feedback extends Component {
             this.props.location.state.feedbackDateId,
         )
             .then(data =>{
-                answers = data;
+                this.answers = data;
                 this.setAnswerValue(questionId);
                 this.setState({
                     isAnswersLoaded: true
@@ -60,20 +62,20 @@ class Feedback extends Component {
             currentQuestionId: undefined,
             isUserSelectError: false
         });
-        feedback = {questionId: [], answers: []};
-        answers = undefined;
+        this.feedback = {questionId: [], answers: []};
+        this.answers = [];
     };
 
-    saveFeedback = () =>{
-        answers = undefined;
-        this.saveFeedbackLocal();
-        feedbackService.saveFeedback(
-            feedback,
+    upsertFeedbackAnswers = () =>{
+        this.answers = [];
+        this.upsertFeedbackAnswersLocal();
+        feedbackService.upsertFeedbackAnswers(
+            this.feedback,
             this.currentUser.id,
             this.props.location.state.feedbackDateId,
             this.state.studentId
         );
-        feedback = {questionId: [], answers: []};
+        this.feedback = {questionId: [], answers: []};
         this.setState({currentQuestionId: undefined});
     } ;
 
@@ -90,7 +92,7 @@ class Feedback extends Component {
     getStudentByMentorId = () =>{
         feedbackService.getStudentByMentorId(this.currentUser.id)
             .then(data =>{
-                students = data;
+                this.students = data;
                 this.setState({
                     isStudentsLoaded: true
                 })
@@ -100,7 +102,7 @@ class Feedback extends Component {
     getFeedbackQuestions = () =>{
         feedbackService.getFeedbackQuestions(this.props.location.state.labId)
             .then(data =>{
-                questions = data;
+                this.questions = data;
                 this.setState({
                     isQuestionsLoaded: true
                 })
@@ -108,27 +110,27 @@ class Feedback extends Component {
     };
 
     setAnswerValue = currentQuestionId =>{
-        const changeAnswerIndex = feedback.questionId.findIndex((value)=>
+        const changeAnswerIndex = this.feedback.questionId.findIndex((value)=>
             value === currentQuestionId
         );
 
         if (changeAnswerIndex !== -1){
             this.setState({
-                answerValue: feedback.answers[changeAnswerIndex]
+                answerValue: this.feedback.answers[changeAnswerIndex]
             })
         }
         else {
-            if (answers === undefined) {
+            if (this.answers.length === 0) {
                 this.getAnswers(currentQuestionId);
             }
             else {
-                const currentAnswerIndex = answers.findIndex((value)=>
+                const currentAnswerIndex = this.answers.findIndex((value)=>
                     value.questionId ===  currentQuestionId
                 );
 
                 if (currentAnswerIndex !== -1){
                     this.setState({
-                        answerValue: answers[currentAnswerIndex].answer
+                        answerValue: this.answers[currentAnswerIndex].answer
                     })
                 }
                 else {
@@ -140,17 +142,17 @@ class Feedback extends Component {
         }
     };
 
-    saveFeedbackLocal = () =>{
-        const changedAnswerIndex = feedback.questionId.findIndex((value)=>
+    upsertFeedbackAnswersLocal = () =>{
+        const changedAnswerIndex = this.feedback.questionId.findIndex((value)=>
             value === this.state.currentQuestionId
         );
         if (changedAnswerIndex !== -1){
-            feedback.questionId[changedAnswerIndex] = this.state.currentQuestionId;
-            feedback.answers[changedAnswerIndex] = this.state.answerValue;
+            this.feedback.questionId[changedAnswerIndex] = this.state.currentQuestionId;
+            this.feedback.answers[changedAnswerIndex] = this.state.answerValue;
         }
         else{
-            feedback.questionId.push(this.state.currentQuestionId);
-            feedback.answers.push(this.state.answerValue);
+            this.feedback.questionId.push(this.state.currentQuestionId);
+            this.feedback.answers.push(this.state.answerValue);
         }
     };
 
@@ -158,7 +160,7 @@ class Feedback extends Component {
         if (this.state.studentId !== undefined){
            this.setAnswerValue(currentQuestionId);
            if (this.state.currentQuestionId !== undefined) {
-                this.saveFeedbackLocal();
+                this.upsertFeedbackAnswersLocal();
            }
            this.setState({currentQuestionId: currentQuestionId});
         }
@@ -185,7 +187,7 @@ class Feedback extends Component {
         else {
             const {t} = this.props;
 
-            const questionElements = questions.map((questionElement, index) => {
+            const questionElements = this.questions.map((questionElement, index) => {
 
                 if( questionElement.questionId === this.state.currentQuestionId) {
                     return <li key={index}>
@@ -209,9 +211,9 @@ class Feedback extends Component {
                 }
             });
 
-            const feedbackQuestions = questions.length === 0 ? t('nonFeedbackQuestions'): questionElements;
+            const feedbackQuestions = this.questions.length === 0 ? t('nonFeedbackQuestions'): questionElements;
 
-            const studentElement = students.map((studentElement, index) =>{
+            const studentElement = this.students.map((studentElement, index) =>{
                 if(index === 0){
                     if(this.state.studentId === undefined){
                         this.setState({
@@ -246,7 +248,7 @@ class Feedback extends Component {
                                 {feedbackQuestions}
                             </ol>
 
-                            <button className="feedback__saveBtn" onClick={this.saveFeedback}>
+                            <button className="feedback__saveBtn" onClick={this.upsertFeedbackAnswers}>
                                 {t('save')}
                             </button>
                         </div>

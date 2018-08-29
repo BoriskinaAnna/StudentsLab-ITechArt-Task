@@ -7,12 +7,11 @@ using System.Security.Claims;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using System.Linq;
-using System;
+using ITechArt.StudentsLab.PresentationLayer.Extensions;
 
 namespace ITechArt.StudentsLab.PresentationLayer.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class AccountController : Controller
     {
@@ -25,7 +24,7 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
             _userService = userService;
         }
 
-        [HttpPost]
+        [HttpPost("login")]
         public async Task<IActionResult> Login(LoginModel model)
         {
             UserModel user = await _accountService.Login(model.Email, model.Password);
@@ -60,7 +59,7 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
             ));
         }
 
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterModel model)
         {
             RegisterUserModel registerUser = new RegisterUserModel(
@@ -91,8 +90,7 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
                 new ClaimsPrincipal(claimsIdentity)
             );
 
-            return Ok(new UserResponseModel
-            (
+            return Ok(new UserResponseModel(
                 user.Id,
                 user.FirstName,
                 user.LastName,
@@ -101,25 +99,24 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
             ));
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetInfoAboutCurrentUser()
+        [HttpGet("currentUser")]
+        public async Task<IActionResult> GetCurrentUserInfo()
         {
-            int id;
+            int id = User.GetUserId();
 
-            if(!Int32.TryParse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value, out id))
+            if (id == 0)
             {
                 return Ok();
             }
 
             UserModel user = await _userService.GetUserById(id);
-            
+
             if (user == null)
             {
                 return NotFound();
             }
 
-            return Ok(new UserResponseModel
-            (
+            return Ok(new UserResponseModel(
                 user.Id,
                 user.FirstName,
                 user.LastName,
@@ -128,6 +125,7 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
             ));
         }
 
+        [Route("logout")]
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(

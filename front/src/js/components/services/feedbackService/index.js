@@ -5,7 +5,7 @@ class FeedbackService{
 
     headers = {
         'Content-Type': 'application/json',
-        "Accept": 'application/json'
+        'Accept': 'application/json'
     };
 
     getHttpGetOptions = () =>{
@@ -17,7 +17,7 @@ class FeedbackService{
 
     getAddFeedbackDateOptions = (date, labId, id) =>{
         return {
-            method: 'POST',
+            method: 'PUT',
             body: JSON.stringify({
                 date: date,
                 labId: labId,
@@ -29,7 +29,7 @@ class FeedbackService{
 
     getSaveFeedbackOptions = (feedback, mentorId, dateId, studentId) =>{
         return {
-            method: 'POST',
+            method: 'PUT',
             body: JSON.stringify({
                 questionId: feedback.questionId,
                 answers: feedback.answers,
@@ -48,28 +48,28 @@ class FeedbackService{
             })
     };
 
-    addOrUpdateFeedbackDate = (date, labId, id, url) =>{
-        return redirectAwareFetch(url, this.getAddFeedbackDateOptions(new Date(date).toLocaleDateString(), labId, id))
+    upsertFeedbackDate = (date, labId, id) =>{
+        return redirectAwareFetch('/api/labs/feedbacks/dates', this.getAddFeedbackDateOptions(new Date(date).toLocaleDateString(), labId, id))
     };
 
     getFeedbackDates = (labId) =>{
-        return this.getRequest(`/api/feedback/getFeedbackDates/${labId}`);
+        return this.getRequest(`/api/labs/${labId}/feedbacks/dates`);
     };
 
     getStudentByMentorId = (mentorId) =>{
-        return this.getRequest(`/api/lab/getMentorStudents/${mentorId}`);
+        return this.getRequest(`/api/labs/mentors/${mentorId}/students`);
     };
 
     getFeedbackQuestions = (labId) =>{
-        return this.getRequest(`/api/feedback/getFeedbackQuestions/${labId}`);
+        return this.getRequest(`/api/labs/${labId}/feedbacks/questions`);
     };
 
     getFeedbackAnswers = (studentId, mentorId, feedbackDateId) =>{
-        return this.getRequest(`/api/feedback/getFeedbackAnswers/${studentId}/${mentorId}/${feedbackDateId}`);
+        return this.getRequest(`/api/labs/feedbacks/dates/${feedbackDateId}/mentors/${mentorId}/students/${studentId}`);
     };
 
-    saveFeedback = (feedback, mentorId, dateId, studentId) =>{
-        redirectAwareFetch(`/api/feedback/putFeedbackAnswer`,
+    upsertFeedbackAnswers = (feedback, mentorId, dateId, studentId) =>{
+        redirectAwareFetch('/api/labs/feedbacks/answers',
             this.getSaveFeedbackOptions(feedback, mentorId, dateId, studentId)
         );
     };

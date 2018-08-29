@@ -10,9 +10,9 @@ import Footer from '../footer';
 import userService from '../services/userService';
 
 
-let schedule;
-
 class Schedule extends Component {
+
+    schedule = [];
 
     currentUser = {
         role: undefined,
@@ -43,7 +43,7 @@ class Schedule extends Component {
     getSchedule = () =>{
         scheduleService.getSchedule(this.props.location.state.labId)
             .then(data =>{
-                schedule = data;
+                this.schedule = data;
                 this.setState({
                     isScheduleLoaded: true
                 });
@@ -64,7 +64,7 @@ class Schedule extends Component {
         else {
             const {showChangeLecture, t} = this.props;
 
-            const lectureElements = schedule.map((lecture, index) =>
+            const lectureElements =  this.schedule.map((lecture, index) =>
                 <div key = {index} className="schedule__lecture">
                     <Lecture lecture={lecture} showChangeLecture={showChangeLecture}/>
                 </div>

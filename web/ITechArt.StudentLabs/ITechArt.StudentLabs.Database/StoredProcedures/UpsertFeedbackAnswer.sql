@@ -1,11 +1,11 @@
-﻿CREATE PROCEDURE [dbo].[AddOrUpdateFeedbackAnswer]
+﻿CREATE PROCEDURE [dbo].[UpsertFeedbackAnswer]
     @MentorId int,
     @FeedbackQuestionId INT,
     @FeedbackDateId INT,
     @StudentId INT,
     @Answer NVARCHAR(4000)
 AS
-	MERGE FeedbackAnswer AS target
+    MERGE FeedbackAnswer AS target
     USING
         (SELECT @MentorId, @FeedbackQuestionId, @FeedbackDateId, @StudentId, @Answer)
     AS source

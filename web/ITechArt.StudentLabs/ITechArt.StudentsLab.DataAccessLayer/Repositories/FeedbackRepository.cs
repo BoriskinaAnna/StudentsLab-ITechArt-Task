@@ -6,9 +6,8 @@ using ITechArt.StudentsLab.BusinessLayer.Contracts;
 using System.Data.SqlClient;
 using ITechArt.StudentsLab.DataAccessLayer.Models.Entities;
 using Dapper;
-using AutoMapper;
 using System.Data;
-using System.Linq;
+using Mapster;
 using System;
 
 namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
@@ -28,20 +27,21 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
             using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))
             {
                 IEnumerable<FeedbackDate> feedbackDates = await connection.QueryAsync<FeedbackDate>(
-                    "GetFeedbackDates",
-                    new { Id = labId },
-                    commandType: CommandType.StoredProcedure);
+                  "GetFeedbackDates",
+                  new { Id = labId },
+                  commandType: CommandType.StoredProcedure
+                );
 
-                return feedbackDates.Select(Mapper.Map<FeedbackDateModel>);
+                return feedbackDates.Adapt<IEnumerable<FeedbackDateModel>>();
             }
         }
 
-        public async Task<int> AddOrUpdateFeedbackDates(FeedbackDateModel feedbackDate)
+        public async Task<int> UpsertFeedbackDates(FeedbackDateModel feedbackDate)
         {
             using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))
             {
                 int id = await connection.ExecuteScalarAsync<int>(
-                    "AddOrUpdateFeedbackDate",
+                    "UpsertFeedbackDate",
                     new
                     {
                         Id = feedbackDate.Id,
@@ -55,14 +55,14 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
             }
         }
 
-        public async Task AddOrUpdateFeedbackAnswers(FeedbackAnswerPostRequestModel feedbackAnswers)
+        public async Task UpsertFeedbackAnswers(FeedbackAnswerPostRequestModel feedbackAnswers)
         {
             using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))
             {
                 for (int i = 0; i < feedbackAnswers.Answers.Length; i++)
                 {
                     await connection.ExecuteScalarAsync<int>(
-                        "AddOrUpdateFeedbackAnswer",
+                        "UpsertFeedbackAnswer",
                         new
                         {
                             MentorId = feedbackAnswers.MentorId,
@@ -92,7 +92,7 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
                     commandType: CommandType.StoredProcedure
                 );
 
-                return feedback.Select(Mapper.Map<FeedbackAnswerResponseModel>);
+                return feedback.Adapt<IEnumerable<FeedbackAnswerResponseModel>>();
             }
         }
 
@@ -106,7 +106,7 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
                     commandType: CommandType.StoredProcedure
                 );
 
-                return feedback.Select(Mapper.Map<FeedbackQuestionModel>);
+                return feedback.Adapt<IEnumerable<FeedbackQuestionModel>>();
             }
         }
     }

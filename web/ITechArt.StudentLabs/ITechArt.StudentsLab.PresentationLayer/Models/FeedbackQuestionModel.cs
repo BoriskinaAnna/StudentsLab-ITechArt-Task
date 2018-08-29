@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace ITechArt.StudentsLab.PresentationLayer.Models
+﻿namespace ITechArt.StudentsLab.PresentationLayer.Models
 {
     public class FeedbackQuestionModel
     {
-        public string Question { get; set; }
+        public string Question { get; }
 
-        public int QuestionId { get; set; }
+        public int QuestionId { get; }
 
         public FeedbackQuestionModel(
             string question,

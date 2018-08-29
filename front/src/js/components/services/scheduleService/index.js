@@ -8,13 +8,13 @@ class ScheduleService{
             method: method,
             headers: {
                 'Content-Type': 'application/json',
-                "Accept": "application/json"
+                'Accept': 'application/json'
             }
         };
     };
 
     getSchedule = (id) =>{
-        return redirectAwareFetch(`/api/schedule/get/${id}`, this.getOptions('GET'))
+        return redirectAwareFetch(`/api/labs/${id}/schedule`, this.getOptions('GET'))
             .then(result =>{
                 return result.data;
             })

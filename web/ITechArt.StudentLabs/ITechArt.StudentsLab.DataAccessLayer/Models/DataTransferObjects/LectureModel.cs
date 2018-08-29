@@ -18,7 +18,7 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Models.DataTransferObjects
 
         public DateTime DateTime { get; }
 
-        public DateTime Duration { get; }
+        public TimeSpan Duration { get; }
 
         public LectureModel(
             int id,
@@ -27,7 +27,7 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Models.DataTransferObjects
             string place,
             string theme,
             DateTime dateTime,
-            DateTime duration
+            TimeSpan duration
         )
         {
             Id = id;

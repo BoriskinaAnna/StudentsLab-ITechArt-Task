@@ -12,6 +12,7 @@ import AccountHeader from './accountHeader';
 import Registration from './registration'
 import ErrorPage from './errorPage'
 import Feedback from './feedback';
+import Header from "./header";
 
 
 export class App extends Component {
@@ -48,7 +49,9 @@ export class App extends Component {
                <Router>
                    <div className="content">
 
+                       <Route exact path="/" component={() => (<Header/>)}/>
                        <Route exact path="/" component={() => (<LabsList showAddLab={this.showAddLab}/>)}/>
+
 
                        <Route exact path="/schedule" component={() => (
                            <Schedule showChangeLecture={this.showChangeLecture}/>)}/>

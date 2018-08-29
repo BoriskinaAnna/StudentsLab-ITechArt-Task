@@ -7,9 +7,9 @@ import feedbackService from '../services/feedbackService';
 import Calendar from './calendar';
 
 
-let feedBackDates;
-
 class AddFeedbackDates extends Component {
+
+    feedBackDates = [];
 
     currentUser = {
         role: undefined
@@ -30,7 +30,7 @@ class AddFeedbackDates extends Component {
     getFeedbackDates = (labId) =>{
         feedbackService.getFeedbackDates(labId)
             .then(data =>{
-                feedBackDates = data;
+                this.feedBackDates = data;
                 this.setState({
                     isFeedbackDatesLoaded: true
                 })
@@ -50,7 +50,7 @@ class AddFeedbackDates extends Component {
     };
 
     addFeedbackDate = () =>{
-        feedbackService.addOrUpdateFeedbackDate(this.state.addDate,  this.props.labId, this.state.changingDateId, '/api/feedback/putFeedbackDate')
+        feedbackService.upsertFeedbackDate(this.state.addDate,  this.props.labId, this.state.changingDateId)
             .then( () => {
                 this.setState({
                     isFeedbackDatesLoaded: false
@@ -59,7 +59,7 @@ class AddFeedbackDates extends Component {
     };
 
     updateFeedbackDate = () =>{
-        feedbackService.addOrUpdateFeedbackDate(this.state.changeDate, this.props.labId, this.state.changingDateId, '/api/feedback/putFeedbackDate')
+        feedbackService.upsertFeedbackDate(this.state.changeDate, this.props.labId, this.state.changingDateId)
             .then( () => {
                 this.setState({
                     isFeedbackDatesLoaded: false,
@@ -99,7 +99,7 @@ class AddFeedbackDates extends Component {
             return null;
         }
         else{
-            const dateElements = feedBackDates.map((feedBackDate, index) =>{
+            const dateElements = this.feedBackDates.map((feedBackDate, index) =>{
                 const  date = new Date(feedBackDate.date);
 
                 const fillFeedback = this.currentUser.role === 'Mentor'
@@ -148,7 +148,7 @@ class AddFeedbackDates extends Component {
                 }
             });
 
-            const dates = feedBackDates.length === 0 ? t('nonFeedbackDates') : dateElements;
+            const dates = this.feedBackDates.length === 0 ? t('nonFeedbackDates') : dateElements;
 
             return (
                 <ol className="feedbackDates">

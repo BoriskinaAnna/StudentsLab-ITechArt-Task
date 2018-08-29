@@ -1,9 +1,9 @@
-﻿CREATE PROCEDURE [dbo].[AddOrUpdateFeedbackDate]
-	@Date DATE,
-	@LabId INT,
-	@Id int
+﻿CREATE PROCEDURE [dbo].[UpsertFeedbackDate]
+    @Date DATE,
+    @LabId INT,
+    @Id int
 AS
-	MERGE FeedbackDate AS target
+    MERGE FeedbackDate AS target
     USING
         (SELECT @Id, @LabId, @Date)
     AS source
@@ -12,7 +12,7 @@ AS
     WHEN MATCHED THEN
         UPDATE SET
             Date = source.Date
-            
+
     WHEN NOT MATCHED THEN
         INSERT (LabId,  [Date])
         VALUES
