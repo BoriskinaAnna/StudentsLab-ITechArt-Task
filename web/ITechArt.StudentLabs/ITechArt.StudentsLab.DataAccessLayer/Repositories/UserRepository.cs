@@ -6,9 +6,9 @@ using Dapper;
 using System.Data;
 using ITechArt.StudentsLab.BusinessLayer.Contracts;
 
-namespace ITechArt.StudentsLab.DataAccessLayer.Services
+namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
 {
-    public class UserRepository : IUserRepository
+    internal class UserRepository : IUserRepository
     {
         private readonly IDalSettings _settings;
 
@@ -17,6 +17,7 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Services
         {
             _settings = settings;
         }
+
 
         public async Task<UserResponse> GetUserByEmail(string email)
         {

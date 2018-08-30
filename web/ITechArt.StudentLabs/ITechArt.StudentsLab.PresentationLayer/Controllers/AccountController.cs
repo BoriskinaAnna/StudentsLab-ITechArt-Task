@@ -7,15 +7,17 @@ using System.Security.Claims;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using ITechArt.StudentsLab.PresentationLayer.Extensions;
 
 namespace ITechArt.StudentsLab.PresentationLayer.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class AccountController : Controller
     {
         private readonly IAccountService _accountService;
         private readonly IUserService _userService;
+
 
         public AccountController(IAccountService accountService, IUserService userService)
         {
@@ -23,7 +25,8 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
             _userService = userService;
         }
 
-        [HttpPost]
+
+        [HttpPost("login")]
         public async Task<IActionResult> Login(LoginModel model)
         {
             UserModel user = await _accountService.Login(model.Email, model.Password);
@@ -48,7 +51,7 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
                 new ClaimsPrincipal(claimsIdentity)
             );
 
-            return Ok(new ResponseModel
+            return Ok(new UserResponseModel
             (
                 user.Id,
                 user.FirstName,
@@ -58,7 +61,7 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
             ));
         }
 
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterModel model)
         {
             RegisterUserModel registerUser = new RegisterUserModel(
@@ -89,8 +92,7 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
                 new ClaimsPrincipal(claimsIdentity)
             );
 
-            return Ok(new ResponseModel
-            (
+            return Ok(new UserResponseModel(
                 user.Id,
                 user.FirstName,
                 user.LastName,
@@ -99,10 +101,16 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
             ));
         }
 
-        [HttpGet]
-        [Route("{id:int}")]
-        public async Task<IActionResult> GetInfoAboutCurrentUser(int id)
+        [HttpGet("current-user")]
+        public async Task<IActionResult> GetCurrentUserInfo()
         {
+            int id = User.GetUserId();
+
+            if (id == 0)
+            {
+                return StatusCode(401, "User is not authenticated");
+            }
+
             UserModel user = await _userService.GetUserById(id);
 
             if (user == null)
@@ -110,8 +118,7 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
                 return NotFound();
             }
 
-            return Ok(new ResponseModel
-            (
+            return Ok(new UserResponseModel(
                 user.Id,
                 user.FirstName,
                 user.LastName,
@@ -120,6 +127,7 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
             ));
         }
 
+        [Route("logout")]
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(

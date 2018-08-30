@@ -1,5 +1,5 @@
 import Result from './result';
-import {FetchResultTypeEnum} from "./fetchResultTypeEnum";
+import {FetchResultTypeEnum} from './fetchResultTypeEnum';
 import HttpStatus from 'http-status-codes';
 
 

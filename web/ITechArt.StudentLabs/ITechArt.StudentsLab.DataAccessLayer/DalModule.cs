@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using ITechArt.StudentsLab.DataAccessLayer.Contracts;
-using ITechArt.StudentsLab.DataAccessLayer.Services;
+using ITechArt.StudentsLab.DataAccessLayer.Repositories;
 
 namespace ITechArt.StudentsLab.DataAccessLayer
 {
@@ -9,6 +9,9 @@ namespace ITechArt.StudentsLab.DataAccessLayer
         public static void Register(IServiceCollection collection)
         {
             collection.AddSingleton<IUserRepository, UserRepository>();
+            collection.AddSingleton<ILabRepository, LabRepository>();
+            collection.AddSingleton<IScheduleRepository, ScheduleRepository>();
+            collection.AddSingleton<IFeedbackRepository, FeedbackRepository>();
         }
     }
 }

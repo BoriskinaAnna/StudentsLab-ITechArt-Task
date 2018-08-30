@@ -17,6 +17,7 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
             _userRepository = userRepository;
         }
 
+
         private static bool ByteArraysCompaire(byte[] a, byte[] b)
         {
             for (int i = 0; i < a.Length; i++)
@@ -48,8 +49,7 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
 
                 if (ByteArraysCompaire(passwordObject.PasswordHash, user.PasswordHash))
                 {
-                    UserModel userModel = new UserModel
-                        (
+                    UserModel userModel = new UserModel(
                             user.Id,
                             user.FirstName,
                             user.LastName,
@@ -84,8 +84,7 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
 
             int userId = await _userRepository.UpsertUser(user);
 
-            UserModel userModel = new UserModel
-            (
+            UserModel userModel = new UserModel(
                 userId,
                 user.FirstName,
                 user.SecondName,

@@ -1,0 +1,64 @@
+@mixin _standardFont(){
+  font-family: "Open Sans",sans-serif;
+  color: #454949;
+}
+
+@mixin _boldFont() {
+  @include _standardFont();
+  font-weight: bold;
+}
+
+.feedbackContainer{
+  background-color: #F6F6F5;
+
+  flex: 1;
+
+  .feedback{
+    width: 800px;
+    margin: auto;
+    background-color: rgb(232, 232, 232);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+
+    &__text{
+      padding-left: 30px;
+      @include _boldFont();
+    }
+
+    &__questions{
+      padding-left: 30px;
+    }
+
+    &__answer{
+      width: 740px;
+      height: 70px;
+      padding-left: 30px;
+      margin: auto;
+    }
+
+    &__saveBtn{
+      align-items: flex-start;
+      background-color: rgb(235, 29, 36);
+      border: 0px rgb(255, 255, 255);
+      cursor: pointer;
+      font-size: 18px;
+      height: 50px;
+      text-align: center;
+      color: white;
+      width: 100%;
+      margin-top: 20px;
+      &:focus {
+        outline-width: 0;
+      }
+    }
+
+    &__chooseStudent{
+      width: 740px;
+      padding-left: 30px;
+      margin: auto;
+    }
+  }
+}

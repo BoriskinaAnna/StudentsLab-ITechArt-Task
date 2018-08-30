@@ -42,11 +42,14 @@ namespace ITechArt.StudentsLab.PresentationLayer
                         options.LoginPath = "/api/account/LogIn";
                         options.LogoutPath = "/api/account/LogOff";
                     });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "wwwroot";
             });
+
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 

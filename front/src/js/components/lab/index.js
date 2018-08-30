@@ -15,7 +15,7 @@ class Lab extends Component {
 
     componentWillMount(){
         const {lab} = this.props;
-        const date = new Date(lab.admissionEndDate.replace(/(\d+).(\d+)/, '$1 1 $2'));
+        const date = new Date(lab.admissionEnd);
         date.setMonth(date.getMonth() + 1);
         if (new Date() - date < 0 ){
             this.setState({isCurrent: false});
@@ -41,33 +41,38 @@ class Lab extends Component {
         }
     }
 
+    getDate = (dateString) =>{
+        const date = new Date (dateString);
+        return '0' + date.getMonth() + '.' + date.getFullYear();
+    };
+
     render() {
         const {lab, t} = this.props;
         const labStatus = !this.state.isCurrent &&
                 <div className="labContent__labStatus"/>;
-        const imageURL = Lab.getImageURL(lab.type);
+        const imageURL = Lab.getImageURL(lab.labType);
 
         return (
             <div className="lab">
                 <div className="labLogo">
                     <img className={this.state.isCurrent ? "labLogo__image labLogo_isNotCurrentLab": "labLogo__image"}
-                         src={imageURL} alt={lab.type}/>
+                         src={imageURL} alt={lab.labType}/>
                 </div>
                 <div className="labContent">
                     <div className="labContent__labType">
                         {labStatus}
-                        <h3 className="labContent__title">{lab.trainingName}</h3>
+                        <h3 className="labContent__title">{lab.name}</h3>
                         <div className="labContent__dates">
                             <div>
                                <span className="labContent__admissionDate">{t('admissionDate')}</span>
-                                {lab.admissionStartDate} - {lab.admissionEndDate}
+                               {this.getDate(lab.admissionStart)} - {this.getDate(lab.admissionEnd)}
                             </div>
                         </div>
                     </div>
                     <div className="labContent__trainingDates">
                         <span className="labContent__headerTrainingDate">{t('trainingDate')}</span>
                         <div className="labContent__dates">
-                            {lab.trainingStartDate} - {lab.trainingEndDate}
+                            {this.getDate(lab.trainingStart)} - {this.getDate(lab.trainingEnd)}
                             </div>
                     </div>
                     <span className="labContent__city">{lab.city}</span>

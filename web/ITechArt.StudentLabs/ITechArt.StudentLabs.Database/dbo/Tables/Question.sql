@@ -3,4 +3,3 @@
     [Question] NVARCHAR (4000) NOT NULL,
     CONSTRAINT [PK_Question] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
-

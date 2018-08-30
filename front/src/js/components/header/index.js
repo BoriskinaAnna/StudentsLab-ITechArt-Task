@@ -2,22 +2,22 @@ import React, {Component} from 'react';
 import './headerStyle.scss';
 import {translate} from 'react-i18next';
 import {Link} from 'react-router-dom';
-import UserService from '../userService';
+import userService from '../services/userService';
 
 
 class Header extends Component {
 
     constructor(){
         super();
-        const userService = UserService;
+
         this.state = {
             btnAuthorizationName: '',
-            isUserNotAuthenticate: userService.getCurrentUser().id === null
-        }
+            isCurrentUserInfoLoaded: false,
+            isUserNotAuthenticate: true
+        };
     }
 
     logout = () =>{
-        const userService = UserService;
         userService.logout();
         this.setState({
             isUserNotAuthenticate: true
@@ -25,43 +25,64 @@ class Header extends Component {
     };
 
     render() {
-        const {t} = this.props;
-        const btnAuthorizationAction = this.state.isUserNotAuthenticate
-            ? <Link
-                to={{
-                  pathname:'/authentication',
-                  state: { redirectPage : window.location.pathname}
-                }}
-                className="headerBtn"
-              >
-                {t('btnAuthorizationLogin')}
-              </Link>
-            : <button onClick={this.logout} className="headerBtn">
-                {t('btnAuthorizationLogout')}
-              </button>;
+        if (!this.state.isCurrentUserInfoLoaded) {
+            userService.getCurrentUserInfoForPublicPage()
+                .then((result) => {
+                    this.setState({
+                        isUserNotAuthenticate: result.id === undefined,
+                        isCurrentUserInfoLoaded: true
+                    });
+                })
+                .catch(error => console.log(error));
 
-        const btnRegistration = this.state.isUserNotAuthenticate
-            && <Link
-                 to={{
-                     pathname:'/registration',
-                     state: { redirectPage : window.location.pathname}
-                 }}
-                 className="headerBtn"
-               >
-                   {t('register')}
-               </Link>;
-
-        return (
-            <header>
-                <Link to="/" className="headerLogo">
-                    <img className="headerLogo__img" src="img/logo.svg" alt="ITechArtHeaderLogo"/>
+            return null;
+        }
+        else {
+            const {t} = this.props;
+            const btnAuthorizationAction = this.state.isUserNotAuthenticate
+                ? <Link
+                    to={{
+                        pathname: '/authentication',
+                        state: {
+                            redirectPage: window.location.pathname,
+                            labId: this.props.labId
+                        }
+                    }}
+                    className="headerBtn"
+                >
+                    {t('btnAuthorizationLogin')}
                 </Link>
-                <div className="login">
-                    {btnAuthorizationAction}
-                    {btnRegistration}
-                </div>
-            </header>
-        )
+                :<Link
+                    to={'/'}
+                    onClick={this.logout}
+                    className="headerBtn"
+                >
+                    {t('btnAuthorizationLogout')}
+                </Link>;
+
+            const btnRegistration = this.state.isUserNotAuthenticate
+                && <Link
+                    to={{
+                        pathname: '/registration',
+                        state: {redirectPage: window.location.pathname}
+                    }}
+                    className="headerBtn"
+                >
+                    {t('register')}
+                </Link>;
+
+            return (
+                <header>
+                    <Link to="/" className="headerLogo">
+                        <img className="headerLogo__img" src="img/logo.svg" alt="ITechArtHeaderLogo"/>
+                    </Link>
+                    <div className="login">
+                        {btnAuthorizationAction}
+                        {btnRegistration}
+                    </div>
+                </header>
+            )
+        }
     }
 }
 export default translate('translations')(Header)

@@ -4,9 +4,9 @@ import {translate} from 'react-i18next';
 import Modal from 'react-modal';
 import RegistrationField from '../registrationField';
 import {Redirect, withRouter} from 'react-router-dom';
-import userService from '../userService';
-import {FetchResultTypeEnum} from '../userService/fetchResultTypeEnum';
-import redirectAwareFetch from '../userService/redirectAwareFetch';
+import userService from '../services/userService';
+import {FetchResultTypeEnum} from '../services/userService/fetchResultTypeEnum';
+import redirectAwareFetch from '../services/userService/redirectAwareFetch';
 
 
 Modal.setAppElement('#content');
@@ -120,6 +120,7 @@ class Registration extends Component {
                            });
                    }
                })
+               .catch(error => console.log(error));
        }
    };
 

@@ -1,23 +1,111 @@
 import React, {Component} from 'react';
 import Lecture from '../lecture/';
 import './scheduleStyle.scss';
+import {translate} from 'react-i18next';
+import AddFeedbackDates from '../addFeedbackDates';
+import scheduleService from '../services/scheduleService';
+import {Route, withRouter} from 'react-router-dom';
+import Header from '../header';
+import Footer from '../footer';
+import userService from '../services/userService';
 
 
-class Index extends Component {
+class Schedule extends Component {
+
+    schedule = [];
+
+    currentUser = {
+        role: undefined,
+        id: undefined
+    };
+
+    constructor(props){
+        super(props);
+
+        this.state = {
+            isAddFeedbackDatesShowed: false,
+            isScheduleLoaded: false,
+            isCurrentUserInfoLoaded: false
+        };
+    }
+
+    getCurrentUserInfo = () =>{
+        userService.getCurrentUserInfoForPublicPage()
+            .then((data) => {
+                this.setState({
+                    isCurrentUserInfoLoaded: true
+                });
+                this.currentUser.id = data.id;
+                this.currentUser.role = data.role;
+            })
+            .catch(error => console.log(error));
+    };
+
+    getSchedule = () =>{
+        scheduleService.getSchedule(this.props.location.state.labId)
+            .then(data =>{
+                this.schedule = data;
+                this.setState({
+                    isScheduleLoaded: true
+                });
+            })
+            .catch(error => console.log(error));
+    };
 
     render() {
-        const {schedule, showChangeLecture} = this.props;
-        const lectureElements = schedule.map((lecture, index) =>
-            <div key = {index} className="schedule__lecture">
-                <Lecture lecture={lecture} showChangeLecture={showChangeLecture}/>
-            </div>
-        );
+        if (!(this.state.isScheduleLoaded && this.state.isCurrentUserInfoLoaded)){
+            if (!this.state.isCurrentUserInfoLoaded){
+               this.getCurrentUserInfo();
+            }
+            if(!this.state.isScheduleLoaded){
+              this.getSchedule();
+            }
 
-        return (
-            <div className="schedule">
-                {lectureElements}
-            </div>
-        )
+            return null;
+        }
+        else {
+            const {showChangeLecture, t} = this.props;
+
+            const lectureElements =  this.schedule.map((lecture, index) =>
+                <div key = {index} className="schedule__lecture">
+                    <Lecture lecture={lecture} showChangeLecture={showChangeLecture}/>
+                </div>
+            );
+
+            const addFeedbackDatesBtnName = this.state.isAddFeedbackDatesShowed? t('close'):t('addFeedbackDates');
+
+            const addFeedbackDatesBtn = this.currentUser.id !== undefined
+                && this.currentUser.role !== 'Student'
+                &&  <button className="schedule__addFeedbackDatesBtn"
+                            onClick = {() =>
+                                this.setState({
+                                    isAddFeedbackDatesShowed: !this.state.isAddFeedbackDatesShowed
+                                })
+                            }
+                >
+                    {addFeedbackDatesBtnName}
+                </button>;
+
+            const addFeedbackDates = this.state.isAddFeedbackDatesShowed&&<AddFeedbackDates labId={this.props.location.state.labId}/>;
+
+            return (
+                <React.Fragment>
+                    <Route exact path="/schedule" component={() =>
+                        (<Header labId={this.props.location.state.labId}/>)}
+                    />
+
+                    <div className="schedule">
+                        {addFeedbackDates}
+                        <div className="schedule__addFeedbackDates">
+                            {addFeedbackDatesBtn}
+                        </div>
+                        {lectureElements}
+                    </div>
+
+                    <Route exact path="/schedule" component={() => (<Footer/>)}/>
+                </React.Fragment>
+            )
+        }
     }
 }
-export default Index
+export default  withRouter(translate('translations')(Schedule))

@@ -1,0 +1,65 @@
+@mixin _standardFont(){
+  font-family: "Open Sans",sans-serif;
+  color: #454949;
+}
+
+@mixin _boldFont() {
+  @include _standardFont();
+  font-weight: bold;
+}
+
+.feedbackDates{
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: #F6F6F5;
+
+  &__addedDates{
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__date{
+    @include _boldFont();
+    margin-left:20px;
+  }
+
+  &__btn{
+    @include _boldFont();
+    border: none;
+    background-color: #F6F6F5;
+
+    &:focus{
+      outline: none;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__fillFeedbackBtn{
+    @include _standardFont();
+    border: none;
+    background-color: #F6F6F5;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__addNext{
+      color: #a6a6a6;
+      background-color: rgb(69,69,69);
+      border: none;
+      margin-left:20px;
+  }
+
+  &__addDate{
+      width: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+  }
+}
