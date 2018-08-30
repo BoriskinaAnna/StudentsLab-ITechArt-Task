@@ -1,4 +1,4 @@
-﻿using ITechArt.StudentsLab.DataAccessLayer.Models.Entities;
+﻿using ITechArt.StudentsLab.DataAccessLayer.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

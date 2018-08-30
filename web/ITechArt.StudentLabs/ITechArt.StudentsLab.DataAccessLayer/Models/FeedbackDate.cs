@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ITechArt.StudentsLab.DataAccessLayer.Models.Entities
+namespace ITechArt.StudentsLab.DataAccessLayer.Models
 {
     public class FeedbackDate
     {

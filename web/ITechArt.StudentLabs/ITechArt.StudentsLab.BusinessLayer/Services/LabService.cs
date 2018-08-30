@@ -2,7 +2,7 @@
 using ITechArt.StudentsLab.DataAccessLayer.Contracts;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ITechArt.StudentsLab.DataAccessLayer.Models.Entities;
+using ITechArt.StudentsLab.DataAccessLayer.Models;
 using ITechArt.StudentsLab.BusinessLayer.Models;
 using Mapster;
 

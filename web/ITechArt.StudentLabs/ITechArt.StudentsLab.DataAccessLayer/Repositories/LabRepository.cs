@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ITechArt.StudentsLab.BusinessLayer.Contracts;
 using System.Data.SqlClient;
-using ITechArt.StudentsLab.DataAccessLayer.Models.Entities;
+using ITechArt.StudentsLab.DataAccessLayer.Models;
 using Dapper;
 using System.Data;
 

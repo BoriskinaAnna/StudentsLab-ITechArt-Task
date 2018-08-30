@@ -3,7 +3,7 @@ using ITechArt.StudentsLab.DataAccessLayer.Contracts;
 using ITechArt.StudentsLab.BusinessLayer.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ITechArt.StudentsLab.DataAccessLayer.Models.Entities;
+using ITechArt.StudentsLab.DataAccessLayer.Models;
 using Mapster;
 
 namespace ITechArt.StudentsLab.BusinessLayer.Services

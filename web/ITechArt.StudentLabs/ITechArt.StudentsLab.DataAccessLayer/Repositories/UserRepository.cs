@@ -1,6 +1,6 @@
 ﻿using ITechArt.StudentsLab.DataAccessLayer.Contracts;
 using System.Threading.Tasks;
-using ITechArt.StudentsLab.DataAccessLayer.Models.DataTransferObjects;
+using ITechArt.StudentsLab.DataAccessLayer.Models;
 using System.Data.SqlClient;
 using Dapper;
 using System.Data;

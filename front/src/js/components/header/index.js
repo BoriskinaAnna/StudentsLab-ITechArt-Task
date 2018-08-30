@@ -28,18 +28,10 @@ class Header extends Component {
         if (!this.state.isCurrentUserInfoLoaded) {
             userService.getCurrentUserInfoForPublicPage()
                 .then((result) => {
-                    if(result.id !== undefined){
-                        this.setState({
-                            isUserNotAuthenticate: false,
-                            isCurrentUserInfoLoaded: true
-                        });
-                    }
-                    else{
-                        this.setState({
-                            isUserNotAuthenticate: true,
-                            isCurrentUserInfoLoaded: true
-                        });
-                    }
+                    this.setState({
+                        isUserNotAuthenticate: result.id !== undefined,
+                        isCurrentUserInfoLoaded: true
+                    });
                 })
                 .catch(error => console.log(error));
 
