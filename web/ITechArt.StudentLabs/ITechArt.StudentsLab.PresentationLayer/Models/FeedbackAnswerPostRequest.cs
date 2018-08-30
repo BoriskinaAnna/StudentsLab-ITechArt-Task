@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ITechArt.StudentsLab.DataAccessLayer.Models.DataTransferObjects
+﻿namespace ITechArt.StudentsLab.PresentationLayer.Models
 {
-    public class FeedbackAnswerPostRequestModel
+    public class FeedbackAnswerPostRequest
     {
-        public int[] QuestionId { get; }
 
-        public string[] Answers { get; }
+        public int[] QuestionId { get;}
+
+        public string[] Answers { get;}
 
         public int StudentId { get; }
 
@@ -17,7 +14,7 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Models.DataTransferObjects
         public int FeedbackDateId { get; }
 
 
-        public FeedbackAnswerPostRequestModel(
+        public FeedbackAnswerPostRequest(
             int[] questionId,
             int studentId,
             int mentorId,

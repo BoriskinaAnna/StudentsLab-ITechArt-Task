@@ -2,7 +2,7 @@
 
 namespace ITechArt.StudentsLab.PresentationLayer.Models
 {
-    public class FeedbackDateModel
+    public class FeedbackDateResponse
     {
         public int Id { get; }
 
@@ -10,7 +10,7 @@ namespace ITechArt.StudentsLab.PresentationLayer.Models
 
         public DateTime Date { get; }
        
-        public FeedbackDateModel(
+        public FeedbackDateResponse(
             int id,
             int labId,
             DateTime date

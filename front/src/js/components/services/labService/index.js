@@ -18,6 +18,7 @@ class LabService{
             .then(result =>{
                 return result.data;
             })
+            .catch(error => console.log(error));
     }
 }
 

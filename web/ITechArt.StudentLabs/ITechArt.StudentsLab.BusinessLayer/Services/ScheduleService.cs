@@ -2,8 +2,8 @@
 using ITechArt.StudentsLab.DataAccessLayer.Contracts;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using LectureModel = ITechArt.StudentsLab.BusinessLayer.Models.LectureModel;
-using DalLectureModel = ITechArt.StudentsLab.DataAccessLayer.Models.DataTransferObjects.LectureModel;
+using ITechArt.StudentsLab.BusinessLayer.Models;
+using ITechArt.StudentsLab.DataAccessLayer.Models.Entities;
 using Mapster;
 
 namespace ITechArt.StudentsLab.BusinessLayer.Services
@@ -19,7 +19,7 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
         }
         public async Task<IEnumerable<LectureModel>> GetSchedule(int labId)
         {
-               IEnumerable<DalLectureModel> schedule = await _scheduleRepository.GetSchedule(labId);
+               IEnumerable<Lecture> schedule = await _scheduleRepository.GetSchedule(labId);
         
               return schedule.Adapt<IEnumerable<LectureModel>>();
         }

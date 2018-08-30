@@ -1,4 +1,5 @@
 import redirectAwareFetch from './redirectAwareFetch';
+import errorAwareFetch from "./errorAwareFetch";
 
 let currentUser = {
     email: '',
@@ -29,9 +30,9 @@ class UserService {
          );
      };
 
-     async getCurrentUserInfo(){
+    async getCurrentUserInfo(fetchFunction){
          if (this.currentUserInfoTimeout){
-             await this.getInfoAboutCurrentUser();
+             await this.getCurrentUserInfoFromServer(fetchFunction);
              this.setTimeout();
          }
 
@@ -42,7 +43,15 @@ class UserService {
              id: currentUser.id,
              role: currentUser.role
          }
+     };
+
+     async getCurrentUserInfoForPublicPage(){
+        return this.getCurrentUserInfo(errorAwareFetch);
      }
+
+    async getCurrentUserInfoForPrivatePage(){
+        return this.getCurrentUserInfo(redirectAwareFetch);
+    }
 
      getOptions = (method) =>{
          return {
@@ -57,16 +66,13 @@ class UserService {
      logout = () =>{
          this.initializeNewUser('', '', '', undefined, '');
 
-         fetch('/api/account/Logout/', this.getOptions('POST'))
-             .catch((error) => {
-                 console.log(error);
-             })
+         redirectAwareFetch('/api/account/Logout/',this.getOptions('POST'));
      };
 
-    getInfoAboutCurrentUser = () =>{
-        return redirectAwareFetch('/api/account/currentUser', this.getOptions('GET'))
+    getCurrentUserInfoFromServer = (fetchFunction) =>{
+        return fetchFunction('/api/account/current-user', this.getOptions('GET'))
             .then(result =>{
-                if(result !== undefined){
+                if(result.data !== undefined){
                     userService.initializeNewUser(
                         result.data.email,
                         result.data.firstName,
@@ -75,7 +81,8 @@ class UserService {
                         result.data.role
                     );
                 }
-            });
+            })
+            .catch(error => console.log(error));
         }
 }
 

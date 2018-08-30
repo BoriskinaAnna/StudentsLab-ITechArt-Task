@@ -99,14 +99,14 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
             ));
         }
 
-        [HttpGet("currentUser")]
+        [HttpGet("current-user")]
         public async Task<IActionResult> GetCurrentUserInfo()
         {
             int id = User.GetUserId();
 
             if (id == 0)
             {
-                return Ok();
+                return StatusCode(401, "User is not authenticated");
             }
 
             UserModel user = await _userService.GetUserById(id);

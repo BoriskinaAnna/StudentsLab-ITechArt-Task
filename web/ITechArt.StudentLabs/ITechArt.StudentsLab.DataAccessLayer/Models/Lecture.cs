@@ -2,7 +2,7 @@
 
 namespace ITechArt.StudentsLab.DataAccessLayer.Models.Entities
 {
-    class Lecture
+    public class Lecture
     {
         public int Id { get; }
 

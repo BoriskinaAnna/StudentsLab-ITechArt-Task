@@ -59,7 +59,8 @@ class Authentication extends Component {
                             isRedirect:  true
                         });
                 }
-            });
+            })
+            .catch(error => console.log(error));
     };
 
     updateLoginValue = (evt) =>{

@@ -2,10 +2,8 @@
 using ITechArt.StudentsLab.DataAccessLayer.Contracts;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using DalLabModel = ITechArt.StudentsLab.DataAccessLayer.Models.DataTransferObjects.LabModel;
-using LabModel = ITechArt.StudentsLab.BusinessLayer.Models.LabModel;
-using DalUserNameModel = ITechArt.StudentsLab.DataAccessLayer.Models.DataTransferObjects.UserNameModel;
-using UserNameModel = ITechArt.StudentsLab.BusinessLayer.Models.UserNameModel;
+using ITechArt.StudentsLab.DataAccessLayer.Models.Entities;
+using ITechArt.StudentsLab.BusinessLayer.Models;
 using Mapster;
 
 namespace ITechArt.StudentsLab.BusinessLayer.Services
@@ -20,13 +18,13 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
 
         public async Task<IEnumerable<LabModel>> GetLabs()
         {
-            IEnumerable<DalLabModel> labs = await _labRepository.GetLabs();
+            IEnumerable<Lab> labs = await _labRepository.GetLabs();
             return labs.Adapt<IEnumerable<LabModel>>();
         }
 
-        public async Task<IEnumerable<UserNameModel>> GetMerntorStudents(int mentorId)
+        public async Task<IEnumerable<UserNameModel>> GetMentorStudents(int mentorId)
         {
-            IEnumerable<DalUserNameModel> feedbackDates = await _labRepository.GetStudentByMentorId(mentorId);
+            IEnumerable<UserName> feedbackDates = await _labRepository.GetStudentByMentorId(mentorId);
 
             return feedbackDates.Adapt<IEnumerable<UserNameModel>>();
         }

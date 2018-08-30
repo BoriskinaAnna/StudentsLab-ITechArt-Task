@@ -1,5 +1,4 @@
 ﻿using ITechArt.StudentsLab.DataAccessLayer.Contracts;
-using ITechArt.StudentsLab.DataAccessLayer.Models.DataTransferObjects;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ITechArt.StudentsLab.BusinessLayer.Contracts;
@@ -7,12 +6,10 @@ using System.Data.SqlClient;
 using ITechArt.StudentsLab.DataAccessLayer.Models.Entities;
 using Dapper;
 using System.Data;
-using Mapster;
-using System;
 
 namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
 {
-    internal class FeedbackRepository: IFeedbackRepository
+    internal class FeedbackRepository : IFeedbackRepository
     {
         private readonly IDalSettings _settings;
 
@@ -22,7 +19,7 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
             _settings = settings;
         }
 
-        public async Task<IEnumerable<FeedbackDateModel>> GetFeedbackDates(int labId)
+        public async Task<IEnumerable<FeedbackDate>> GetFeedbackDates(int labId)
         {
             using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))
             {
@@ -32,11 +29,11 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
                   commandType: CommandType.StoredProcedure
                 );
 
-                return feedbackDates.Adapt<IEnumerable<FeedbackDateModel>>();
+                return feedbackDates;
             }
         }
 
-        public async Task<int> UpsertFeedbackDates(FeedbackDateModel feedbackDate)
+        public async Task<int> UpsertFeedbackDates(FeedbackDate feedbackDate)
         {
             using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))
             {
@@ -55,7 +52,7 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
             }
         }
 
-        public async Task UpsertFeedbackAnswers(FeedbackAnswerPostRequestModel feedbackAnswers)
+        public async Task UpsertFeedbackAnswers(FeedbackAnswerPostRequest feedbackAnswers)
         {
             using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))
             {
@@ -77,11 +74,11 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
             }
         }
 
-        public async Task<IEnumerable<FeedbackAnswerResponseModel>> GetFeedbackAnswers(FeedbackAnswerRequestModel feedbackRequest)
+        public async Task<IEnumerable<FeedbackAnswerResponse>> GetFeedbackAnswers(FeedbackAnswerGetRequest feedbackRequest)
         {
             using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))
             {
-                IEnumerable <FeedbackAnswer> feedback = await connection.QueryAsync<FeedbackAnswer>(
+                IEnumerable<FeedbackAnswerResponse> feedback = await connection.QueryAsync<FeedbackAnswerResponse>(
                     "GetFeedbackAnswers",
                     new
                     {
@@ -92,11 +89,11 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
                     commandType: CommandType.StoredProcedure
                 );
 
-                return feedback.Adapt<IEnumerable<FeedbackAnswerResponseModel>>();
+                return feedback;
             }
         }
 
-        public async Task<IEnumerable<FeedbackQuestionModel>> GetFeedbackQuestions(int labId)
+        public async Task<IEnumerable<FeedbackQuestion>> GetFeedbackQuestions(int labId)
         {
             using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))
             {
@@ -106,7 +103,7 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
                     commandType: CommandType.StoredProcedure
                 );
 
-                return feedback.Adapt<IEnumerable<FeedbackQuestionModel>>();
+                return feedback;
             }
         }
     }

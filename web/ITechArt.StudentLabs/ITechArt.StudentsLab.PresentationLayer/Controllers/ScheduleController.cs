@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using ITechArt.StudentsLab.BusinessLayer.Contracts;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using BlLectureModel = ITechArt.StudentsLab.BusinessLayer.Models.LectureModel;
+using ITechArt.StudentsLab.BusinessLayer.Models;
 using Mapster;
 
 namespace ITechArt.StudentsLab.PresentationLayer.Controllers
@@ -23,10 +23,10 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
         [Route("labs/{labId:int}/schedule")]
         public async  Task<IActionResult> Get(int labId)
         {
-             IEnumerable<BlLectureModel> schedule = await _scheduleService.GetSchedule(labId);
+             IEnumerable<LectureModel> schedule = await _scheduleService.GetSchedule(labId);
 
              return Ok(
-                schedule.Adapt<IEnumerable<LectureModel>>()
+                schedule.Adapt<IEnumerable<LectureResponse>>()
              );
         }
     }

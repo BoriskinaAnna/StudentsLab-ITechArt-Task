@@ -1,6 +1,6 @@
 ﻿namespace ITechArt.StudentsLab.BusinessLayer.Models
 {
-    public class FeedbackAnswerRequestModel
+    public class FeedbackAnswerGetRequestModel
     {
         public int StudentId { get; }
 
@@ -8,7 +8,7 @@
 
         public int FeedbackDateId { get; }
 
-        public FeedbackAnswerRequestModel(
+        public FeedbackAnswerGetRequestModel(
             int studentId,
             int mentorId,
             int feedbackDateId

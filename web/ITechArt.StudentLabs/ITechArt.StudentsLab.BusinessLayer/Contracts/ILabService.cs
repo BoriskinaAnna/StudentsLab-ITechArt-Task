@@ -8,6 +8,6 @@ namespace ITechArt.StudentsLab.BusinessLayer.Contracts
     {
         Task<IEnumerable<LabModel>> GetLabs();
 
-        Task<IEnumerable<UserNameModel>> GetMerntorStudents(int mentorId);
+        Task<IEnumerable<UserNameModel>> GetMentorStudents(int mentorId);
     }
 }

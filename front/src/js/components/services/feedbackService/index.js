@@ -46,6 +46,7 @@ class FeedbackService{
             .then(result =>{
                 return result.data;
             })
+            .catch(error => console.log(error));
     };
 
     upsertFeedbackDate = (date, labId, id) =>{

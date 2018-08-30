@@ -1,5 +1,4 @@
 ﻿using ITechArt.StudentsLab.DataAccessLayer.Contracts;
-using ITechArt.StudentsLab.DataAccessLayer.Models.DataTransferObjects;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ITechArt.StudentsLab.BusinessLayer.Contracts;
@@ -7,7 +6,6 @@ using System.Data.SqlClient;
 using ITechArt.StudentsLab.DataAccessLayer.Models.Entities;
 using Dapper;
 using System.Data;
-using Mapster;
 
 namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
 {
@@ -21,7 +19,7 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
             _settings = settings;
         }
 
-        public async Task<IEnumerable<LabModel>> GetLabs()
+        public async Task<IEnumerable<Lab>> GetLabs()
         {
             using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))
             {
@@ -29,11 +27,11 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
                     "GetLabs",
                     commandType: CommandType.StoredProcedure);
 
-                return labs.Adapt<IEnumerable<LabModel>>();
+                return labs;
             }
         }
 
-        public async Task<IEnumerable<UserNameModel>> GetStudentByMentorId(int mentorId)
+        public async Task<IEnumerable<UserName>> GetStudentByMentorId(int mentorId)
         {
             using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))
             {
@@ -43,7 +41,7 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
                     commandType: CommandType.StoredProcedure
                 );
 
-                return feedback.Adapt<IEnumerable<UserNameModel>>();
+                return feedback;
             }
         }
     }

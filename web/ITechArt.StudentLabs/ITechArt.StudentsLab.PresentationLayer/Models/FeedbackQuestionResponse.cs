@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ITechArt.StudentsLab.DataAccessLayer.Models.DataTransferObjects
+﻿namespace ITechArt.StudentsLab.PresentationLayer.Models
 {
-    public class FeedbackQuestionModel
+    public class FeedbackQuestionResponse
     {
         public string Question { get; }
 
         public int QuestionId { get; }
 
-        public FeedbackQuestionModel(
+        public FeedbackQuestionResponse(
             string question,
             int questionId
         )

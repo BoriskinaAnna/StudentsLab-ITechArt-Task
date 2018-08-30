@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import Lab from '../lab';
 import './labsListStyle.scss';
 import {Link, Route} from 'react-router-dom';
-import labService from "../services/labService";
-import Footer from "../footer";
+import labService from '../services/labService';
+import Footer from '../footer';
 
 
 class LabList extends Component {
@@ -25,7 +25,8 @@ class LabList extends Component {
                     this.setState({
                         isLabsLoaded: true
                     })
-                });
+                })
+                .catch(error => console.log(error));
             return null;
         }
         else{

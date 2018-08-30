@@ -30,14 +30,15 @@ class Schedule extends Component {
     }
 
     getCurrentUserInfo = () =>{
-        userService.getCurrentUserInfo()
+        userService.getCurrentUserInfoForPublicPage()
             .then((data) => {
                 this.setState({
                     isCurrentUserInfoLoaded: true
                 });
                 this.currentUser.id = data.id;
                 this.currentUser.role = data.role;
-            });
+            })
+            .catch(error => console.log(error));
     };
 
     getSchedule = () =>{
@@ -47,7 +48,8 @@ class Schedule extends Component {
                 this.setState({
                     isScheduleLoaded: true
                 });
-            });
+            })
+            .catch(error => console.log(error));
     };
 
     render() {

@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using ITechArt.StudentsLab.BusinessLayer.Contracts;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using BlLabModel = ITechArt.StudentsLab.BusinessLayer.Models.LabModel;
-using BlUserNameModel = ITechArt.StudentsLab.BusinessLayer.Models.UserNameModel;
+using ITechArt.StudentsLab.BusinessLayer.Models;
 using Mapster;
 
 namespace ITechArt.StudentsLab.PresentationLayer.Controllers
@@ -24,9 +23,9 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            IEnumerable<BlLabModel> labs = await _labService.GetLabs();
+            IEnumerable<LabModel> labs = await _labService.GetLabs();
             return Ok(
-                labs.Adapt<IEnumerable<LabModel>>()
+                labs.Adapt<IEnumerable<LabResponse>>()
             );
         }
        
@@ -34,10 +33,10 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
         [Route("mentors/{mentorId:int}/students")]
         public async Task<IActionResult> GetMentorStudents(int mentorId)
         {
-            IEnumerable<BlUserNameModel> feedbackResponse = await _labService.GetMerntorStudents(mentorId);
+            IEnumerable<UserNameModel> feedbackResponse = await _labService.GetMentorStudents(mentorId);
 
             return Ok(
-                feedbackResponse.Adapt<IEnumerable<UserNameModel>>()
+                feedbackResponse.Adapt<IEnumerable<UserNameResponse>>()
             );
         }
     }

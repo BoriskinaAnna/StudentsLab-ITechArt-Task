@@ -1,12 +1,12 @@
 ﻿namespace ITechArt.StudentsLab.PresentationLayer.Models
 {
-    public class UserNameModel
+    public class UserNameResponse
     {
         public int Id { get; }
         public string FirstName { get; }
         public string LastName { get; }
 
-        public UserNameModel(
+        public UserNameResponse(
             int id,
             string firstName,
             string lastName

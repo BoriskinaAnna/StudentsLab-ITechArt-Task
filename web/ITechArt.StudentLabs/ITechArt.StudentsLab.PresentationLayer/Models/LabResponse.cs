@@ -2,7 +2,7 @@
 
 namespace ITechArt.StudentsLab.PresentationLayer.Models
 {
-    public class LabModel
+    public class LabResponse
     {
         public int Id { get; }
 
@@ -22,7 +22,7 @@ namespace ITechArt.StudentsLab.PresentationLayer.Models
 
         public bool IsDraft { get; }
 
-        public LabModel(
+        public LabResponse(
             int id,
             string labType,
             string city,

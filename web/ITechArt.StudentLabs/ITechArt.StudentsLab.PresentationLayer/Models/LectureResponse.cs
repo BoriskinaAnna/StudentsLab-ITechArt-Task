@@ -2,7 +2,7 @@
 
 namespace ITechArt.StudentsLab.PresentationLayer.Models
 {
-    public class LectureModel
+    public class LectureResponse
     {
         public int Id { get; }
 
@@ -18,7 +18,7 @@ namespace ITechArt.StudentsLab.PresentationLayer.Models
 
         public TimeSpan Duration { get; }
 
-        public LectureModel(
+        public LectureResponse(
             int id,
             string lectorFirstName,
             string lectorLastName,

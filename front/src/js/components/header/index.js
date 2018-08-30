@@ -26,13 +26,23 @@ class Header extends Component {
 
     render() {
         if (!this.state.isCurrentUserInfoLoaded) {
-            userService.getCurrentUserInfo()
-                .then((data) => {
-                    this.setState({
-                        isUserNotAuthenticate: data.id === undefined,
-                        isCurrentUserInfoLoaded: true
-                    });
-                });
+            userService.getCurrentUserInfoForPublicPage()
+                .then((result) => {
+                    if(result.id !== undefined){
+                        this.setState({
+                            isUserNotAuthenticate: false,
+                            isCurrentUserInfoLoaded: true
+                        });
+                    }
+                    else{
+                        this.setState({
+                            isUserNotAuthenticate: true,
+                            isCurrentUserInfoLoaded: true
+                        });
+                    }
+                })
+                .catch(error => console.log(error));
+
             return null;
         }
         else {

@@ -11,7 +11,7 @@ namespace ITechArt.StudentsLab.BusinessLayer.Contracts
 
         Task<FeedbackDateModel> UpsertFeedbackDate(FeedbackDateModel feedbackDate);
 
-        Task<IEnumerable<FeedbackAnswerResponseModel>> GetFeedbackAnswers(FeedbackAnswerRequestModel feedbackRequest);
+        Task<IEnumerable<FeedbackAnswerResponseModel>> GetFeedbackAnswers(FeedbackAnswerGetRequestModel feedbackRequest);
 
         Task<IEnumerable<FeedbackQuestionModel>> GetFeedbackQuestions(int labId);
 

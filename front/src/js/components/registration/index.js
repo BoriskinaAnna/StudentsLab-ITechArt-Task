@@ -120,6 +120,7 @@ class Registration extends Component {
                            });
                    }
                })
+               .catch(error => console.log(error));
        }
    };
 

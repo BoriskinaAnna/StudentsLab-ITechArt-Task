@@ -1,5 +1,4 @@
 ﻿using ITechArt.StudentsLab.DataAccessLayer.Contracts;
-using ITechArt.StudentsLab.DataAccessLayer.Models.DataTransferObjects;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ITechArt.StudentsLab.BusinessLayer.Contracts;
@@ -7,7 +6,6 @@ using System.Data.SqlClient;
 using ITechArt.StudentsLab.DataAccessLayer.Models.Entities;
 using Dapper;
 using System.Data;
-using Mapster;
 
 namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
 {
@@ -21,7 +19,7 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
             _settings = settings;
         }
 
-        public async Task<IEnumerable<LectureModel>> GetSchedule(int labId)
+        public async Task<IEnumerable<Lecture>> GetSchedule(int labId)
         {
             using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))
             {
@@ -30,7 +28,7 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
                    new { Id = labId },
                    commandType: CommandType.StoredProcedure
                );
-                return schedule.Adapt<IEnumerable<LectureModel>>();
+                return schedule;
             }
         }
     }

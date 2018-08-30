@@ -1,6 +1,6 @@
 ﻿namespace ITechArt.StudentsLab.DataAccessLayer.Models.Entities
 {
-    public class FeedbackAnswer
+    public class FeedbackAnswerResponse
     {
         public string Answer { get; set; }
 

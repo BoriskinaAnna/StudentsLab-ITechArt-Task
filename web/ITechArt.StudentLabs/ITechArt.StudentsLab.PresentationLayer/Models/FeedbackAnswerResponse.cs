@@ -1,6 +1,6 @@
 ﻿namespace ITechArt.StudentsLab.PresentationLayer.Models
 {
-    public class FeedbackAnswerResponseModel
+    public class FeedbackAnswerResponse
     {
         public string Answer { get; }
 
@@ -8,7 +8,7 @@
 
         public int QuestionId { get; }
 
-        public FeedbackAnswerResponseModel(
+        public FeedbackAnswerResponse(
             int answerId,
             string answer,
             int questionId

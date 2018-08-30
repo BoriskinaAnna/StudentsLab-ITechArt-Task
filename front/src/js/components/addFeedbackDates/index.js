@@ -34,7 +34,8 @@ class AddFeedbackDates extends Component {
                 this.setState({
                     isFeedbackDatesLoaded: true
                 })
-            });
+            })
+            .catch(error => console.log(error));
     };
 
     addDateCalendarOnChange = addDate =>{
@@ -55,7 +56,8 @@ class AddFeedbackDates extends Component {
                 this.setState({
                     isFeedbackDatesLoaded: false
                 })
-            });
+            })
+            .catch(error => console.log(error));
     };
 
     updateFeedbackDate = () =>{
@@ -65,7 +67,8 @@ class AddFeedbackDates extends Component {
                     isFeedbackDatesLoaded: false,
                     changingDateId: undefined
                 })
-            });
+            })
+            .catch(error => console.log(error));
     };
 
     cancelChanges = () => {
@@ -75,13 +78,14 @@ class AddFeedbackDates extends Component {
     };
 
     getCurrentUserInfo = () =>{
-        userService.getCurrentUserInfo()
+        userService.getCurrentUserInfoForPrivatePage()
             .then((data) => {
                 this.currentUser.role = data.role;
                 this.setState({
                     isCurrentUserInfoLoaded: true
                 });
-            });
+            })
+            .catch(error => console.log(error));
     };
 
     render() {

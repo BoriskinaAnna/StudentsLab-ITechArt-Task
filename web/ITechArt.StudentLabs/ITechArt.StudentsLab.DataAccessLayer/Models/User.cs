@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ITechArt.StudentsLab.DataAccessLayer.Models.Entities
+﻿namespace ITechArt.StudentsLab.DataAccessLayer.Models.Entities
 {
     class User
     {

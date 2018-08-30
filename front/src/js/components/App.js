@@ -52,7 +52,6 @@ export class App extends Component {
                        <Route exact path="/" component={() => (<Header/>)}/>
                        <Route exact path="/" component={() => (<LabsList showAddLab={this.showAddLab}/>)}/>
 
-
                        <Route exact path="/schedule" component={() => (
                            <Schedule showChangeLecture={this.showChangeLecture}/>)}/>
 

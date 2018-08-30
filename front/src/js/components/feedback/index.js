@@ -52,7 +52,8 @@ class Feedback extends Component {
                 this.setState({
                     isAnswersLoaded: true
                 });
-            });
+            })
+            .catch(error => console.log(error));
     };
 
     selectOnChange = event =>{
@@ -80,13 +81,14 @@ class Feedback extends Component {
     } ;
 
     getCurrentUserInfo = () =>{
-        userService.getCurrentUserInfo()
+        userService.getCurrentUserInfoForPrivatePage()
             .then((data) => {
                 this.setState({
                     isCurrentUserInfoLoaded: true
                 });
                 this.currentUser.id = data.id;
-            });
+            })
+            .catch(error => console.log(error));
     };
 
     getStudentByMentorId = () =>{
@@ -96,7 +98,8 @@ class Feedback extends Component {
                 this.setState({
                     isStudentsLoaded: true
                 })
-            });
+            })
+            .catch(error => console.log(error));
     };
 
     getFeedbackQuestions = () =>{
@@ -106,7 +109,8 @@ class Feedback extends Component {
                 this.setState({
                     isQuestionsLoaded: true
                 })
-            });
+            })
+            .catch(error => console.log(error));
     };
 
     setAnswerValue = currentQuestionId =>{
