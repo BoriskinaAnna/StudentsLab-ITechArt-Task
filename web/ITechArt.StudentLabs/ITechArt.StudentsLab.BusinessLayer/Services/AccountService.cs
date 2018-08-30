@@ -17,6 +17,7 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
             _userRepository = userRepository;
         }
 
+
         private static bool ByteArraysCompaire(byte[] a, byte[] b)
         {
             for (int i = 0; i < a.Length; i++)

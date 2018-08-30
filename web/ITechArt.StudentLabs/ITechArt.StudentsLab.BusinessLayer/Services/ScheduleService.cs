@@ -17,6 +17,8 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
         {
             _scheduleRepository = scheduleRepository;
         }
+
+
         public async Task<IEnumerable<LectureModel>> GetSchedule(int labId)
         {
                IEnumerable<Lecture> schedule = await _scheduleRepository.GetSchedule(labId);

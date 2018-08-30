@@ -19,6 +19,7 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
         {
             _labService = labService;
         }
+
         
         [HttpGet]
         public async Task<IActionResult> Get()

@@ -14,10 +14,12 @@ namespace ITechArt.StudentsLab.PresentationLayer.Controllers
     {
         private readonly IScheduleService _scheduleService;
 
+
         public ScheduleController(IScheduleService scheduleService)
         {
             _scheduleService = scheduleService;
         }
+
 
         [HttpGet]
         [Route("labs/{labId:int}/schedule")]

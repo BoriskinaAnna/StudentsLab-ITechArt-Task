@@ -24,9 +24,9 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
             using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))
             {
                 IEnumerable<FeedbackDate> feedbackDates = await connection.QueryAsync<FeedbackDate>(
-                  "GetFeedbackDates",
-                  new { Id = labId },
-                  commandType: CommandType.StoredProcedure
+                    "GetFeedbackDates",
+                    new { Id = labId },
+                    commandType: CommandType.StoredProcedure
                 );
 
                 return feedbackDates;

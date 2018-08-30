@@ -11,7 +11,8 @@ let currentUser = {
 
 class UserService {
 
-     currentUserInfoTimeout = true;
+     relevantInterval = 3000;
+     getCurrentUserInfoTimeStamp = 0;
 
      initializeNewUser = (email, firstName, lastName, id, role) => {
          currentUser.id = id;
@@ -19,21 +20,13 @@ class UserService {
          currentUser.lastName = lastName;
          currentUser.email = email;
          currentUser.role = role;
-         this.setTimeout();
+         this.getCurrentUserInfoTimeStamp = new Date().getTime();
     };
 
-     setTimeout =() =>{
-         this.currentUserInfoTimeout = false;
-         setTimeout(
-             ()=>{this.currentUserInfoTimeout = true},
-             15000
-         );
-     };
-
     async getCurrentUserInfo(fetchFunction){
-         if (this.currentUserInfoTimeout){
+         if (new Date().getTime() - this.getCurrentUserInfoTimeStamp > this.relevantInterval){
              await this.getCurrentUserInfoFromServer(fetchFunction);
-             this.setTimeout();
+             this.getCurrentUserInfoTimeStamp = new Date().getTime();
          }
 
          return {
@@ -53,7 +46,7 @@ class UserService {
         return this.getCurrentUserInfo(redirectAwareFetch);
     }
 
-     getOptions = (method) =>{
+     getOptions = (method) => {
          return {
              method: method,
              headers: {
@@ -63,13 +56,13 @@ class UserService {
          };
      };
 
-     logout = () =>{
+     logout = () => {
          this.initializeNewUser('', '', '', undefined, '');
 
          redirectAwareFetch('/api/account/Logout/',this.getOptions('POST'));
      };
 
-    getCurrentUserInfoFromServer = (fetchFunction) =>{
+    getCurrentUserInfoFromServer = (fetchFunction) => {
         return fetchFunction('/api/account/current-user', this.getOptions('GET'))
             .then(result =>{
                 if(result.data !== undefined){

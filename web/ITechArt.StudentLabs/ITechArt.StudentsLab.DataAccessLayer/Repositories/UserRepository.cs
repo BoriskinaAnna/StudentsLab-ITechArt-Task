@@ -18,6 +18,7 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
             _settings = settings;
         }
 
+
         public async Task<UserResponse> GetUserByEmail(string email)
         {
             using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))

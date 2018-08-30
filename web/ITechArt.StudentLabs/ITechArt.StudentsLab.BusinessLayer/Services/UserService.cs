@@ -16,6 +16,7 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
             _userRepository = userRepository;
         }
 
+
         public async Task<UserModel> GetUserById(int id)
         {
             UserResponse user = await _userRepository.GetUserById(id);

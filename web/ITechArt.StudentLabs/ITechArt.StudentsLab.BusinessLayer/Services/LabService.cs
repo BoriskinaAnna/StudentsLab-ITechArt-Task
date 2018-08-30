@@ -12,9 +12,11 @@ namespace ITechArt.StudentsLab.BusinessLayer.Services
     {
         private readonly ILabRepository _labRepository;
 
+
         public LabService (ILabRepository labRepository){
             _labRepository = labRepository;
         }
+
 
         public async Task<IEnumerable<LabModel>> GetLabs()
         {

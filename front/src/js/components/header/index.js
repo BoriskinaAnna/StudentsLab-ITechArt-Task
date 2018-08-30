@@ -29,7 +29,7 @@ class Header extends Component {
             userService.getCurrentUserInfoForPublicPage()
                 .then((result) => {
                     this.setState({
-                        isUserNotAuthenticate: result.id !== undefined,
+                        isUserNotAuthenticate: result.id === undefined,
                         isCurrentUserInfoLoaded: true
                     });
                 })

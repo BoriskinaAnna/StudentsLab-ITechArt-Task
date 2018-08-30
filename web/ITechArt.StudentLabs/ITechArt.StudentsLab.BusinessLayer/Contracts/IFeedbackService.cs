@@ -6,7 +6,6 @@ namespace ITechArt.StudentsLab.BusinessLayer.Contracts
 {
     public interface IFeedbackService
     {
-
         Task<IEnumerable<FeedbackDateModel>> GetFeedbackDates(int labId);
 
         Task<FeedbackDateModel> UpsertFeedbackDate(FeedbackDateModel feedbackDate);

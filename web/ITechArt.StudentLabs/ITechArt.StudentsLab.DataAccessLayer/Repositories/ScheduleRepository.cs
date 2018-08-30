@@ -19,6 +19,7 @@ namespace ITechArt.StudentsLab.DataAccessLayer.Repositories
             _settings = settings;
         }
 
+
         public async Task<IEnumerable<Lecture>> GetSchedule(int labId)
         {
             using (SqlConnection connection = new SqlConnection(_settings.DefaultConnectionString))

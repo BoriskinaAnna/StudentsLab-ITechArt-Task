@@ -5,7 +5,7 @@
     [LectorId]  INT            NULL,
     [DateTime]      DATETIME       NOT NULL,
     [Theme]     NVARCHAR (255) NOT NULL,
-    [Duration] DATETIME       NULL,
+    [Duration] TIME       NULL,
     CONSTRAINT [PK_Lecture] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_Lecture_Lab] FOREIGN KEY ([LabId]) REFERENCES [dbo].[Lab] ([Id]),
     CONSTRAINT [FK_Lecture_Place] FOREIGN KEY ([PlaceId]) REFERENCES [dbo].[Place] ([Id]),
